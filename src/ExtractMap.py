@@ -6,7 +6,6 @@ Ex:
     m=ExtractMap(df,"Density20")
     plt.imshow(m)
     
-    
 Created on Wed Sep 7 11:50:57 2022
 
 @author: paolo pierobon
@@ -16,7 +15,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
 
-def ExtractMap(df,featName):
+def ExtractMap(df, featName, choose=None):
+    if isinstance(choose, str):
+        df = df[df["FileName"] == choose]
+
     x=np.int32(np.array((df['X']-df['X'].min())/40))
     y=np.int32(np.array((df['Y']-df['Y'].min())/40))
     m=np.zeros([y.max()+1,x.max()+1]);
