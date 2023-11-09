@@ -232,6 +232,78 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
     return fig, ax
 
 
+def plot(indices, *values, scale="linear", mode="plot",
+        title="", metric="", xlabel="", ylabel="", alphas=(1,),
+        xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
+        save_to=None, overwrite=True, filename="plot", ext="png", label="",
+        **kwargs
+):
+    # Plot mode selection
+    plotting_mode = {
+        "plot": lambda ax: ax.plot,
+        **dict.fromkeys(['bar', 'delta_bar'], lambda ax: ax.bar),
+        "hist": lambda ax: ax.hist,
+        "scatter": lambda ax: ax.scatter,
+        "hist2d": lambda ax: ax.hist2d,
+        "violin": lambda ax: ax.violinplot
+    }
+    # Check mode
+    if mode not in plotting_mode.keys():
+        raise Exception("Selected mode is invalid")
+
+    alphas = (1,) if alphas is None else alphas
+    alphas = (alphas, ) if isinstance(alphas, (int, float)) else tuple(alphas)
+    alphas = alphas + (1,)
+
+    xticks = kwargs.get("xticks", None)
+    yticks = kwargs.get("yticks", None)
+    grid = kwargs.get("grid", False)
+
+    # Conversion
+    if not isinstance(indices, np.ndarray):
+        indices = np.array(indices)
+    
+    for i, var in enumerate(values):
+        if not isinstance(var, np.ndarray):
+            values[i] = np.array(var)
+
+    # TODO: iterate while plotting
+    # Plot depending on mode
+    fig, ax = plt.subplots(figsize=(8, 7))
+    label_observed, label_predicted = lab_1, lab_2
+    if (mode == "plot"):
+        plotting_mode[mode](ax)(indices, observed[indices], label=label_observed, alpha=alphas[0], **kwargs)
+        plotting_mode[mode](ax)(indices, predicted[indices], label=label_predicted, alpha=alphas[1], **kwargs)
+    elif (mode == "hist"):
+        bins=kwargs["bins"]
+        plotting_mode[mode](ax)(observed[indices], bins=bins, label=label_observed, alpha=alphas[0])
+        plotting_mode[mode](ax)(predicted[indices], bins=bins, label=label_predicted, alpha=alphas[1])
+    elif (mode == "bar"):
+        plotting_mode[mode](ax)(indices, observed[indices], label=label_observed, alpha=alphas[0], **kwargs)
+        plotting_mode[mode](ax)(indices, predicted[indices], label=label_predicted, alpha=alphas[1], **kwargs)
+    elif (mode == "violin"):
+        v1 = plotting_mode[mode](ax)(observed[indices], positions=[0], **kwargs)
+        v2 = plotting_mode[mode](ax)(predicted[indices], positions=[0.5], **kwargs)
+        labels = []
+        labels.append((mpatches.Patch(color=v1["bodies"][0].get_facecolor().flatten()), label_observed))
+        labels.append((mpatches.Patch(color=v2["bodies"][0].get_facecolor().flatten()), label_predicted))
+        main_legend = ax.legend(*zip(*labels), loc=2)
+        ax.add_artist(main_legend)
+    elif (mode == "scatter"):
+        plotting_mode[mode](ax)(observed[indices], predicted[indices], alpha=alphas[0], **kwargs)
+    elif (mode == "hist2d"):
+        plotting_mode[mode](ax)(observed[indices], predicted[indices], **kwargs)
+    elif (mode == "delta_bar"):
+        delta_values_idx = delta_values[indices]
+        plotting_mode[mode](ax)(indices, delta_values_idx, alpha=alphas[0], **kwargs)
+
+    # Main Legend
+    handles, labels = ax.get_legend_handles_labels()
+    if (handles != []) & (labels != []):
+        main_legend = ax.legend(handles, labels, loc="upper left")
+        ax.add_artist(main_legend)
+
+
 def dual_plot(indices, observed, predicted, scale = "linear", mode="plot",
               title="", metric="", xlabel="", ylabel="", alphas=(1, 1),
               xleft=None, xright=None, ytop=None, ybottom=None,
