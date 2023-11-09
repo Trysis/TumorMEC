@@ -49,7 +49,7 @@ def read_dataframe(filepath, **kwargs):
     return pd.read_csv(filepath, **kwargs)
 
 
-def min_max_normalization(values, min_scale, max_scale, ignore_nan=True):
+def min_max_normalization(values, min_scale=0, max_scale=1, ignore_nan=True):
     """Normalize values on a specified min and max range.
 
     values: array-like (numpy.ndarray) -> shape (n_samples, x)
