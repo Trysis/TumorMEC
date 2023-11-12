@@ -21,10 +21,11 @@ def ExtractMap(df, featName, choose=None):
 
     x=np.int32(np.array((df['X']-df['X'].min())/40))
     y=np.int32(np.array((df['Y']-df['Y'].min())/40))
-    m=np.zeros([y.max()+1,x.max()+1]);
+    m=np.zeros([y.max()+1,x.max()+1])
     feat=np.array(df[featName])
     npoints=df.shape[0]
+
     for i in range(npoints):
-        #   m[y[i],x[i]]=fiber[i]
-        m[y[i],x[i]]=feat[i];
-    return m;
+        m[y[i],x[i]]=feat[i]
+
+    return m

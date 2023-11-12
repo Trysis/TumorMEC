@@ -6,11 +6,30 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib.colors as mcolors
+from matplotlib.backends.backend_pdf import PdfPages 
 
 from sklearn.metrics import r2_score
 
 # Local modules
 import auxiliary
+
+
+def save_plots_pdf(filepath, figures):
+    """Save a list of figure in pdf format
+
+    filepath: str
+        Path indicating where to create the file
+
+    figures: List -> List(matplotlib.figure.Figure)
+        A list of matplotlib figures
+
+    
+    """
+    filepath = auxiliary.replace_extension(filepath, "pdf")
+    with PdfPages(filepath) as pdf:
+        # Each figure is saved in pdf object 
+        for fig in figures:
+            fig.savefig(p, format='pdf')
 
 
 def legend_patch(label, color="none"):
