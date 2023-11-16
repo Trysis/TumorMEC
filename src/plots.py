@@ -6,7 +6,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib.colors as mcolors
-from matplotlib.backends.backend_pdf import PdfPages 
+from matplotlib.backends.backend_pdf import PdfPages
 
 from sklearn.metrics import r2_score
 
@@ -14,7 +14,7 @@ from sklearn.metrics import r2_score
 import auxiliary
 
 
-def save_plots_pdf(filepath, figures):
+def to_pdf(filepath, figures, return_p=False, **kwargs):
     """Save a list of figure in pdf format
 
     filepath: str
@@ -23,17 +23,26 @@ def save_plots_pdf(filepath, figures):
     figures: List -> List(matplotlib.figure.Figure)
         A list of matplotlib figures
 
-    
+    Exemple:
+        fig1 = plt.figure(figsize=(7, 8))  # plot 1
+        plt.plot([1, 2, 3], [2, 6, 10]
+        fig2 = plt.figure(figsize=(7, 8))  # plot 2
+        plt.scatter([1, 2, 3, 4], [1, 2, 5, 7])
+        figures = [plt.figure(n) for n in plt.get_fignums()]
+        # Save plots to pdf
+        to_pdf("test.pdf", figures)
+
     """
     filepath = auxiliary.replace_extension(filepath, "pdf")
     with PdfPages(filepath) as pdf:
-        # Each figure is saved in pdf object 
+        # Each figure is saved in pdf object
         for fig in figures:
-            fig.savefig(p, format='pdf')
+            fig.savefig(pdf, format='pdf', **kwargs)
 
 
 def legend_patch(label, color="none"):
-    """Returns the corresponding label with a Patch object for matplotlib legend purposes.
+    """Returns the corresponding label with a Patch object
+    for matplotlib legend purposes.
     
     label: str
         Character chain specifying the label

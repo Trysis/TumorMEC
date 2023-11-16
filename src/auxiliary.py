@@ -49,6 +49,11 @@ def read_dataframe(filepath, **kwargs):
     return pd.read_csv(filepath, **kwargs)
 
 
+def min_max(arraylike):
+    """Returns the min and max from an array."""
+    return min(arraylike), max(arraylike)
+
+
 def min_max_normalization(values, min_scale=0, max_scale=1, ignore_nan=True):
     """Normalize values on a specified min and max range.
 
