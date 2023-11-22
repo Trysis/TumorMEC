@@ -57,11 +57,12 @@ def legend_patch(label, color="none"):
 
 
 def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
-                title="", xlabel="", ylabel="", alphas=(1,),
+                title="", xlabel="", ylabel="", label="", alphas=(1,),
+                showY=True, showR2=True, ignore_nan=True, 
+                color=None, r2=None, anchor_x=1.05, anchor_y=0.9,
                 xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
-                save_to=None, filename="plot", ext="png", overwrite=True,
-                showY=True, ignore_nan=True, forcename=False, 
-                label="", **kwargs
+                save_to=None, filename="plot", ext="png", forcename=False, overwrite=True,
+                figure=None, **kwargs
 ):
     """Generate a specified figure from a set of values.
 
@@ -127,6 +128,14 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
         Else, extension is replaced by detecting the last "."
         character to replace it.
 
+    label: str
+        Associated label to the plot (for legend purpose).
+
+    figure: matplotlib.figure.Figure -> (fig, ax)
+        A tuple corresponding to a Figure returned by
+        matplotlib.figure.figure, the axis {ax} should
+        correspond to only one
+
     Returns: tuple (matplotlib.figure, matplotlib.axes.Axes)
         Figure and Axes for graphical purposes
 
@@ -154,6 +163,7 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
     # Optional arguments
     if mode.startswith("hist"):
         kwargs["bins"] = kwargs.get("bins", 100)
+    kwargs["color"] = "#1f77b4" if color is None else color
 
     xticks = kwargs.get("xticks", None)
     yticks = kwargs.get("yticks", None)
@@ -177,7 +187,7 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
     median_yvalues = np.median(yvalues) if not ignore_nan else np.nanmedian(yvalues)
 
     # Plot depending on mode
-    fig, ax = plt.subplots(figsize=(8, 7))
+    fig, ax = plt.subplots(figsize=(8, 7)) if figure is None else figure
     if (mode == "plot"):
         plotting_mode[mode](ax)(xvalues, yvalues, label=label, alpha=alphas[0], **kwargs)
     elif (mode == "hist"):
@@ -205,15 +215,32 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
             mean_yvalues_label, mean_yvalues_patch = legend_patch(f"mean = {mean_yvalues:.3f}")
             std_yvalues_label, std_yvalues_patch = legend_patch(f"std = {std_yvalues:.3f}")
             median_yvalues_label, median_yvalues_patch = legend_patch(f"median = {median_yvalues:.3f}")
-        
+
             handles_y.extend([mean_yvalues_patch, std_yvalues_patch, median_yvalues_patch])
             labels_y.extend([mean_yvalues_label, std_yvalues_label, median_yvalues_label])
-        
-            msm_observed_legend = fig.legend(handles_y, labels_y, title=label,
-                                            handlelength=0, handletextpad=0, borderaxespad=0,
-                                            bbox_to_anchor=(1.06, 0.88))
+
+            msm_observed_legend = ax.legend(
+                handles_y, labels_y, title=label, loc="center",
+                handlelength=0, handletextpad=0, borderaxespad=0,
+                bbox_to_anchor=(anchor_x, anchor_y)
+            )
 
             ax.add_artist(msm_observed_legend)  # Add legend to artist
+
+        if showR2:  # R2
+            r2 = r2 if r2 else r2_score(xvalues[isnotnan], yvalues[isnotnan])
+            handles_r2, labels_r2 = [], []
+            r2_label, r2_patch = legend_patch(f"R2 = {r2:.4f}")
+            handles_r2.append(r2_patch)
+            labels_r2.append(r2_label)
+
+            r2_legend = ax.legend(
+                handles_r2, labels_r2, loc="upper right",
+                handlelength=0, handletextpad=0
+            )
+
+            # Add legend
+            ax.add_artist(r2_legend)
 
     # Set scale selected by user
     ax.set_xscale(scale)
@@ -232,7 +259,8 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
         ax.set_yticks(yticks)
 
     # Label
-    ax.set_title(f"{title} ;scale={scale}")
+    title = title if title == "" else f"{title}\nscale={scale}"
+    ax.set_title(title)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
     # Limit in x and y
@@ -264,7 +292,7 @@ def plot(indices, *values, scale="linear", mode="plot",
         title="", metric="", xlabel="", ylabel="", alphas=(1,),
         xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
         save_to=None, overwrite=True, filename="plot", ext="png", label="",
-        **kwargs
+        figure=None, **kwargs
 ):
     # Plot mode selection
     plotting_mode = {
@@ -297,7 +325,7 @@ def plot(indices, *values, scale="linear", mode="plot",
 
     # TODO: iterate while plotting
     # Plot depending on mode
-    fig, ax = plt.subplots(figsize=(8, 7))
+    fig, ax = plt.subplots(figsize=(8, 7)) if figure is None else figure
     label_observed, label_predicted = lab_1, lab_2
     if (mode == "plot"):
         plotting_mode[mode](ax)(indices, observed[indices], label=label_observed, alpha=alphas[0], **kwargs)
