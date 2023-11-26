@@ -57,7 +57,7 @@ def min_max(arraylike):
 def min_max_normalization(values, min_scale=0, max_scale=1, ignore_nan=True):
     """Normalize values on a specified min and max range.
 
-    values: array-like (numpy.ndarray) -> shape (n_samples, x)
+    values: numpy.ndarray -> shape (n_samples, x)
         Values to perform normalization on
     min_scale: float
         Bottom range limit to apply on values so that

@@ -7,6 +7,7 @@ import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 import matplotlib.colors as mcolors
 from matplotlib.backends.backend_pdf import PdfPages
+import seaborn as sns
 
 from sklearn.metrics import r2_score
 
@@ -288,76 +289,311 @@ def single_plot(yvalues, xvalues=None, scale="linear", mode="plot",
     return fig, ax
 
 
-def plot(indices, *values, scale="linear", mode="plot",
-        title="", metric="", xlabel="", ylabel="", alphas=(1,),
-        xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
-        save_to=None, overwrite=True, filename="plot", ext="png", label="",
-        figure=None, **kwargs
+def plot(*values, indices=None, scale="linear", mode="plot",
+         title="", xlabel="", ylabel="", label=("",), alphas=(1,),
+         showY=True, showR2=True, ignore_nan=True, 
+         color=None, color_palette="Set1", r2=None, anchor_x=1.05, anchor_y=0.9,
+         xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
+         save_to=None, filename="plot", ext="png", forcename=False, overwrite=True,
+         figsize=None, figure=None, **kwargs
 ):
+    """Generate a specified figure from a set of values.
+
+    values: list -> list(Array-like)
+        Values to plot, correspond to y axis
+
+    indices: list -> list(Array-like)
+        Values in x axis
+
+    scale: str
+        Chosen scale for observed and predicted values
+        "linear", "log", ...
+
+    mode: str
+        Selected mode for plot taking values such as 
+        "plot" -> line plot
+        "bar" -> barplot plot
+        "hist" -> histogram plot
+        "scatter" -> scatter plot
+        "violin" -> violin plot
+
+    title, xlabel, ylabel: str
+        Title, x-axis and y-axis labels to assign to
+        the figure
+
+    alphas: tuple(float), optional
+        alpha values for the plot
+
+    xleft, xright: float, optional
+        lower and upper x limit
+
+    ybottom, ytop: int, optional
+        lower and upper y limit
+
+    normalize: bool
+        Normalize values so that it is bound to [0; 1]
+
+    save_to: str
+        Directory to save plot to
+
+    filename: str
+        Name of the file to create
+
+    ext: str
+        Extension of the file to create
+
+    overwrite: str
+        If a plot have the same name as our, should we
+        overwrite ? If not, it creates a filename with
+        an appended suffix
+
+    showY: bool
+        show legend parameters associated with the metric
+
+    ignore_nan: bool
+        Should we ignore nan value ? When plotting,
+        and calculating metrics such as mean, median
+        and std
+
+    color: tuple, optional
+        Associated color for each {values} plots
+
+    forcename: bool
+        If True, then filename will exactly be the same
+        as specified and only the extension will be appended.
+        Else, extension is replaced by detecting the last "."
+        character to replace it.
+
+    label: list -> list(str)
+        Associated label to the plot (for legend purpose).
+
+    figure: matplotlib.figure.Figure -> (fig, ax)
+        A tuple corresponding to a Figure returned by
+        matplotlib.figure.figure, the axis {ax} should
+        correspond to only one
+
+    Returns: tuple (matplotlib.figure, matplotlib.axes.Axes)
+        Figure and Axes for graphical purposes
+
+    """
+    # Number of observations to plot
+    n_obs = len(values)
+    # Color palette
+    palette = sns.color_palette(color_palette)
+    # Figure size
+    figsize = (8, 7) if figsize is None else figsize
+
     # Plot mode selection
     plotting_mode = {
         "plot": lambda ax: ax.plot,
-        **dict.fromkeys(['bar', 'delta_bar'], lambda ax: ax.bar),
+        'bar': lambda ax: ax.bar,
         "hist": lambda ax: ax.hist,
         "scatter": lambda ax: ax.scatter,
-        "hist2d": lambda ax: ax.hist2d,
         "violin": lambda ax: ax.violinplot
     }
+
     # Check mode
     if mode not in plotting_mode.keys():
         raise Exception("Selected mode is invalid")
 
+    if n_obs == 0:
+        raise Exception(
+            "At least one argument should be provided for {values}"
+        )
+
+    # Check if each {*values} provided is of instance np.ndarray
+    # converts them if possible.
+    values_length = []
+    values_list = list(values)
+    for idx, val in enumerate(values):
+        if not isinstance(val, np.ndarray):
+            try:
+                val_np = np.array(val)
+                values_list[idx] = val_np if not normalize else \
+                                   auxiliary.min_max_normalization(
+                                       val_np, 0, 1, ignore_nan=ignore_nan
+                                   )
+            except:
+                raise Exception(
+                    "Array-like values should be "
+                    "provided for {values} argument"
+                )
+        values_length.append(len(val))
+
+    values = tuple(values_list)
+
+    # x-axis equals indices if not set
+    if indices is None:
+        indices = [np.arange(length) for length in values_length]
+    elif all(isinstance(ind, (int, float)) for ind in indices):
+        indices = [indices]
+    for idx, ind in enumerate(indices):
+        if not isinstance(ind, np.ndarray):
+            try:
+                indices[idx] = np.array(ind)
+            except:
+                raise Exception(
+                    "Could not convert data to "
+                    "numpy.ndarray, check {indices} "
+                    "argument."
+                )
+
+    if (len(indices) == 1) & (n_obs > len(indices)):
+        if len(indices[0]) < max(values_length):
+            raise Exception("indices should be set for each ticks position")
+
+        indices_per_val = []
+        for idx in range(n_obs):
+            indices_per_val.append(indices[0][:len(values[idx])])
+        indices = indices_per_val
+
+    # alpha value for each {*values}
     alphas = (1,) if alphas is None else alphas
     alphas = (alphas, ) if isinstance(alphas, (int, float)) else tuple(alphas)
-    alphas = alphas + (1,)
+    alphas = alphas + (1,) * (n_obs-len(alphas)) if len(alphas) < n_obs else alphas
+
+    # color value for each {*values}
+    color = ("#1f77b4",) if color is None else color
+    if len(color) < n_obs:
+        color_tmp = []
+        for idx in range(n_obs - len(color)):
+            color_tmp.append(palette[idx%len(palette)])
+        color = color + tuple(color_tmp)
+
+    label = ("", ) if label is None else label
+    label = (label, ) if isinstance(label, (str)) else tuple(label)
+    label = label + ("",) * (n_obs-len(label)) if len(label) < n_obs else label
+
+    ## Optional arguments
+    # Bins
+    if mode.startswith("hist"):
+        kwargs["bins"] = kwargs.get("bins", (100,))
+        if isinstance(kwargs["bins"], (float, int)):
+            kwargs["bins_list"] = (kwargs["bins"],)
+        else:
+            kwargs["bins_list"] = tuple(kwargs.bins["bins"])
+
+        if len(kwargs["bins_list"]) < n_obs:
+            kwargs["bins_list"] = kwargs["bins_list"] + (100, ) * (n_obs - len(kwargs["bins_list"]))
 
     xticks = kwargs.get("xticks", None)
     yticks = kwargs.get("yticks", None)
     grid = kwargs.get("grid", False)
 
-    # Conversion
-    if not isinstance(indices, np.ndarray):
-        indices = np.array(indices)
-    
-    for i, var in enumerate(values):
-        if not isinstance(var, np.ndarray):
-            values[i] = np.array(var)
-
-    # TODO: iterate while plotting
     # Plot depending on mode
-    fig, ax = plt.subplots(figsize=(8, 7)) if figure is None else figure
-    label_observed, label_predicted = lab_1, lab_2
-    if (mode == "plot"):
-        plotting_mode[mode](ax)(indices, observed[indices], label=label_observed, alpha=alphas[0], **kwargs)
-        plotting_mode[mode](ax)(indices, predicted[indices], label=label_predicted, alpha=alphas[1], **kwargs)
-    elif (mode == "hist"):
-        bins=kwargs["bins"]
-        plotting_mode[mode](ax)(observed[indices], bins=bins, label=label_observed, alpha=alphas[0])
-        plotting_mode[mode](ax)(predicted[indices], bins=bins, label=label_predicted, alpha=alphas[1])
-    elif (mode == "bar"):
-        plotting_mode[mode](ax)(indices, observed[indices], label=label_observed, alpha=alphas[0], **kwargs)
-        plotting_mode[mode](ax)(indices, predicted[indices], label=label_predicted, alpha=alphas[1], **kwargs)
-    elif (mode == "violin"):
-        v1 = plotting_mode[mode](ax)(observed[indices], positions=[0], **kwargs)
-        v2 = plotting_mode[mode](ax)(predicted[indices], positions=[0.5], **kwargs)
-        labels = []
-        labels.append((mpatches.Patch(color=v1["bodies"][0].get_facecolor().flatten()), label_observed))
-        labels.append((mpatches.Patch(color=v2["bodies"][0].get_facecolor().flatten()), label_predicted))
-        main_legend = ax.legend(*zip(*labels), loc=2)
-        ax.add_artist(main_legend)
-    elif (mode == "scatter"):
-        plotting_mode[mode](ax)(observed[indices], predicted[indices], alpha=alphas[0], **kwargs)
-    elif (mode == "hist2d"):
-        plotting_mode[mode](ax)(observed[indices], predicted[indices], **kwargs)
-    elif (mode == "delta_bar"):
-        delta_values_idx = delta_values[indices]
-        plotting_mode[mode](ax)(indices, delta_values_idx, alpha=alphas[0], **kwargs)
+    fig, ax = plt.subplots(figsize=figsize) if figure is None else figure
+    _vl_label_list = []
+    for idx, val in enumerate(values):
+        if (mode == "plot"):
+            plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
+        elif (mode == "hist"):
+            plotting_mode[mode](ax)(val, bins=kwargs["bins_list"][idx], label=label[idx], color=color[idx], alpha=alphas[idx])
+        elif (mode == "bar"):
+            plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
+        elif (mode == "violin"):
+            vl = plotting_mode[mode](ax)(val, positions=[idx], **kwargs)
+            vl_label = [mpatches.Patch(color=vl["bodies"][0].get_facecolor().flatten()), label]
+            _vl_label_list.append(vl_label)
+            if idx == n_obs - 1:
+                main_legend = ax.legend(*zip(*_vl_label_list), loc=2)
+                ax.add_artist(main_legend)
+        elif (mode == "scatter"):
+            plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
 
     # Main Legend
-    handles, labels = ax.get_legend_handles_labels()
-    if (handles != []) & (labels != []):
-        main_legend = ax.legend(handles, labels, loc="upper left")
-        ax.add_artist(main_legend)
+    if True:
+        handles, labels = ax.get_legend_handles_labels()
+        if (handles != []) & (labels != []):
+            main_legend = ax.legend(handles, labels, loc="best")
+            ax.add_artist(main_legend)
+
+        if showY:
+            anchor_y_cumul = anchor_y
+            for idx, val in enumerate(values):
+                handles_y, labels_y = [], []
+                
+                # Observed and Predicted : Mean, std, median
+                mean_yvalues = val.mean() if not ignore_nan else np.nanmean(val)
+                std_yvalues = val.std() if not ignore_nan else np.nanstd(val)
+                median_yvalues = np.median(val) if not ignore_nan else np.nanmedian(val)
+        
+                mean_yvalues_label, mean_yvalues_patch = legend_patch(f"mean = {mean_yvalues:.3f}")
+                std_yvalues_label, std_yvalues_patch = legend_patch(f"std = {std_yvalues:.3f}")
+                median_yvalues_label, median_yvalues_patch = legend_patch(f"median = {median_yvalues:.3f}")
+    
+                handles_y.extend([mean_yvalues_patch, std_yvalues_patch, median_yvalues_patch])
+                labels_y.extend([mean_yvalues_label, std_yvalues_label, median_yvalues_label])
+    
+                msm_observed_legend = ax.legend(
+                    handles_y, labels_y, title=label[idx], loc="center",
+                    handlelength=0, handletextpad=0, borderaxespad=0,
+                    bbox_to_anchor=(anchor_x, anchor_y_cumul)
+                )
+                anchor_y_cumul -= 0.14 if label == ("", ) else 0.17
+                ax.add_artist(msm_observed_legend)  # Add legend to artist
+
+        if showR2:  # R2
+            handles_r2, labels_r2 = [], []
+            for idx, val in enumerate(values):
+                isnotnan = ~np.isnan(val)  # index of not NaN values
+    
+                r2 = r2 if r2 else r2_score(indices[idx][isnotnan], val[isnotnan])
+                r2_label, r2_patch = legend_patch(f"R2 = {r2:.4f}")
+                handles_r2.append(r2_patch)
+                labels_r2.append(r2_label)
+
+            r2_legend = ax.legend(
+                handles_r2, labels_r2, loc="upper right",
+                handlelength=0, handletextpad=0
+            )
+
+            # Add legend
+            ax.add_artist(r2_legend)
+
+    # Set scale selected by user
+    ax.set_xscale(scale)
+    ax.set_yscale(scale)
+    # Option for specific mode
+    if (mode == "scatter"):
+        # Range to have xlim=ylim
+        xy_lim = auxiliary.min_max(ax.get_xlim() + ax.get_ylim())
+        ax.set_xlim(xy_lim)
+        ax.set_ylim(xy_lim)
+
+    # Set figure label, limit and legend
+    if xticks is not None:
+        ax.set_xticks(xticks)
+    if yticks is not None:
+        ax.set_yticks(yticks)
+
+    # Label
+    title = title if title == "" else f"{title}\nscale={scale}"
+    ax.set_title(title)
+    ax.set_xlabel(xlabel)
+    ax.set_ylabel(ylabel)
+    # Limit in x and y
+    ax.set_xlim(left=xleft, right=xright)
+    ax.set_ylim(top=ytop, bottom=ybottom)
+    # Grid
+    ax.grid(grid)
+
+    if save_to is not None:
+        if not auxiliary.isdir(save_to):
+            raise Exception("Specified directory does not exists")
+
+        ext = ext.replace(".", "")
+        save_to = auxiliary.to_dirpath(save_to)
+        filepath = save_to + filename + "." + ext
+        if not forcename:
+            root, _ = os.path.splitext(filename)
+            # Save file to
+            filename = auxiliary.replace_extension(root, ext)
+            filepath = save_to + filename if overwrite else \
+                       auxiliary.filepath_with_suffix(save_to + filename)
+
+        plt.savefig(filepath, bbox_inches = 'tight')
+
+    return fig, ax
 
 
 def dual_plot(indices, observed, predicted, scale = "linear", mode="plot",
