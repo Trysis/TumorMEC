@@ -154,6 +154,51 @@ def append_suffix(filepath, path_sep="/", suffix_sep="_"):
     return filepath_suffix
 
 
+def get_metrics(array, q=(0, 0.25, 0.5, 0.75, 1), ignore_nan=False):
+    """This function returns a panel of statistics calculated on the
+        provided {array} argument.
+    """
+    if not isinstance(array, np.ndarray):
+        try:
+            array = np.array(array)
+        except:
+            raise Exception("{array} cannot be converted to np.ndarray")
+
+    # Array metric
+    arr_mean = array.mean() if not ignore_nan else np.nanmean(array)
+    arr_sd = array.std() if not ignore_nan else np.nanstd(array) 
+    arr_median = np.median(array) if not ignore_nan else np.nanmedian(array)
+    arr_quantile = np.quantile(array, q) if not ignore_nan else np.nanquantile(array, q)
+
+    to_return = {
+        "mean": arr_mean,
+        "std": arr_sd,
+        "median": arr_median,
+        "quantile": arr_quantile
+    }
+
+    return to_return
+
+
+def format_by_rows(array, ncol=1, spacing=3):
+    """Returns values aranged in a specified format."""
+    arr_str = [f"{value}" for value in array]
+    arr_len = [len(value) for value in arr_str]
+    max_len = max(arr_len)
+    # format
+    val_format = f"<{max_len}s"
+    spacing_format = f"{spacing}s"
+    # to_return
+    val_str = [
+        f"{val:{val_format}}{'':{spacing_format}}" if (idx+1)%ncol != 0\
+        else f"{val:{val_format}}{'':{spacing_format}}\n"
+        for idx, val in enumerate(arr_str)
+    ]
+    val_str = "".join(val_str)
+
+    return val_str
+
+
 if __name__ == "__main__":
     filepath = "./data/test.py"
     filepath_with_suffix = append_suffix(filepath)
