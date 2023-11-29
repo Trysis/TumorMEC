@@ -844,9 +844,14 @@ def plot(
         if len(kwargs["bins_list"]) < n_obs:
             kwargs["bins_list"] = kwargs["bins_list"] + (100, ) * (n_obs - len(kwargs["bins_list"]))
 
-    xticks = kwargs.get("xticks", None)
-    yticks = kwargs.get("yticks", None)
-    grid = kwargs.get("grid", False)
+    if mode == "bar":
+        kwargs["width"] = kwargs.get("width", 0.8)
+        kwargs["dodge"] = kwargs.get("dodge", False)
+        dodge = kwargs.pop("dodge")
+
+    xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) else None
+    yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) else None
+    grid = kwargs.pop("grid") if kwargs.get("grid", False) else False
 
     # Plot depending on mode
     fig, ax = plt.subplots(figsize=figsize) if figure is None else figure
@@ -857,7 +862,10 @@ def plot(
         elif (mode == "hist"):
             plotting_mode[mode](ax)(val, bins=kwargs["bins_list"][idx], label=label[idx], color=color[idx], alpha=alphas[idx])
         elif (mode == "bar"):
-            plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
+            if dodge:  # When there is multiple bar, shift them
+                plotting_mode[mode](ax)(indices[idx] + idx*kwargs["width"], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
+            else:
+                plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
         elif (mode == "violin"):
             vl = plotting_mode[mode](ax)(val, positions=[idx], **kwargs)
             vl_label = [mpatches.Patch(color=vl["bodies"][0].get_facecolor().flatten()), label]
@@ -872,7 +880,7 @@ def plot(
     if True:
         handles, labels = ax.get_legend_handles_labels()
         if (handles != []) & (labels != []):
-            main_legend = ax.legend(handles, labels, loc="best")
+            main_legend = ax.legend(handles, labels, loc="upper left")
             ax.add_artist(main_legend)
 
         if showY:
