@@ -1,0 +1,122 @@
+
+
+def forest_depth_acc(
+    x_train, y_train, x_test, y_test,
+    classifier=RandomForestClassifier,
+    title="", depths=None, size=(9, 7), **kwargs
+):
+    """"""
+    max_depths = np.arange(10) + 1 if depths is None else depths
+    results = {
+        "depths": max_depths,
+        "auc_train": [],
+        "acc_train": [],
+        "auc_test": [],
+        "acc_test": []
+    }
+
+    # From depth 1 to n
+    for max_depth in max_depths:
+        # Fit model with specified depth
+        rf = classifier(max_depth=max_depth, **kwargs)
+        rf.fit(x_train, y_train)  
+        # Train
+        train_pred = rf.predict(x_train)
+        false_positive_rate, true_positive_rate, thresholds = roc_curve(y_train, train_pred)
+        train_roc_auc = auc(false_positive_rate, true_positive_rate)
+        train_accuracy = accuracy_score(y_train, train_pred)
+        # Test
+        test_pred = rf.predict(x_test)
+        false_positive_rate, true_positive_rate, thresholds = roc_curve(y_test, test_pred)
+        test_roc_auc = auc(false_positive_rate, true_positive_rate)
+        test_accuracy = accuracy_score(y_test, test_pred)
+
+        results["auc_train"].append(train_roc_auc)
+        results["acc_train"].append(train_accuracy)
+        results["auc_test"].append(test_roc_auc)
+        results["acc_test"].append(test_accuracy)
+
+    return results
+
+
+# Imported from https://github.com/AdrianaLecourieux/Image-Analysis-for-spatial-transcriptomic/blob/main/analysis/Random_forest.ipynb
+# repository
+def perform_random_forest(X_train, X_test, y_train, y_test, scale=False):
+    """Perform random forest and exctract feature importances.
+
+    Parameters
+    ----------
+    X_train, X_test: pandas dataframe
+        Train and Test features
+    Y_train, Y_test: pandas dataframe
+        Train and Test targets
+    """
+    # Standardization
+    if scale:
+        scaler = StandardScaler().fit(X_train)
+        X_train = scaler.transform(X_train)
+        X_test = scaler.transform(X_test)
+
+    param_dist = {
+        'n_estimators': [5, 10, 15, 20],
+        'max_depth': [2, 4, 6, 10, 15, 20, 25]
+    }
+
+    # Create a random forest classifier
+    rf = RandomForestClassifier()
+
+    # Use random search to find the best hyperparameters
+    rand_search = RandomizedSearchCV(rf, 
+                                     param_distributions = param_dist, 
+                                     n_iter=5, 
+                                     cv=5)
+
+    # Fit the random search object to the data
+    rand_search.fit(X_train, y_train)
+    # Print the best hyperparameters
+    print('Best hyperparameters:',  rand_search.best_params_)
+    max_depth = rand_search.best_params_['max_depth']
+    n_estimators = rand_search.best_params_['n_estimators']
+    
+    rf = RandomForestClassifier(max_depth= max_depth, n_estimators= n_estimators)
+    rf.fit(X_train, y_train)
+    
+    y_pred = rf.predict(X_test)
+    accuracy = accuracy_score(y_test, y_pred)
+    print("Accuracy:", accuracy)
+    
+    start_time = time.time()
+    importances = rf.feature_importances_
+    std = np.std([tree.feature_importances_ for tree in rf.estimators_], axis=0)
+    elapsed_time = time.time() - start_time
+
+    print(f"Elapsed time to compute the importances: {elapsed_time:.3f} seconds")
+    
+    forest_importances = pd.Series(importances, index=X.columns)
+
+    fig, ax = plt.subplots()
+    forest_importances.plot.bar(yerr=std, ax=ax)
+    ax.set_title("Feature importances using MDI")
+    ax.set_ylabel("Mean decrease in impurity")
+    fig.tight_layout()
+
+    start_time = time.time()
+    result = permutation_importance(
+        rf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=-1
+    )
+    elapsed_time = time.time() - start_time
+    print(f"Elapsed time to compute the importances: {elapsed_time:.3f} seconds")
+
+    forest_importances = pd.Series(result.importances_mean, index=X.columns)
+    
+    fig, ax = plt.subplots()
+    forest_importances.plot.bar(yerr=result.importances_std, ax=ax)
+    ax.set_title("Feature importances using permutation on full model")
+    ax.set_ylabel("Mean accuracy decrease")
+    fig.tight_layout()
+    plt.show()
+
+    scores = cross_val_score(rf, X, y, cv=10)
+    scores
+
+    print("%0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))

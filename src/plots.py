@@ -1,4 +1,6 @@
-"""This scripts contains plot functions."""
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+"""This scripts contains plot and plot saving functions."""
 
 import os
 
@@ -14,8 +16,10 @@ from sklearn.metrics import r2_score
 # Local modules
 import auxiliary
 
+__author__ = "Roude JEAN MARIE"
+__email__ = "roude.bioinfo@gmail.com"
 
-def to_pdf(filepath, figures, return_p=False, **kwargs):
+def to_pdf(filepath, figures, then_close=False, bbox_inches=None):
     """Save a list of figure in pdf format
 
     filepath: str
@@ -38,7 +42,11 @@ def to_pdf(filepath, figures, return_p=False, **kwargs):
     with PdfPages(filepath) as pdf:
         # Each figure is saved in pdf object
         for fig in figures:
-            fig.savefig(pdf, format='pdf', **kwargs)
+            plt.tight_layout()
+            fig.savefig(pdf, format='pdf', bbox_inches=bbox_inches)
+            if then_close:
+                plt.close(fig)
+            
 
 
 def legend_patch(label, color="none"):
@@ -839,23 +847,37 @@ def plot(
         if isinstance(kwargs["bins"], (float, int)):
             kwargs["bins_list"] = (kwargs["bins"],)
         else:
-            kwargs["bins_list"] = tuple(kwargs.bins["bins"])
+            kwargs["bins_list"] = tuple(kwargs["bins"])
 
         if len(kwargs["bins_list"]) < n_obs:
             kwargs["bins_list"] = kwargs["bins_list"] + (100, ) * (n_obs - len(kwargs["bins_list"]))
 
+    # kwargs
+    kwargs["dodge"] = kwargs.get("dodge", False)
+    kwargs["spacing"] = kwargs.get("spacing", 0)
+    dodge = kwargs.pop("dodge")
+    spacing = kwargs.pop("spacing")
     if mode == "bar":
         kwargs["width"] = kwargs.get("width", 0.8)
-        kwargs["dodge"] = kwargs.get("dodge", False)
-        dodge = kwargs.pop("dodge")
+        impair_n_obs = n_obs % 2 == 1
+        bar_positions = (
+            np.linspace(-n_obs / 2, n_obs / 2, num=n_obs) if impair_n_obs else
+            np.setdiff1d(np.linspace(-n_obs / 2, n_obs / 2, num=n_obs+1), 0)
+        )
 
-    xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) else None
-    yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) else None
+        spacing_pos = []
+        for idx, i in enumerate(bar_positions):
+            if i < 0: spacing_pos.append(-spacing * np.abs(bar_positions[idx]))
+            elif i > 0: spacing_pos.append(spacing * np.abs(bar_positions[idx]))
+            else: spacing_pos.append(0)
+
+    xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) is not None else None
+    yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) is not None else None
     grid = kwargs.pop("grid") if kwargs.get("grid", False) else False
 
     # Plot depending on mode
     fig, ax = plt.subplots(figsize=figsize) if figure is None else figure
-    _vl_label_list = []
+    _vl_label_list = []        
     for idx, val in enumerate(values):
         if (mode == "plot"):
             plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
@@ -863,7 +885,20 @@ def plot(
             plotting_mode[mode](ax)(val, bins=kwargs["bins_list"][idx], label=label[idx], color=color[idx], alpha=alphas[idx])
         elif (mode == "bar"):
             if dodge:  # When there is multiple bar, shift them
-                plotting_mode[mode](ax)(indices[idx] + idx*kwargs["width"], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
+                if n_obs % 2 == 0:
+                    v = kwargs["width"]/2 if bar_positions[idx] < 0 else -kwargs["width"]/2
+                    print(int(bar_positions[idx]) * (kwargs["width"]))
+                    plotting_mode[mode](ax)(
+                        indices[idx] + int(bar_positions[idx]) * (kwargs["width"]) + v + spacing_pos[idx],
+                        val, label=label[idx], alpha=alphas[idx],
+                        color=color[idx], **kwargs
+                    )
+                else:
+                    plotting_mode[mode](ax)(
+                        indices[idx] + int(bar_positions[idx]) * (kwargs["width"]) + spacing_pos[idx],
+                        val, label=label[idx], alpha=alphas[idx],
+                        color=color[idx], **kwargs
+                    )
             else:
                 plotting_mode[mode](ax)(indices[idx], val, label=label[idx], alpha=alphas[idx], color=color[idx], **kwargs)
         elif (mode == "violin"):
