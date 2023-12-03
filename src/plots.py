@@ -5,11 +5,11 @@
 import os
 
 import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-import matplotlib.colors as mcolors
-from matplotlib.backends.backend_pdf import PdfPages
 import seaborn as sns
+import matplotlib.pyplot as plt
+import matplotlib.colors as mcolors
+import matplotlib.patches as mpatches
+from matplotlib.backends.backend_pdf import PdfPages
 
 from sklearn.metrics import r2_score
 
@@ -42,11 +42,9 @@ def to_pdf(filepath, figures, then_close=False, bbox_inches=None):
     with PdfPages(filepath) as pdf:
         # Each figure is saved in pdf object
         for fig in figures:
-            plt.tight_layout()
             fig.savefig(pdf, format='pdf', bbox_inches=bbox_inches)
             if then_close:
                 plt.close(fig)
-            
 
 
 def legend_patch(label, color="none"):
@@ -870,6 +868,7 @@ def plot(
             if i < 0: spacing_pos.append(-spacing * np.abs(bar_positions[idx]))
             elif i > 0: spacing_pos.append(spacing * np.abs(bar_positions[idx]))
             else: spacing_pos.append(0)
+        spacing_pos = np.array(spacing_pos)
 
     xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) is not None else None
     yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) is not None else None
@@ -887,9 +886,9 @@ def plot(
             if dodge:  # When there is multiple bar, shift them
                 if n_obs % 2 == 0:
                     v = kwargs["width"]/2 if bar_positions[idx] < 0 else -kwargs["width"]/2
-                    print(int(bar_positions[idx]) * (kwargs["width"]))
+                    s = (kwargs["width"]) * (n_obs) * indices[idx]
                     plotting_mode[mode](ax)(
-                        indices[idx] + int(bar_positions[idx]) * (kwargs["width"]) + v + spacing_pos[idx],
+                        indices[idx] + (indices[idx] * (spacing*n_obs + n_obs/2)) + int(bar_positions[idx]) * (kwargs["width"]) + spacing_pos[idx] + s + v,
                         val, label=label[idx], alpha=alphas[idx],
                         color=color[idx], **kwargs
                     )
@@ -972,13 +971,14 @@ def plot(
         ax.set_ylim(xy_lim)
 
     # Set figure label, limit and legend
+    ax.set_xticks((kwargs["width"] * n_obs * indices[0]) + indices[0] * (spacing*n_obs + n_obs/2) + indices[0], indices[0])
+    
     if xticks is not None:
         ax.set_xticks(xticks)
     if yticks is not None:
         ax.set_yticks(yticks)
 
     # Label
-    title = title if title == "" else f"{title}\nscale={scale}"
     ax.set_title(title)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
