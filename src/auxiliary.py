@@ -26,19 +26,17 @@ def to_dirpath(dirpath, dir_sep="/"):
     return dirpath
 
 
-def create_dir(dirpath, add_suffix=False):
+def create_dir(dirpath, dir_sep="/", add_suffix=False):
     """Create a directory."""
-    if not isdir(os.path.dirname(dirpath)):
-        return None
-
+    dirpath_ = to_dirpath(dirpath, dir_sep=dir_sep)
     if add_suffix:
-        dirpath = append_suffix(dirpath)
+        dirpath_ = append_suffix(dirpath_)
 
-    if os.path.exists(dirpath):
-        return dirpath
+    if os.path.exists(dirpath_):
+        return dirpath_
 
-    os.mkdir(dirpath)
-    return dirpath
+    os.mkdir(dirpath_)
+    return dirpath_
 
 
 def read_dataframe(filepath, **kwargs):

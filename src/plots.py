@@ -650,10 +650,12 @@ def dual_plot(
 
 
 def plot(
-    *values, indices=None, scale="linear", mode="plot",
+    *values, indices=None, scale=None, mode="plot",
+    scale_x="linear", scale_y="linear",
     title="", xlabel="", ylabel="", label=("",), alphas=(1,),
     xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
     figure=None, figsize=None, anchor_x=1.05, anchor_y=0.9,
+    loc_label="upper left", loc_r2="upper right",
     color=None, color_palette="Set1", showY=True, showR2=True,
     save_to=None, filename="plot", ext="png", forcename=False, overwrite=True,
     ignore_nan=True, **kwargs
@@ -666,9 +668,11 @@ def plot(
     indices: list -> list(Array-like)
         Values in x axis
 
-    scale: str, default="linear"
-        Chosen scale for observed and predicted values
-        "linear", "log", ...
+    scale: str
+        Chosen {scale} for observed and predicted values
+        applied on x and y axis.
+        {scale} can take value such as "linear", "log", etc
+        see matplotlib documentation.
 
     mode: str, default="plot"
         Selected mode for plot taking values such as 
@@ -677,6 +681,9 @@ def plot(
         "hist" -> histogram plot
         "scatter" -> scatter plot
         "violin" -> violin plot
+
+    scale_x_, scale_y:
+        Chosen scale on x and y axis.
 
     title, xlabel, ylabel: str
         Title, x-axis and y-axis labels to assign to
@@ -851,10 +858,8 @@ def plot(
             kwargs["bins_list"] = kwargs["bins_list"] + (100, ) * (n_obs - len(kwargs["bins_list"]))
 
     # kwargs
-    kwargs["dodge"] = kwargs.get("dodge", False)
-    kwargs["spacing"] = kwargs.get("spacing", 0)
-    dodge = kwargs.pop("dodge")
-    spacing = kwargs.pop("spacing")
+    dodge = kwargs.pop("dodge") if "dodge" in kwargs else False
+    spacing = kwargs.pop("spacing") if "spacing" in kwargs else 0
     if mode == "bar":
         kwargs["width"] = kwargs.get("width", 0.8)
         impair_n_obs = n_obs % 2 == 1
@@ -884,9 +889,9 @@ def plot(
             plotting_mode[mode](ax)(val, bins=kwargs["bins_list"][idx], label=label[idx], color=color[idx], alpha=alphas[idx])
         elif (mode == "bar"):
             if dodge:  # When there is multiple bar, shift them
+                s = (kwargs["width"]) * (n_obs) * indices[idx]
                 if n_obs % 2 == 0:
                     v = kwargs["width"]/2 if bar_positions[idx] < 0 else -kwargs["width"]/2
-                    s = (kwargs["width"]) * (n_obs) * indices[idx]
                     plotting_mode[mode](ax)(
                         indices[idx] + (indices[idx] * (spacing*n_obs + n_obs/2)) + int(bar_positions[idx]) * (kwargs["width"]) + spacing_pos[idx] + s + v,
                         val, label=label[idx], alpha=alphas[idx],
@@ -894,7 +899,7 @@ def plot(
                     )
                 else:
                     plotting_mode[mode](ax)(
-                        indices[idx] + int(bar_positions[idx]) * (kwargs["width"]) + spacing_pos[idx],
+                        indices[idx] + (indices[idx] * (spacing*n_obs + n_obs/2)) + int(bar_positions[idx]) * (kwargs["width"]) + spacing_pos[idx] + s,
                         val, label=label[idx], alpha=alphas[idx],
                         color=color[idx], **kwargs
                     )
@@ -914,7 +919,7 @@ def plot(
     if True:
         handles, labels = ax.get_legend_handles_labels()
         if (handles != []) & (labels != []):
-            main_legend = ax.legend(handles, labels, loc="upper left")
+            main_legend = ax.legend(handles, labels, loc=loc_label)
             ax.add_artist(main_legend)
 
         if showY:
@@ -953,7 +958,7 @@ def plot(
                 labels_r2.append(r2_label)
 
             r2_legend = ax.legend(
-                handles_r2, labels_r2, loc="upper right",
+                handles_r2, labels_r2, loc=loc_r2,
                 handlelength=0, handletextpad=0
             )
 
@@ -961,18 +966,26 @@ def plot(
             ax.add_artist(r2_legend)
 
     # Set scale selected by user
-    ax.set_xscale(scale)
-    ax.set_yscale(scale)
+    if scale is not None:
+        scale_x = scale
+        scale_y = scale
+
+    ax.set_xscale(scale_x)
+    ax.set_yscale(scale_y)
     # Option for specific mode
     if (mode == "scatter"):
         # Range to have xlim=ylim
         xy_lim = auxiliary.min_max(ax.get_xlim() + ax.get_ylim())
         ax.set_xlim(xy_lim)
         ax.set_ylim(xy_lim)
+    if (mode == "bar"):
+        bar_idx_shift = indices[0] * (spacing*n_obs + n_obs/2)
+        bar_center_pos = (kwargs["width"] * n_obs * indices[0])
+        ax.set_xticks(
+            bar_center_pos + bar_idx_shift + indices[0], indices[0]
+        )
 
-    # Set figure label, limit and legend
-    ax.set_xticks((kwargs["width"] * n_obs * indices[0]) + indices[0] * (spacing*n_obs + n_obs/2) + indices[0], indices[0])
-    
+    # Set figure label, limit and legend    
     if xticks is not None:
         ax.set_xticks(xticks)
     if yticks is not None:

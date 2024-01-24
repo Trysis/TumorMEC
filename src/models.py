@@ -21,23 +21,25 @@ def forest_depth_acc(
         "depths": max_depths,
         "auc_train": [],
         "acc_train": [],
+        "mcc_train": [],
         "auc_test": [],
-        "acc_test": []
+        "acc_test": [],
+        "mcc_test": []
     }
 
     # From depth 1 to n
-    for max_depth in max_depths:
+    for depth in max_depths:
         # Fit model with specified depth
-        rf = classifier(max_depth=max_depth, **kwargs)
+        rf = classifier(max_depth=depth, **kwargs)
         rf.fit(x_train, y_train)  
         # Train
         train_pred = rf.predict(x_train)
-        false_positive_rate, true_positive_rate, thresholds = metrics.roc_curve(y_train, train_pred)
-        train_roc_auc = metrics.auc(false_positive_rate, true_positive_rate)
+        fpr_train, tpr_train, _ = metrics.roc_curve(y_train, train_pred)
+        trainauc = metrics.auc(false_positive_rate, true_positive_rate)
         train_accuracy = metrics.accuracy_score(y_train, train_pred)
         # Test
         test_pred = rf.predict(x_test)
-        false_positive_rate, true_positive_rate, thresholds = metrics.roc_curve(y_test, test_pred)
+        false_positive_rate, true_positive_rate, _ = metrics.roc_curve(y_test, test_pred)
         test_roc_auc = metrics.auc(false_positive_rate, true_positive_rate)
         test_accuracy = metrics.accuracy_score(y_test, test_pred)
 
@@ -49,12 +51,28 @@ def forest_depth_acc(
     return results
 
 
+def forest_importance(rf_model):
+    """"""
+    importances_mean = rf_model.feature_importances_
+    importances_std = np.std([tree.feature_importances_ for tree in rf_model.estimators_], axis=0)
+    return importances_mean, importances_std
+
+
+def forest_permutation_importance(
+    rf_model, x, y, n_repeats=10, random_state=42, n_jobs=2
+):
+    """"""
+    result = inspection.permutation_importance(
+        rf, x, y, n_repeats=n_repeats, random_state=random_state, n_jobs=n_jobs
+    )
+    return result
+
 # Imported from https://github.com/AdrianaLecourieux/Image-Analysis-for-spatial-transcriptomic/blob/main/analysis/Random_forest.ipynb
 # repository
 def perform_random_forest(
     X_train, X_test, y_train, y_test, columns,
-    n_estimators = (10, 20, 30, 40, 50, 70),
-    n_depths = (2, 4, 10, 15, 20)
+    n_estimators = (20, 30, 40, 60),
+    n_depths = (2, 4, 8, 10, 15, 20),
     class_weight=None, scale=False
 ):
     """Perform random forest and exctract feature importances.
@@ -118,6 +136,7 @@ def perform_random_forest(
     ax.set_ylabel("Mean decrease in impurity")
     fig.tight_layout()
 
+    # Permutation Importance
     start_time = time.time()
     result = inspection.permutation_importance(
         rf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=-1
@@ -134,11 +153,18 @@ def perform_random_forest(
     fig.tight_layout()
     plt.show()
 
-    scores = model_selection.cross_val_score(rf, X_train, y_train, cv=5)
+    #scores = model_selection.cross_val_score(rf, X_train, y_train, cv=5)
 
-    print("%0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
+    #print("%0.2f accuracy with a standard deviation of %0.2f" % (scores.mean(), scores.std()))
 
-    return rf
+    to_return = {
+        "model": rf,
+        "column": columns,
+        "importance_mdi": {"mean": importances, "std": std},
+        "importance_permutation": {"mean": result.importances_mean, "std": result.importances_std}
+    }
+
+    return to_return
 
 
 if __name__ == "_main__":
