@@ -35,7 +35,7 @@ def forest_depth_acc(
         # Train
         train_pred = rf.predict(x_train)
         fpr_train, tpr_train, _ = metrics.roc_curve(y_train, train_pred)
-        trainauc = metrics.auc(false_positive_rate, true_positive_rate)
+        train_auc = metrics.auc(false_positive_rate, true_positive_rate)
         train_accuracy = metrics.accuracy_score(y_train, train_pred)
         # Test
         test_pred = rf.predict(x_test)
