@@ -13,11 +13,110 @@ from matplotlib.backends.backend_pdf import PdfPages
 
 from sklearn.metrics import r2_score
 
+# Decision Tree graph
+import collections
+import pydotplus
+
 # Local modules
 import auxiliary
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
+
+
+def node_color(
+    dot_data, colors=('#33aaff', '#ff664d'),
+    by="entropy", attr="label"
+):
+    """Apply the selected colors on a decision tree
+    with transparency depending on node impurity.
+
+    -----
+    Exemple:
+    
+        dtree_plus = DecisionTreeClassifier(...)  # object
+        columns = ...  # features in str
+        labels = ... # class in tuple(str, ...)
+    
+        dot_data = tree.export_graphviz(
+            dtree_plus,
+            feature_names=x_columns,
+            class_names=labels_class,
+        )
+        dot_data = node_color(dot_data, by="entropy")
+        graph = graphviz.Source(dot_data, format="png")
+        graph.render(...)  # save decision tree with new color
+
+    -----
+    dot_data: str
+        decision tree dot data representation
+        from sklearn.tree.export_graphviz
+
+    colors: tuple -> tuple(str, str, ...)
+        Applied color for each child from a node
+        in the corresponding order, such that a tree
+        predicting two classes needs two colors.
+
+    by: str
+        criterion for node impurity such as
+        gini, entropy. It will be used
+        to apply transparency such that a complete disorder
+        will be completely transparent and no disorder
+        won't be at all transparent.
+
+    attr: str
+        node label to access and retrieve data to
+        perform modifications on.
+
+    Returns: str
+        dot data with modified color
+
+    """
+    criterion_str = f"{by} = "
+    sep = "\\n"
+
+    # Graph from dot data
+    graph_dot = pydotplus.graphviz.graph_from_dot_data(dot_data)
+    edges = collections.defaultdict(list)
+
+    for edge in graph_dot.get_edge_list():
+        edges[edge.get_source()].append(int(edge.get_destination()))
+
+    for edge in edges:
+        edges[edge].sort()
+        for i in range(2):
+            node = graph_dot.get_node(str(edges[edge][i]))[0]
+            node_label = node.get_attributes()[attr]
+            entropy = float(node_label.split(criterion_str)[1].split(sep)[0])
+            transparency = hex(int((1 - entropy) * 255))[2:]
+            if len(transparency) == 1:
+                transparency = '1' + transparency
+            node.set_fillcolor(colors[i] + transparency)
+
+    # Final decision tree graph
+    return graph_dot.to_string()
+
+#fig, ax = plt.subplots(figsize=(400, 120))
+#colors = ('#33aaff', '#ff664d')
+#
+#artists = tree.plot_tree(
+#    dtree_plus,
+#    feature_names=x_columns,
+#    class_names=labels_class,
+#    rounded=True,
+#    fontsize=18,
+#    ax=ax
+#)
+#
+#from matplotlib.colors import ListedColormap, to_rgb
+#for artist, impurity, value in zip(artists, dtree_plus.tree_.impurity, dtree_plus.tree_.value):
+#    # let the max value decide the color; whiten the color depending on impurity (gini)
+#    transparency = hex(int((1 - impurity) * 255))[2:]
+#    if len(transparency) == 1:
+#        transparency = '1' + transparency
+#    artist.get_bbox_patch().set_facecolor(colors[np.argmax(value)] + transparency)
+#    artist.get_bbox_patch().set_edgecolor('black')
+
 
 def to_pdf(filepath, figures, then_close=False, bbox_inches=None):
     """Save a list of figure in pdf format

@@ -16,27 +16,27 @@ def ExtractMap(
         the features at the respective position. It is
         used to show regions intensity.
 
-        -----
-        Extract a feature as a map from a given dataframe
-        Exemple: 
-            m = ExtractMap(df,"Density20")
-            plt.imshow(m)
-        
-        Created on Wed Sep 7 11:50:57 2022
-        @author: paolo pierobon
+    -----
+    Extract a feature as a map from a given dataframe
+    Exemple: 
+        m = ExtractMap(df,"Density20")
+        plt.imshow(m)
+    
+    Created on Wed Sep 7 11:50:57 2022
+    @author: paolo pierobon
 
-        -----
-        data: pandas.Dataframe
-            A dataframe formatted such that it contains
-            an X and Y column corresponding to positions
-            where a specfic observation has been made.
+    -----
+    data: pandas.Dataframe
+        A dataframe formatted such that it contains
+        an X and Y column corresponding to positions
+        where a specfic observation has been made.
 
-        chosen_file: str
-            In case if dataframe is formatted such that
+    chosen_file: str
+        In case if dataframe is formatted such that
 
-        Returns: np.ndarray
-            The matrix containing features values
-            associated to each position.
+    Returns: np.ndarray
+        The matrix containing features values
+        associated to each position.
 
     """
     df = data
