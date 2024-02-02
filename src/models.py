@@ -120,7 +120,8 @@ def perform_random_forest(
     rf = RandomForestClassifier(
         max_depth=max_depth,
         n_estimators=n_estimators,
-        class_weight=class_weight
+        class_weight=class_weight,
+        random_state=seed
     )
     rf.fit(x_train, y_train)
 
