@@ -1,3 +1,29 @@
+# Class
+class Constantes():
+    def __init__(self, column, value, name=None) -> None:
+        self.column = column
+        self.value = value
+        self.name = name
+        if self.name is None:
+            self.name = self.value
+
+    def __getitem__(self, key):
+        return (
+            self.column if (key == 0 or key == "column")
+            else self.value if (key == 1 or key == "value")
+            else self.name if (key == 2 or key == "name")
+            else None
+        )
+
+    def __eq__(self, other):
+        return self.value == other
+
+    def __repr__(self) -> str:
+        return self.value
+
+    def __str__(self) -> str:
+        return f"Constantes: {self.column} = {self.value}"
+
 
 # Output file path
 OUTPUT_DIR = "../out"
@@ -5,12 +31,12 @@ DATA_DIR = "../data"
 SOURCE_DIR = "../src"
 
 # Column, Val association
-WT = ("Condition", "WT")
-KI = ("Condition", "KI")
-CD3 = ("Type", "CD3")
-LY6 = ("Type", "Ly6")
-IN_TUMOR = ("Mask", 1)
-OUT_TUMOR = ("Mask", 0)
+WT = Constantes("Condition", "WT")
+KI = Constantes("Condition", "KI")
+CD3 = Constantes("Type", "CD3")
+LY6 = Constantes("Type", "Ly6", "LY6")
+IN_TUMOR = Constantes("Mask", 1, "IN-TUMOR")
+OUT_TUMOR = Constantes("Mask", 0, "OUT-TUMOR")
 
 # Columns definition
 str_columns = ("Condition", "FileName", "Type")
@@ -72,3 +98,7 @@ if __name__ == "__main__":
     # Create output directory
     create_dir(DATA_DIR, add_suffix=False)
     create_dir(OUTPUT_DIR, add_suffix=False)
+    #
+    hey = Constantes("Condition", "KI")
+    print(f"column = {hey[0]}")
+    print(f"value = {hey[1]}")
