@@ -1,25 +1,110 @@
-# Class
+""""""
+
+import numpy as np  # for data type
+from auxiliary import create_dir
+
+# Constantes class
 class Constantes():
-    def __init__(self, column, value, name=None) -> None:
+    def __init__(self, column, value, name=None, **kwargs) -> None:
         self.column = column
         self.value = value
         self.name = name
+        self.kwargs = kwargs
         if self.name is None:
             self.name = self.value
 
+        # Set data accessing dictionnary
+        self.__set_dict__()
+
+    def __set_dict__(self):
+        """Set the dictionnary of str and associated index"""
+        self.attributes_ = {
+            "column": self.column,
+            "value": self.value,
+            "name": self.name,
+            **self.kwargs
+        }
+        self.key_index__ = {
+            idx: arg for idx, arg in enumerate(self.attributes_.values())
+        }
+
     def __getitem__(self, key):
-        return (
-            self.column if (key == 0 or key == "column")
-            else self.value if (key == 1 or key == "value")
-            else self.name if (key == 2 or key == "name")
-            else None
-        )
+        """Allow the user to retrieve element with str or int key."""
+        if isinstance(key, str):
+            return self.attributes_.get(key, None)
+        elif isinstance(key, int):
+            return self.attributes_.get(self.key_index__(key), None)
+        elif isinstance(key, Constantes):
+            return self.__getitem__(key.value)
+        else:
+            return None
+
+    def __bool__(self):
+        return bool(self.value)
 
     def __eq__(self, other):
+        if isinstance(other, Constantes):
+            return self.__eq__(other.value)
+
+        if isinstance(self.value, bool):
+            condition = other != 0
+            return (
+                condition if self.value else
+                ~condition
+            )
+
         return self.value == other
 
+    def __gt__(self, other):
+        if isinstance(other, Constantes):
+            return self.__gt__(other.value)
+
+        if isinstance(self.value, bool):
+            condition = 0 < other
+            return (
+                condition if self.value else
+                ~condition
+            )
+        return self.value > other
+
+    def __ge__(self, other):
+        if isinstance(other, Constantes):
+            return self.__ge__(other.value)
+
+        if isinstance(self.value, bool):
+            condition = 0 <= other
+            return (
+                condition if self.value else
+                ~condition
+            )
+        return self.value >= other
+
+    def __lt__(self, other):
+        if isinstance(other, Constantes):
+            return self.__lt__(other.value)
+
+        if isinstance(self.value, bool):
+            condition = 0 > other
+            return (
+                condition if self.value else
+                ~condition
+            )
+        return self.value < other
+
+    def __le__(self, other):
+        if isinstance(other, Constantes):
+            return self.__le__(other.value)
+
+        if isinstance(self.value, bool):
+            condition = 0 >= other
+            return (
+                condition if self.value else
+                ~condition
+            )
+        return self.value <= other
+
     def __repr__(self) -> str:
-        return self.value
+        return f"{self.value}"
 
     def __str__(self) -> str:
         return f"Constantes: {self.column} = {self.value}"
@@ -37,6 +122,17 @@ CD3 = Constantes("Type", "CD3")
 LY6 = Constantes("Type", "Ly6", "LY6")
 IN_TUMOR = Constantes("Mask", 1, "IN-TUMOR")
 OUT_TUMOR = Constantes("Mask", 0, "OUT-TUMOR")
+
+IN_FIBER = Constantes("Density20", True, "FIBER")
+OUT_FIBER = Constantes("Density20", False, "NO-FIBER")
+
+CELLS = Constantes("Cells", True)
+CELLS100UM = Constantes("Cells100um", True)
+
+# Classes column
+T_PLUS = Constantes("class_t_plus", 1, "t-plus")
+T_ENRICHED = Constantes("class_t_enriched", 1, "t-enriched")
+T_ENRICHED_2 = Constantes("class_t_enriched_2", 1, "t-enriched-2")
 
 # Columns definition
 str_columns = ("Condition", "FileName", "Type")
@@ -93,8 +189,26 @@ float_columns = (
     *cells_100um_columns, *cells_columns
 )
 
+aberrant_columns = (
+    *float20_columns,
+    *float60_columns,
+    *float100_columns,
+    *float140_columns
+)
+aberrant_columns = [
+    column for column in aberrant_columns
+    if column not in ("Density60", "Density100", "Density140")
+]
+
+# Type for each column
+data_type = {
+    **dict.fromkeys(str_columns, object),
+    **dict.fromkeys(unsigned_columns, np.uint32),
+    **dict.fromkeys(float_columns, np.float64),
+    **dict.fromkeys(int_columns, np.int32)
+}
+
 if __name__ == "__main__":
-    from auxiliary import create_dir
     # Create output directory
     create_dir(DATA_DIR, add_suffix=False)
     create_dir(OUTPUT_DIR, add_suffix=False)
