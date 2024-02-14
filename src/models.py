@@ -4,11 +4,108 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import sklearn.preprocessing as preprocessing
 from sklearn.ensemble import RandomForestClassifier
 import sklearn.inspection as inspection
+
 import sklearn.metrics as metrics
-import sklearn.preprocessing as preprocessing
-import sklearn.model_selection as model_selection
+from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import StratifiedShuffleSplit
+from sklearn.model_selection import GroupShuffleSplit
+from sklearn.model_selection import cross_validate
+
+
+def split_data(
+        x, y, groups=None,
+        n_splits=1, test_size=0.2,
+        stratify=True, seed=42
+):
+    """Create a split of the dataset
+
+    x: array-like of shape (n_samples, n_features)
+        data features to fit
+
+    y: array-like of shape (n_samples,) or (n_samples, n_outputs)
+        target variable to predict
+
+    groups: array-like of shape (n_samples,), default=None
+
+    n_split: int, default=5
+        Number of repeated split of the data 
+
+    seed: int
+        Seed to control the randomness and
+        have reproductible results
+
+    if n_split == 1:
+        Returns: tuple -> tuple(ndarray) * 6
+            A tuple containing the list of train and test
+            split of inputs, represented as tuple(x_train,
+            x_test, y_train, y_test, groups_train, groups_test)
+
+    elif n_split > 1:
+        Yiels: tuple -> tuple(ndarray, ndarray)
+            The training and test indices represented
+            as tuple(train_index, test_index)
+
+    """
+    # Return a generator if number of split > 1
+    return_generator = n_splits > 1
+
+    # If the user defined groups for the variable
+    if groups is not None:
+        gss = GroupShuffleSplit(
+            n_splits=n_splits, test_size=test_size, random_state=seed
+        )
+        gss_gen = gss.split(X=x, y=y, groups=groups)
+        if not return_generator:
+            train_index, test_index = next(gss_gen)
+            return (
+                x[train_index], x[test_index],
+                y[train_index], y[test_index],
+                groups[train_index], groups[test_index]
+            )
+        else:
+            return gss_gen
+    # Else case
+    else:
+        sss = StratifiedShuffleSplit(
+            n_splits=n_splits, test_size=test_index, random_state=seed
+        )
+        sss_gen = sss.split(X=x, y=y, groups=None)
+        if not return_generator:
+            train_index, test_index = next(sss_gen)
+            return x[train_index], x[test_index], y[train_index], y[test_index]
+        else:
+            return sss_gen
+
+
+def cross_validation(
+        estimator, x, y,
+        groups=None, fold=10, seed=42,
+        scoring=(
+            precision_recall_curve,
+            roc_curve,
+            class_likelihood_ratios,
+        ),
+        return_train_score=False,
+        return_estimator=False,
+        return_indices=False,
+        **kwargs
+):
+    """"""
+    scores = cross_validate(
+        estimator=estimator,
+        X=x,
+        y=y,
+        groups=groups,
+        scoring=scoring,
+        cv=fold,
+        return_train_score=False,
+        return_estimator=False,
+        return_indices=False,
+        **kwargs
+    )
 
 def forest_depth_acc(
     x_train, y_train, x_test, y_test,
@@ -104,7 +201,7 @@ def perform_random_forest(
 
     # Random search to find best hyperparameters
     rf = RandomForestClassifier()
-    rand_search = model_selection.RandomizedSearchCV(
+    rand_search = RandomizedSearchCV(
         rf, param_distributions=param_dist, 
         n_iter=5, cv=5, random_state=seed
     )
