@@ -10,15 +10,18 @@ import sklearn.inspection as inspection
 
 import sklearn.metrics as metrics
 from sklearn.model_selection import RandomizedSearchCV
+from sklearn.model_selection import ShuffleSplit
 from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GroupShuffleSplit
 from sklearn.model_selection import cross_validate
 
 
+SEED = 42
+
 def split_data(
         x, y, groups=None,
         n_splits=1, test_size=0.2,
-        stratify=True, seed=42
+        stratify=True, seed=SEED
 ):
     """Create a split of the dataset
 
@@ -29,11 +32,26 @@ def split_data(
         target variable to predict
 
     groups: array-like of shape (n_samples,), default=None
+        group labels for the samples, used
+        to split data while conserving a group in
+        one set only (train or test)
 
-    n_split: int, default=5
-        Number of repeated split of the data 
+    n_split: int, default=1
+        Number of repeated split of the data
 
-    seed: int
+    test_size: float or int, default=0.2
+        If float, it correspond to the proportion
+        of the dataset to include in the test split.
+        If int, represent the absolute number of test
+        samples.
+
+    stratify: bool, default=True
+        Should the split be stratified ? Such
+        that the percentage of the target class
+        is the same across the sets (unavailable
+        with groups!=None)
+
+    seed: int, default=models.SEED
         Seed to control the randomness and
         have reproductible results
 
@@ -51,13 +69,17 @@ def split_data(
     """
     # Return a generator if number of split > 1
     return_generator = n_splits > 1
-
+    data_args = {"X": x, "y":y, "groups": groups}
+    split_args = {
+        "n_splits": n_splits,
+        "test_size": test_size,
+        "train_size": None,
+        "random_state": seed
+    }
     # If the user defined groups for the variable
     if groups is not None:
-        gss = GroupShuffleSplit(
-            n_splits=n_splits, test_size=test_size, random_state=seed
-        )
-        gss_gen = gss.split(X=x, y=y, groups=groups)
+        gss = GroupShuffleSplit(**split_args)
+        gss_gen = gss.split(**data_args)
         if not return_generator:
             train_index, test_index = next(gss_gen)
             return (
@@ -69,31 +91,96 @@ def split_data(
             return gss_gen
     # Else case
     else:
-        sss = StratifiedShuffleSplit(
-            n_splits=n_splits, test_size=test_index, random_state=seed
+        sss = (
+            StratifiedShuffleSplit(**split_args) if stratify
+            else ShuffleSplit(**split_args)
         )
-        sss_gen = sss.split(X=x, y=y, groups=None)
+        sss_gen = sss.split(**data_args)
         if not return_generator:
             train_index, test_index = next(sss_gen)
-            return x[train_index], x[test_index], y[train_index], y[test_index]
+            return (
+                x[train_index], x[test_index],
+                y[train_index], y[test_index]
+            )
         else:
             return sss_gen
 
 
 def cross_validation(
         estimator, x, y,
-        groups=None, fold=10, seed=42,
+        groups=None, fold=None,
         scoring=(
             precision_recall_curve,
             roc_curve,
             class_likelihood_ratios,
         ),
+        seed=SEED, stratify=True,
         return_train_score=False,
         return_estimator=False,
         return_indices=False,
         **kwargs
 ):
-    """"""
+    """Perform a cross-validation on the data
+
+    estimator: object
+        estimator object implementing fit
+
+    x: array-like of shape (n_samples, n_features)
+        data features to fit
+
+    y: array-like of shape (n_samples,) or (n_samples, n_outputs)
+        target variable to predict
+
+    groups: array-like of shape (n_samples,), default=None
+        group labels for the samples, should be
+        used in conjunction with a Group cv instance
+        (e.g., sklearn.model_selection.GroupKFold,
+        sklearn.model_selection.StratifiedGroupKFold, ...)
+
+    fold: int, default=5
+        Number of repeated split of the data
+
+    scoring: str, callable, list, tuple, or dict
+        see the {scoring} argument from
+        sklearn.model_selection.cross_validate
+        documentation
+
+    seed: int, default=models.SEED
+        Seed to control the randomness and
+        have reproductible results
+
+    stratify: bool, default=True
+        Should the different split across the
+        folds be stratified ? Such that we
+        attempt to preserve the percentage
+        of the target class across the sets
+
+    return_train_score: bool, default=False
+        Should we compute and return the train
+        score for each split ?
+ 
+    return_estimator: bool, default=False
+        Should we return the fitted estimators
+        for each split ?
+
+    return_indices: bool, default=False
+        Should we return the indices for each
+        split ?
+
+    kwargs: dict
+        supplementary argument
+
+    Returns: dict
+        Dictionnary containing the different
+        score computed on the different fold,
+        also contain fitting time, scoring time.
+        train_scores, estimator and indices are
+        provided if the user set the argument to
+        True.
+        See sklearn.model_selection.cross_validate
+        documentation
+
+    """
     scores = cross_validate(
         estimator=estimator,
         X=x,
@@ -101,9 +188,9 @@ def cross_validation(
         groups=groups,
         scoring=scoring,
         cv=fold,
-        return_train_score=False,
-        return_estimator=False,
-        return_indices=False,
+        return_train_score=return_train_score,
+        return_estimator=return_estimator,
+        return_indices=return_indices,
         **kwargs
     )
 
