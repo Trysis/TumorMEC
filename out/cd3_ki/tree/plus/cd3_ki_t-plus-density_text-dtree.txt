@@ -1,0 +1,1756 @@
+|--- Density140 <= 1.00
+|   |--- Energy140 <= 0.30
+|   |   |--- Coherency140 <= 0.32
+|   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |--- MeanInt140 <= 3.58
+|   |   |   |   |   |--- MeanInt140 <= 2.23
+|   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |--- VarInt140 <= 21.04
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 1.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  1.34
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarInt140 >  21.04
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.42
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.42
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 6.53
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 1.14
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  1.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  6.53
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.63
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.63
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 20.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  20.38
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- MeanInt140 >  2.23
+|   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |--- VarInt140 <= 10.51
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.88
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.88
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarInt140 >  10.51
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.45
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.45
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.16
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarDensity60 >  0.16
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 32.68
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  32.68
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.09
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 14.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  14.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- MeanInt140 >  3.58
+|   |   |   |   |   |--- VarInt140 <= 24.28
+|   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |--- VarInt100 <= 14.66
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.18
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarInt100 >  14.66
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.18
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -1.09
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -1.09
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.46
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.46
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.45
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.45
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- VarInt140 >  24.28
+|   |   |   |   |   |   |--- OrientationRef140 <= 0.10
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 6.09
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  6.09
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  0.10
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 38.98
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  38.98
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Energy20 >  0.02
+|   |   |   |   |--- VarInt140 <= 89.94
+|   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |   |--- MeanInt140 <= 4.92
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 1.35
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  1.35
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt140 >  4.92
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 8.39
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  8.39
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.12
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 6.06
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  6.06
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |   |--- Energy100 <= 0.22
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.00
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.00
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.22
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.18
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.29
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.29
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |--- Energy60 <= 0.18
+|   |   |   |   |   |   |   |--- Energy100 <= 0.10
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.13
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.13
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 21.50
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  21.50
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.10
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy60 >  0.18
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.08
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 3.87
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  3.87
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.08
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 6.57
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  6.57
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.08
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.15
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.15
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- VarInt140 >  89.94
+|   |   |   |   |   |--- Energy100 <= 0.09
+|   |   |   |   |   |   |--- Density140 <= 0.38
+|   |   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.47
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.47
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 5.89
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  5.89
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Density140 >  0.38
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.09
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.09
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.07
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 18.94
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  18.94
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy100 >  0.09
+|   |   |   |   |   |   |--- VarDensity140 <= 0.05
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.26
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 20.72
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  20.72
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.26
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 18.50
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  18.50
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.12
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarDensity140 >  0.05
+|   |   |   |   |   |   |   |--- VarInt140 <= 173.68
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 8.97
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  8.97
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarInt140 >  173.68
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 16.26
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  16.26
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.12
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |--- Coherency140 >  0.32
+|   |   |   |--- Energy60 <= 0.11
+|   |   |   |   |--- Energy140 <= 0.06
+|   |   |   |   |   |--- Density140 <= 0.43
+|   |   |   |   |   |   |--- VarInt140 <= 13.72
+|   |   |   |   |   |   |   |--- Energy100 <= 0.04
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.04
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.16
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.16
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 1.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  1.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- VarInt140 >  13.72
+|   |   |   |   |   |   |   |--- Energy100 <= 0.05
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.05
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 2.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  2.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Density140 >  0.43
+|   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |--- OrientationRef20 <= -0.91
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef20 >  -0.91
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |--- MeanInt20 <= 10.91
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  10.91
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Energy140 >  0.06
+|   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |--- VarInt140 <= 8.32
+|   |   |   |   |   |   |   |--- OrientationRef20 <= 0.15
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Density20 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Density20 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef20 >  0.15
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 4.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  4.31
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- VarInt140 >  8.32
+|   |   |   |   |   |   |   |--- MeanInt100 <= 3.25
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.36
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.36
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt100 >  3.25
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.40
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.40
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |--- OrientationRef140 <= 0.40
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.17
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.39
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.39
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 9.77
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  9.77
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency20 >  0.17
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.32
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.32
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  0.40
+|   |   |   |   |   |   |   |--- Energy140 <= 0.09
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.09
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.04
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.48
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.48
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.04
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 9.47
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  9.47
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Energy60 >  0.11
+|   |   |   |   |--- Coherency140 <= 0.40
+|   |   |   |   |   |--- Energy20 <= 0.10
+|   |   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |   |--- Energy140 <= 0.19
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.19
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 141.14
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  141.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.19
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.19
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.05
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |   |--- Energy140 <= 0.17
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.38
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.38
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.17
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 235.30
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  235.30
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- Energy20 >  0.10
+|   |   |   |   |   |   |--- Energy20 <= 0.13
+|   |   |   |   |   |   |   |--- Energy140 <= 0.20
+|   |   |   |   |   |   |   |   |--- Density140 <= 0.30
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Density140 >  0.30
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.20
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.22
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.22
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy20 >  0.13
+|   |   |   |   |   |   |   |--- Energy20 <= 0.52
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.51
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.51
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.52
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 1981.65
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  1981.65
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- Coherency140 >  0.40
+|   |   |   |   |   |--- Coherency140 <= 0.49
+|   |   |   |   |   |   |--- OrientationRef140 <= -0.07
+|   |   |   |   |   |   |   |--- Energy60 <= 0.14
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.16
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 142.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  142.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.16
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.14
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 426.59
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  426.59
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  -0.07
+|   |   |   |   |   |   |   |--- Coherency100 <= 0.48
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 17.76
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt60 >  17.76
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.53
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.53
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency100 >  0.48
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- Coherency140 >  0.49
+|   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |--- Density140 <= 0.28
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Density140 >  0.28
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |--- class: plus
+|   |--- Energy140 >  0.30
+|   |   |--- VarInt140 <= 351.65
+|   |   |   |--- Energy60 <= 0.28
+|   |   |   |   |--- Coherency140 <= 0.43
+|   |   |   |   |   |--- Energy20 <= 0.04
+|   |   |   |   |   |   |--- Energy100 <= 0.22
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.24
+|   |   |   |   |   |   |   |   |--- Density140 <= 0.86
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 54.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  54.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Density140 >  0.86
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.24
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 37.85
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  37.85
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy100 >  0.22
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.16
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.25
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.26
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.26
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.25
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Coherency20 >  0.16
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.15
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 6.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  6.45
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.15
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 118.48
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  118.48
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy20 >  0.04
+|   |   |   |   |   |   |--- VarInt140 <= 93.64
+|   |   |   |   |   |   |   |--- Energy100 <= 0.34
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.34
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.24
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.44
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.24
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.43
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.43
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarInt140 >  93.64
+|   |   |   |   |   |   |   |--- Energy100 <= 0.25
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.35
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.35
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.25
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.14
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.14
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Coherency140 >  0.43
+|   |   |   |   |   |--- OrientationRef140 <= -0.05
+|   |   |   |   |   |   |--- Energy20 <= 0.08
+|   |   |   |   |   |   |   |--- MeanInt20 <= 2.76
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  2.76
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy20 >  0.08
+|   |   |   |   |   |   |   |--- MeanInt20 <= 1.76
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  1.76
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- OrientationRef140 >  -0.05
+|   |   |   |   |   |   |--- Coherency20 <= 0.03
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency20 >  0.03
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Energy60 >  0.28
+|   |   |   |   |--- Coherency140 <= 0.28
+|   |   |   |   |   |--- Energy140 <= 0.48
+|   |   |   |   |   |   |--- Energy20 <= 0.14
+|   |   |   |   |   |   |   |--- Energy100 <= 0.46
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 244.19
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 132.23
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  132.23
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  244.19
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.46
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.39
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.39
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.49
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy20 >  0.14
+|   |   |   |   |   |   |   |--- Energy60 <= 0.39
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.31
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.31
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.39
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.49
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 212.78
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  212.78
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.49
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy140 >  0.48
+|   |   |   |   |   |   |--- Energy20 <= 0.21
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.11
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.18
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency60 >  0.11
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- Density60 <= 0.54
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Density60 >  0.54
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.84
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.84
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy20 >  0.21
+|   |   |   |   |   |   |   |--- Energy140 <= 0.62
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.29
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.29
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.62
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.21
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Coherency140 >  0.28
+|   |   |   |   |   |--- Energy20 <= 0.17
+|   |   |   |   |   |   |--- OrientationRef100 <= -0.00
+|   |   |   |   |   |   |   |--- MeanInt140 <= 13.29
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.10
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.10
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt140 >  13.29
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.42
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.42
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.36
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.36
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef100 >  -0.00
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.33
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.09
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 6.35
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  6.35
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.33
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.19
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.19
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy20 >  0.17
+|   |   |   |   |   |   |--- VarDensity140 <= 0.23
+|   |   |   |   |   |   |   |--- Energy140 <= 0.31
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.31
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarDensity140 >  0.23
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.31
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.49
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.49
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.31
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.56
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.56
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |--- VarInt140 >  351.65
+|   |   |   |--- Energy20 <= 0.32
+|   |   |   |   |--- Coherency100 <= 0.42
+|   |   |   |   |   |--- Coherency100 <= 0.23
+|   |   |   |   |   |   |--- Energy140 <= 0.34
+|   |   |   |   |   |   |   |--- VarDensity140 <= 0.02
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.32
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.32
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarDensity140 >  0.02
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.26
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.26
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy140 >  0.34
+|   |   |   |   |   |   |   |--- Energy60 <= 0.72
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.17
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.17
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.72
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 67.78
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  67.78
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Coherency100 >  0.23
+|   |   |   |   |   |   |--- OrientationRef140 <= 0.00
+|   |   |   |   |   |   |   |--- Energy140 <= 0.87
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 680.02
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 24.83
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  24.83
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  680.02
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.87
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  0.00
+|   |   |   |   |   |   |   |--- Energy140 <= 0.61
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.11
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.66
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.66
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.61
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.16
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 408.56
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  408.56
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.16
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 74.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  74.13
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Coherency100 >  0.42
+|   |   |   |   |   |--- OrientationRef60 <= -0.02
+|   |   |   |   |   |   |--- Coherency140 <= 0.41
+|   |   |   |   |   |   |   |--- Energy140 <= 0.37
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.34
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.34
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.37
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.37
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.37
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency140 >  0.41
+|   |   |   |   |   |   |   |--- VarDensity140 <= 0.11
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarDensity140 >  0.11
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.18
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- OrientationRef60 >  -0.02
+|   |   |   |   |   |   |--- Coherency140 <= 0.43
+|   |   |   |   |   |   |   |--- Energy100 <= 0.51
+|   |   |   |   |   |   |   |   |--- Density140 <= 0.84
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 >  0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Density140 >  0.84
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy100 >  0.51
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.37
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.37
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency140 >  0.43
+|   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 524.67
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt20 >  524.67
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 0.25
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  0.25
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Energy20 >  0.32
+|   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |--- Energy20 <= 0.39
+|   |   |   |   |   |   |--- VarInt20 <= 2263.24
+|   |   |   |   |   |   |   |--- Energy20 <= 0.39
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.39
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 31.89
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  31.89
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarInt20 >  2263.24
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.37
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.35
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.35
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency20 >  0.37
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 52.32
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  52.32
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.47
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.47
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy20 >  0.39
+|   |   |   |   |   |   |--- VarDensity100 <= 0.00
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarDensity100 >  0.00
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |--- Energy60 <= 0.65
+|   |   |   |   |   |   |--- Coherency60 <= 0.14
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency60 >  0.14
+|   |   |   |   |   |   |   |--- Coherency100 <= 0.39
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.92
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.92
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.10
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency100 >  0.39
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.32
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.32
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy60 >  0.65
+|   |   |   |   |   |   |--- OrientationRef100 <= 0.02
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.33
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency60 >  0.33
+|   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarDensity100 >  0.12
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef100 >  0.02
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.10
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.66
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 3472.44
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  3472.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.66
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.10
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|--- Density140 >  1.00
+|   |--- VarInt140 <= 296.96
+|   |   |--- Energy60 <= 0.23
+|   |   |   |--- Coherency140 <= 0.15
+|   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |--- Coherency140 <= 0.08
+|   |   |   |   |   |   |--- OrientationRef140 <= 0.02
+|   |   |   |   |   |   |   |--- MeanInt100 <= 14.20
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt100 >  14.20
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.22
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.22
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 5.58
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  5.58
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  0.02
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 18.73
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  18.73
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- Coherency140 >  0.08
+|   |   |   |   |   |   |--- Coherency60 <= 0.13
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency60 >  0.13
+|   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 19.81
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 18.72
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  18.72
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  19.81
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |--- Coherency100 <= 0.11
+|   |   |   |   |   |   |   |--- MeanInt100 <= 30.54
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.15
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.15
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt100 >  30.54
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency100 >  0.11
+|   |   |   |   |   |   |   |--- OrientationRef100 <= -0.03
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 28.14
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt100 >  28.14
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef100 >  -0.03
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |--- OrientationRef60 <= 0.22
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 25.86
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt60 >  25.86
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 20.54
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  20.54
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef60 >  0.22
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.02
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |--- Energy60 <= 0.21
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 32.32
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  32.32
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 15.46
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  15.46
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.21
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.29
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.29
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Coherency140 >  0.15
+|   |   |   |   |--- Energy140 <= 0.25
+|   |   |   |   |   |--- Coherency140 <= 0.27
+|   |   |   |   |   |   |--- Coherency20 <= 0.31
+|   |   |   |   |   |   |   |--- OrientationRef100 <= 0.05
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.00
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.00
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef100 >  0.05
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.21
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency20 >  0.31
+|   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Coherency140 >  0.27
+|   |   |   |   |   |   |--- VarInt140 <= 146.15
+|   |   |   |   |   |   |   |--- Energy20 <= 0.06
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.06
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.20
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.20
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- VarInt140 >  146.15
+|   |   |   |   |   |   |   |--- MeanInt20 <= 16.87
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  16.87
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Energy140 >  0.25
+|   |   |   |   |   |--- MeanInt140 <= 27.00
+|   |   |   |   |   |   |--- Energy20 <= 0.04
+|   |   |   |   |   |   |   |--- Energy140 <= 0.30
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.00
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 3.43
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  3.43
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.00
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.30
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy20 >  0.04
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.16
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.15
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.15
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency140 >  0.16
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 36.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  36.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 87.66
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  87.66
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- MeanInt140 >  27.00
+|   |   |   |   |   |   |--- Energy60 <= 0.21
+|   |   |   |   |   |   |   |--- MeanInt20 <= 19.69
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  19.69
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy60 >  0.21
+|   |   |   |   |   |   |   |--- VarInt60 <= 95.75
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarInt60 >  95.75
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 151.88
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt100 >  151.88
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |--- Energy60 >  0.23
+|   |   |   |--- Energy60 <= 0.32
+|   |   |   |   |--- VarInt140 <= 109.18
+|   |   |   |   |   |--- VarInt60 <= 30.64
+|   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- VarInt60 >  30.64
+|   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- VarInt140 >  109.18
+|   |   |   |   |   |--- MeanInt100 <= 54.52
+|   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |--- OrientationRef20 <= -0.27
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.34
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.34
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef20 >  -0.27
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |--- Energy140 <= 0.42
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 44.00
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt20 >  44.00
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.42
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 53.20
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- VarInt20 >  53.20
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- MeanInt100 >  54.52
+|   |   |   |   |   |   |--- OrientationRef100 <= 0.00
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef100 >  0.00
+|   |   |   |   |   |   |   |--- Energy20 <= 0.11
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy20 >  0.11
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 241.64
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 60.86
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  60.86
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt100 >  241.64
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |--- Energy60 >  0.32
+|   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |--- Coherency100 <= 0.29
+|   |   |   |   |   |   |--- Energy100 <= 0.62
+|   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy100 >  0.62
+|   |   |   |   |   |   |   |--- Energy140 <= 0.65
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.65
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= 0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  0.23
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.65
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.65
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.08
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Coherency100 >  0.29
+|   |   |   |   |   |   |--- Energy100 <= 0.53
+|   |   |   |   |   |   |   |--- MeanInt140 <= 36.31
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt140 >  36.31
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy100 >  0.53
+|   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |--- Energy140 <= 0.75
+|   |   |   |   |   |   |   |--- VarInt140 <= 143.86
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarInt140 >  143.86
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.59
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.59
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy140 >  0.75
+|   |   |   |   |   |   |   |--- MeanInt100 <= 34.13
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt100 >  34.13
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |--- VarInt140 >  296.96
+|   |   |--- OrientationRef100 <= -0.01
+|   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |--- Energy140 <= 0.13
+|   |   |   |   |   |--- OrientationRef60 <= -0.05
+|   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- OrientationRef60 >  -0.05
+|   |   |   |   |   |   |--- OrientationRef140 <= -0.02
+|   |   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 515.01
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  515.01
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 31.76
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  31.76
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 3.60
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt20 >  3.60
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  -0.02
+|   |   |   |   |   |   |   |--- Coherency100 <= 0.11
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 29.91
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  29.91
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Coherency100 >  0.11
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- Energy140 >  0.13
+|   |   |   |   |   |--- Coherency140 <= 0.07
+|   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |--- OrientationRef100 <= -0.35
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.35
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.35
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef100 >  -0.35
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |--- Energy60 <= 0.13
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy60 >  0.13
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 66.66
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt60 >  66.66
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Coherency140 >  0.07
+|   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |--- Energy140 <= 0.48
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.27
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.27
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.48
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.33
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.33
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |--- OrientationRef60 <= 0.03
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.15
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.15
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef60 >  0.03
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.03
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |--- Coherency100 <= 0.21
+|   |   |   |   |   |--- VarInt140 <= 894.73
+|   |   |   |   |   |   |--- MeanInt140 <= 44.48
+|   |   |   |   |   |   |   |--- Energy140 <= 0.11
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.21
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 151.57
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  151.57
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.11
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.20
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.20
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- MeanInt140 >  44.48
+|   |   |   |   |   |   |   |--- OrientationRef140 <= -0.03
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef140 >  -0.03
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 512.84
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt20 >  512.84
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- VarInt140 >  894.73
+|   |   |   |   |   |   |--- Energy100 <= 0.43
+|   |   |   |   |   |   |   |--- MeanInt140 <= 67.60
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt140 >  67.60
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 2427.80
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  2427.80
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 3598.71
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  3598.71
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy100 >  0.43
+|   |   |   |   |   |   |   |--- VarInt20 <= 7.87
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarInt20 >  7.87
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |--- Coherency100 >  0.21
+|   |   |   |   |   |--- class: plus
+|   |   |--- OrientationRef100 >  -0.01
+|   |   |   |--- Coherency140 <= 0.19
+|   |   |   |   |--- Energy100 <= 0.06
+|   |   |   |   |   |--- VarInt60 <= 113.52
+|   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- VarInt60 >  113.52
+|   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |--- OrientationRef60 <= -0.03
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 432.65
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- VarInt140 >  432.65
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef60 >  -0.03
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- Energy100 >  0.06
+|   |   |   |   |   |--- Coherency20 <= 0.06
+|   |   |   |   |   |   |--- OrientationRef140 <= 0.03
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.02
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= 0.77
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 60.93
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  60.93
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  0.77
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.02
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.26
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 24.28
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  24.28
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.26
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef140 >  0.03
+|   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |--- Coherency20 >  0.06
+|   |   |   |   |   |   |--- OrientationRef100 <= 0.10
+|   |   |   |   |   |   |   |--- MeanInt140 <= 47.19
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- MeanInt140 >  47.19
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.26
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.26
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.32
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.32
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- OrientationRef100 >  0.10
+|   |   |   |   |   |   |   |--- VarInt140 <= 708.54
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.04
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.04
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarInt140 >  708.54
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.39
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.39
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.01
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |--- Coherency140 >  0.19
+|   |   |   |   |--- VarInt140 <= 605.23
+|   |   |   |   |   |--- Energy100 <= 0.37
+|   |   |   |   |   |   |--- Coherency140 <= 0.26
+|   |   |   |   |   |   |   |--- OrientationRef20 <= -0.27
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- OrientationRef20 >  -0.27
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- Coherency140 >  0.26
+|   |   |   |   |   |   |   |--- MeanInt20 <= 38.25
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- MeanInt20 >  38.25
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- Energy100 >  0.37
+|   |   |   |   |   |   |--- MeanInt100 <= 62.61
+|   |   |   |   |   |   |   |--- VarInt140 <= 440.49
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.22
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.22
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- VarInt140 >  440.49
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |--- MeanInt100 >  62.61
+|   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |--- VarInt140 >  605.23
+|   |   |   |   |   |--- Coherency60 <= 0.40
+|   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |--- Energy140 <= 0.49
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.36
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.36
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 90.57
+|   |   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  90.57
+|   |   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- Energy140 >  0.49
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |--- VarDensity140 <= 0.00
+|   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |--- VarDensity140 >  0.00
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |--- Coherency60 >  0.40
+|   |   |   |   |   |   |--- Energy140 <= 0.55
+|   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |--- Energy140 >  0.55
+|   |   |   |   |   |   |   |--- Coherency100 <= 0.40
+|   |   |   |   |   |   |   |   |--- class: not_plus
+|   |   |   |   |   |   |   |--- Coherency100 >  0.40
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.32
+|   |   |   |   |   |   |   |   |   |--- class: plus
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.32
+|   |   |   |   |   |   |   |   |   |--- class: plus

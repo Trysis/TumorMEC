@@ -1,0 +1,2200 @@
+|--- Energy100 <= 0.09
+|   |--- Density140 <= 0.59
+|   |   |--- Dist <= 40.71
+|   |   |   |--- Coherency140 <= 0.20
+|   |   |   |   |--- Energy140 <= 0.06
+|   |   |   |   |   |--- VarDensity140 <= 0.23
+|   |   |   |   |   |   |--- Angle140 <= 0.98
+|   |   |   |   |   |   |   |--- Angle20 <= 0.37
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.03
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle20 >  0.37
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle140 >  0.98
+|   |   |   |   |   |   |   |--- Density140 <= 0.01
+|   |   |   |   |   |   |   |   |--- Dist <= 40.02
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 1.51
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  1.51
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  40.02
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.01
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.00
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.00
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 1.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  1.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarDensity140 >  0.23
+|   |   |   |   |   |   |--- VarInt20 <= 0.49
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.08
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency20 >  0.08
+|   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- VarInt20 >  0.49
+|   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Energy140 >  0.06
+|   |   |   |   |   |--- Dist <= 19.71
+|   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.13
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 25.18
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  25.18
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 763.54
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  763.54
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.13
+|   |   |   |   |   |   |   |   |--- Dist <= 14.93
+|   |   |   |   |   |   |   |   |   |--- Dist <= 4.74
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  4.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  14.93
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |--- Energy20 <= 0.03
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 37.09
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  37.09
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 1.48
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  1.48
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.03
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.09
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Dist >  19.71
+|   |   |   |   |   |   |--- Angle140 <= 0.88
+|   |   |   |   |   |   |   |--- Density140 <= 0.38
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Density60 <= 0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density60 >  0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.38
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 19.60
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  19.60
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle140 >  0.88
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.18
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- Angle100 <= 1.29
+|   |   |   |   |   |   |   |   |   |--- Dist <= 37.62
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  37.62
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  1.29
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |--- Coherency140 >  0.20
+|   |   |   |   |--- Angle140 <= 0.54
+|   |   |   |   |   |--- OrientationRef100 <= -0.36
+|   |   |   |   |   |   |--- Angle140 <= 0.31
+|   |   |   |   |   |   |   |--- Energy140 <= 0.01
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 0.86
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  0.86
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.01
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle140 >  0.31
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.26
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= -1.39
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  -1.39
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency60 >  0.26
+|   |   |   |   |   |   |   |   |--- Dist <= 11.39
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  11.39
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- OrientationRef100 >  -0.36
+|   |   |   |   |   |   |--- Energy140 <= 0.03
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.89
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.03
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.89
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Density20 <= 0.42
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density20 >  0.42
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.21
+|   |   |   |   |   |   |   |   |   |--- Dist <= 29.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  29.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy140 >  0.03
+|   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |--- Dist <= 3.08
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.24
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  3.08
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.37
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.37
+|   |   |   |   |   |   |   |   |   |--- Dist <= 14.78
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  14.78
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |--- Angle140 >  0.54
+|   |   |   |   |   |--- Dist <= 22.81
+|   |   |   |   |   |   |--- Coherency140 <= 0.32
+|   |   |   |   |   |   |   |--- Energy140 <= 0.13
+|   |   |   |   |   |   |   |   |--- Angle100 <= 1.40
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  1.40
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.13
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 36.69
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  36.69
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 16.04
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  16.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Coherency140 >  0.32
+|   |   |   |   |   |   |   |--- Dist <= 2.53
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  2.53
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.06
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.06
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Dist >  22.81
+|   |   |   |   |   |   |--- Energy20 <= 0.04
+|   |   |   |   |   |   |   |--- VarInt60 <= 10.24
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 4.40
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.40
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.40
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  4.40
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- VarInt60 >  10.24
+|   |   |   |   |   |   |   |   |--- Angle140 <= 1.28
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  1.28
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy20 >  0.04
+|   |   |   |   |   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.40
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.40
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.08
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |--- Dist >  40.71
+|   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |--- OrientationRef140 <= 0.19
+|   |   |   |   |   |--- Energy140 <= 0.02
+|   |   |   |   |   |   |--- Dist <= 78.54
+|   |   |   |   |   |   |   |--- Angle140 <= 0.26
+|   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.22
+|   |   |   |   |   |   |   |   |   |--- Dist <= 46.55
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  46.55
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity20 >  0.22
+|   |   |   |   |   |   |   |   |   |--- Dist <= 66.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  66.00
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Angle140 >  0.26
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 65.74
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt100 >  65.74
+|   |   |   |   |   |   |   |   |   |--- Dist <= 47.81
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  47.81
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  78.54
+|   |   |   |   |   |   |   |--- OrientationRef100 <= -0.17
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- Dist <= 98.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  98.44
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef100 >  -0.17
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Energy140 >  0.02
+|   |   |   |   |   |   |--- MeanInt140 <= 9.83
+|   |   |   |   |   |   |   |--- MeanInt20 <= 5.47
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 2.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  2.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt20 >  5.47
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.00
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.00
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- MeanInt140 >  9.83
+|   |   |   |   |   |   |   |--- Energy100 <= 0.04
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy100 >  0.04
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 36.44
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 0.60
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  0.60
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt60 >  36.44
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 9.84
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  9.84
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- OrientationRef140 >  0.19
+|   |   |   |   |   |--- Energy140 <= 0.04
+|   |   |   |   |   |   |--- Dist <= 69.61
+|   |   |   |   |   |   |   |--- Angle100 <= 1.09
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 0.72
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  0.72
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 1.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  1.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle100 >  1.09
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  69.61
+|   |   |   |   |   |   |   |--- Energy100 <= 0.00
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.82
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.82
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy100 >  0.00
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Energy140 >  0.04
+|   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |--- Energy140 >  0.07
+|   |   |   |   |--- Angle140 <= 1.20
+|   |   |   |   |   |--- Dist <= 111.40
+|   |   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |   |--- MeanInt100 <= 3.78
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.06
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.06
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt100 >  3.78
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |   |--- Energy100 <= 0.06
+|   |   |   |   |   |   |   |   |--- Dist <= 67.72
+|   |   |   |   |   |   |   |   |   |--- Density20 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density20 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  67.72
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy100 >  0.06
+|   |   |   |   |   |   |   |   |--- Density20 <= 0.53
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 1.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  1.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density20 >  0.53
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 0.83
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  0.83
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Dist >  111.40
+|   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Angle140 >  1.20
+|   |   |   |   |   |--- OrientationRef140 <= -0.38
+|   |   |   |   |   |   |--- Dist <= 50.42
+|   |   |   |   |   |   |   |--- OrientationRef20 <= -0.07
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 3.51
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  3.51
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 1.31
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  1.31
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef20 >  -0.07
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.98
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.98
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  50.42
+|   |   |   |   |   |   |   |--- OrientationRef20 <= 1.33
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef20 >  1.33
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 1.40
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  1.40
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |   |--- Dist <= 55.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  55.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- OrientationRef140 >  -0.38
+|   |   |   |   |   |   |--- Energy100 <= 0.06
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.15
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency60 >  0.15
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.87
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.87
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.06
+|   |   |   |   |   |   |   |--- OrientationRef100 <= -1.48
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.17
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.17
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef100 >  -1.48
+|   |   |   |   |   |   |   |   |--- Dist <= 110.50
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 0.91
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  0.91
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  110.50
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |--- Density140 >  0.59
+|   |   |--- Energy100 <= 0.07
+|   |   |   |--- VarInt140 <= 22.42
+|   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |--- Energy100 <= 0.04
+|   |   |   |   |   |   |   |--- VarInt20 <= 21.68
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt20 >  21.68
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 21.68
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  21.68
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.04
+|   |   |   |   |   |   |   |--- Dist <= 86.04
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  86.04
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 20.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  20.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.05
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |--- VarDensity140 <= 0.14
+|   |   |   |   |   |   |--- Dist <= 117.08
+|   |   |   |   |   |   |   |--- Dist <= 43.98
+|   |   |   |   |   |   |   |   |--- Angle20 <= 1.53
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle20 >  1.53
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 1.53
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  1.53
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  43.98
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 23.61
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt100 >  23.61
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  117.08
+|   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- VarDensity140 >  0.14
+|   |   |   |   |   |   |--- VarInt140 <= 18.69
+|   |   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.50
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.50
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- VarInt140 >  18.69
+|   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |--- VarInt140 >  22.42
+|   |   |   |   |--- Energy140 <= 0.05
+|   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |--- OrientationRef100 <= 0.01
+|   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- OrientationRef100 >  0.01
+|   |   |   |   |   |   |   |--- OrientationRef100 <= 0.01
+|   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef100 >  0.01
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |--- Angle20 <= 0.40
+|   |   |   |   |   |   |   |--- Dist <= 85.15
+|   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.25
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity20 >  0.25
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  85.15
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 15.31
+|   |   |   |   |   |   |   |   |   |--- Dist <= 91.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  91.74
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  15.31
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle20 >  0.40
+|   |   |   |   |   |   |   |--- OrientationRef60 <= -0.75
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef60 >  -0.75
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Energy140 >  0.05
+|   |   |   |   |   |--- MeanInt140 <= 18.39
+|   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |--- Energy140 <= 0.07
+|   |   |   |   |   |   |   |   |--- Dist <= 5.52
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  5.52
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.07
+|   |   |   |   |   |   |   |   |--- Dist <= 117.03
+|   |   |   |   |   |   |   |   |   |--- Dist <= 37.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  37.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  117.03
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |--- Angle100 <= 1.19
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.16
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.16
+|   |   |   |   |   |   |   |   |   |--- Dist <= 28.03
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  28.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle100 >  1.19
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- MeanInt140 >  18.39
+|   |   |   |   |   |   |--- Energy100 <= 0.06
+|   |   |   |   |   |   |   |--- OrientationRef20 <= -0.23
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.02
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.02
+|   |   |   |   |   |   |   |   |   |--- Dist <= 43.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  43.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef20 >  -0.23
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 20.73
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  20.73
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.06
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.03
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.03
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.13
+|   |   |   |   |   |   |   |   |   |--- Dist <= 76.96
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  76.96
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.13
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 0.93
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  0.93
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |--- Energy100 >  0.07
+|   |   |   |--- VarInt140 <= 71.09
+|   |   |   |   |--- Dist <= 66.74
+|   |   |   |   |   |--- VarDensity140 <= 0.15
+|   |   |   |   |   |   |--- Dist <= 25.98
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.09
+|   |   |   |   |   |   |   |   |--- Density140 <= 0.82
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density140 >  0.82
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency20 >  0.09
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.55
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.55
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Dist >  25.98
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 18.99
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  18.99
+|   |   |   |   |   |   |   |   |   |--- Dist <= 66.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  66.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- Angle60 <= 1.36
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle60 >  1.36
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarDensity140 >  0.15
+|   |   |   |   |   |   |--- Dist <= 4.74
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.18
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 8.65
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 11.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  11.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  8.65
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.18
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.31
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.31
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Dist >  4.74
+|   |   |   |   |   |   |   |--- VarInt140 <= 34.76
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  34.76
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.04
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.04
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Dist >  66.74
+|   |   |   |   |   |--- Dist <= 101.62
+|   |   |   |   |   |   |--- Energy100 <= 0.08
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 26.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  26.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.08
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.08
+|   |   |   |   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |   |   |   |--- Angle60 <= 1.22
+|   |   |   |   |   |   |   |   |   |--- Dist <= 84.99
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  84.99
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle60 >  1.22
+|   |   |   |   |   |   |   |   |   |--- Dist <= 74.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  74.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 <= 0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity100 >  0.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity100 >  0.10
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 8.43
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  8.43
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Dist >  101.62
+|   |   |   |   |   |   |--- Angle100 <= 0.33
+|   |   |   |   |   |   |   |--- Density20 <= 0.65
+|   |   |   |   |   |   |   |   |--- Density60 <= 0.69
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density60 >  0.69
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Density20 >  0.65
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle100 >  0.33
+|   |   |   |   |   |   |   |--- Dist <= 123.34
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 61.53
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  61.53
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  1.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  123.34
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |--- VarInt140 >  71.09
+|   |   |   |   |--- Energy60 <= 0.06
+|   |   |   |   |   |--- Dist <= 100.67
+|   |   |   |   |   |   |--- Dist <= 8.15
+|   |   |   |   |   |   |   |--- VarDensity140 <= 0.09
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarDensity140 >  0.09
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 149.75
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  149.75
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Dist >  8.15
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.04
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.23
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.23
+|   |   |   |   |   |   |   |   |   |--- Density100 <= 0.79
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density100 >  0.79
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.04
+|   |   |   |   |   |   |   |   |--- Dist <= 27.12
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  27.12
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Dist >  100.67
+|   |   |   |   |   |   |--- Angle140 <= 1.05
+|   |   |   |   |   |   |   |--- Energy140 <= 0.09
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 27.13
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt60 >  27.13
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.09
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Angle140 >  1.05
+|   |   |   |   |   |   |   |--- Dist <= 112.00
+|   |   |   |   |   |   |   |   |--- Angle140 <= 1.45
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 0.56
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  0.56
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  1.45
+|   |   |   |   |   |   |   |   |   |--- Dist <= 101.93
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  101.93
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  112.00
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.08
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 86.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  86.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |--- Energy60 >  0.06
+|   |   |   |   |   |--- VarInt140 <= 334.41
+|   |   |   |   |   |   |--- Coherency100 <= 0.30
+|   |   |   |   |   |   |   |--- MeanInt100 <= 34.57
+|   |   |   |   |   |   |   |   |--- Coherency60 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- Dist <= 52.43
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  52.43
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency60 >  0.09
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt100 >  34.57
+|   |   |   |   |   |   |   |   |--- Dist <= 26.58
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  26.58
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Coherency100 >  0.30
+|   |   |   |   |   |   |   |--- OrientationRef20 <= 0.09
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.24
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.42
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.42
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.24
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef20 >  0.09
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarInt140 >  334.41
+|   |   |   |   |   |   |--- Energy100 <= 0.08
+|   |   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= -1.44
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  -1.44
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 601.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  601.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.03
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.03
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.08
+|   |   |   |   |   |   |   |--- Density140 <= 0.94
+|   |   |   |   |   |   |   |   |--- Density60 <= 0.66
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density60 >  0.66
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.94
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 13.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  13.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.09
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|--- Energy100 >  0.09
+|   |--- Energy60 <= 0.12
+|   |   |--- VarDensity140 <= 0.16
+|   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |--- Density140 <= 0.87
+|   |   |   |   |   |--- MeanInt140 <= 2.27
+|   |   |   |   |   |   |--- Coherency140 <= 0.25
+|   |   |   |   |   |   |   |--- Angle60 <= 0.86
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Dist <= 28.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  28.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |   |   |--- Density100 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density100 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle60 >  0.86
+|   |   |   |   |   |   |   |   |--- Angle140 <= 1.13
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  1.13
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Coherency140 >  0.25
+|   |   |   |   |   |   |   |--- Energy20 <= 0.04
+|   |   |   |   |   |   |   |   |--- OrientationRef60 <= 0.76
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 11.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  11.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef60 >  0.76
+|   |   |   |   |   |   |   |   |   |--- Density20 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density20 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.04
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 29.43
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 4.89
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  4.89
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  29.43
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- MeanInt140 >  2.27
+|   |   |   |   |   |   |--- VarInt140 <= 22.27
+|   |   |   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 4.55
+|   |   |   |   |   |   |   |   |   |--- Dist <= 32.82
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  32.82
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  4.55
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |   |   |--- Dist <= 33.44
+|   |   |   |   |   |   |   |   |   |--- Dist <= 12.82
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  12.82
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  33.44
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- VarInt140 >  22.27
+|   |   |   |   |   |   |   |--- Dist <= 7.04
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.13
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.13
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.13
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.43
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.43
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  7.04
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.21
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 36.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  36.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Density140 >  0.87
+|   |   |   |   |   |--- VarInt140 <= 46.81
+|   |   |   |   |   |   |--- Coherency20 <= 0.08
+|   |   |   |   |   |   |   |--- Dist <= 14.09
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  14.09
+|   |   |   |   |   |   |   |   |--- Angle60 <= 1.44
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle60 >  1.44
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 25.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  25.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Coherency20 >  0.08
+|   |   |   |   |   |   |   |--- Energy60 <= 0.05
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.05
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 23.25
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 32.33
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  32.33
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  23.25
+|   |   |   |   |   |   |   |   |   |--- Dist <= 83.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  83.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- VarInt140 >  46.81
+|   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.18
+|   |   |   |   |   |   |   |   |--- Dist <= 93.79
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  93.79
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.18
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- Dist <= 8.88
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  8.88
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.03
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 42.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  42.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |--- MeanInt140 <= 28.96
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.99
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.99
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt140 >  28.96
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.32
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.32
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.81
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.81
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |--- Energy60 >  0.08
+|   |   |   |   |--- VarInt140 <= 70.56
+|   |   |   |   |   |--- Energy100 <= 0.13
+|   |   |   |   |   |   |--- VarDensity140 <= 0.05
+|   |   |   |   |   |   |   |--- Dist <= 67.49
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.11
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 1.44
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  1.44
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  67.49
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 2.28
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  2.28
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- VarDensity140 >  0.05
+|   |   |   |   |   |   |   |--- Dist <= 30.44
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 27.86
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  27.86
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  30.44
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 5.34
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  5.34
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Energy100 >  0.13
+|   |   |   |   |   |   |--- Dist <= 16.08
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.19
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.06
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.06
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 4.82
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  4.82
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency20 >  0.19
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 3.29
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  3.29
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  16.08
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.25
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.09
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.09
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 21.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  21.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency60 >  0.25
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 19.85
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  19.85
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 5.81
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  5.81
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- VarInt140 >  70.56
+|   |   |   |   |   |--- VarDensity140 <= 0.00
+|   |   |   |   |   |   |--- Energy140 <= 0.17
+|   |   |   |   |   |   |   |--- Dist <= 16.66
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  16.66
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 23.55
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 6.30
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  6.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  23.55
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy140 >  0.17
+|   |   |   |   |   |   |   |--- Angle20 <= 1.09
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 46.92
+|   |   |   |   |   |   |   |   |   |--- Dist <= 46.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  46.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  46.92
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle20 >  1.09
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.10
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- VarDensity140 >  0.00
+|   |   |   |   |   |   |--- MeanInt100 <= 6.95
+|   |   |   |   |   |   |   |--- Energy100 <= 0.13
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 67.86
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 3.86
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  3.86
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt100 >  67.86
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy100 >  0.13
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.18
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.18
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 >  0.00
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- MeanInt100 >  6.95
+|   |   |   |   |   |   |   |--- Energy60 <= 0.10
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.81
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.81
+|   |   |   |   |   |   |   |   |   |--- Dist <= 104.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  104.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.10
+|   |   |   |   |   |   |   |   |--- Dist <= 61.95
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 49.64
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  49.64
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  61.95
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 768.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  768.74
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |--- VarDensity140 >  0.16
+|   |   |   |--- Angle140 <= 0.46
+|   |   |   |   |--- Coherency140 <= 0.14
+|   |   |   |   |   |--- VarInt140 <= 36.47
+|   |   |   |   |   |   |--- Dist <= 20.81
+|   |   |   |   |   |   |   |--- MeanInt100 <= 6.22
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.11
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- MeanInt100 >  6.22
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.14
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.14
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  20.81
+|   |   |   |   |   |   |   |--- VarInt140 <= 25.21
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  25.21
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 23.20
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  23.20
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarInt140 >  36.47
+|   |   |   |   |   |   |--- Coherency140 <= 0.08
+|   |   |   |   |   |   |   |--- Dist <= 92.86
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.11
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 426.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  426.16
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  92.86
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.05
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Coherency140 >  0.08
+|   |   |   |   |   |   |   |--- Density140 <= 0.43
+|   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.00
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.00
+|   |   |   |   |   |   |   |   |   |--- Dist <= 3.58
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  3.58
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.43
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.11
+|   |   |   |   |   |   |   |   |   |--- Dist <= 2.50
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  2.50
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.11
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Coherency140 >  0.14
+|   |   |   |   |   |--- OrientationRef140 <= -0.25
+|   |   |   |   |   |   |--- OrientationRef100 <= -0.54
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.21
+|   |   |   |   |   |   |   |   |--- Angle60 <= 0.42
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle60 >  0.42
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.21
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- OrientationRef100 >  -0.54
+|   |   |   |   |   |   |   |--- VarInt140 <= 122.33
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 7.43
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  7.43
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  122.33
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- OrientationRef140 >  -0.25
+|   |   |   |   |   |   |--- Energy60 <= 0.07
+|   |   |   |   |   |   |   |--- OrientationRef140 <= 0.04
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.10
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.21
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef140 >  0.04
+|   |   |   |   |   |   |   |   |--- Dist <= 7.14
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 38.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  38.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  7.14
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity60 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy60 >  0.07
+|   |   |   |   |   |   |   |--- Dist <= 28.01
+|   |   |   |   |   |   |   |   |--- Energy100 <= 0.17
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy100 >  0.17
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.41
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  28.01
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.13
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.13
+|   |   |   |   |   |   |   |   |   |--- Dist <= 90.32
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  90.32
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |--- Angle140 >  0.46
+|   |   |   |   |--- VarInt140 <= 47.48
+|   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |--- Angle140 <= 0.96
+|   |   |   |   |   |   |   |--- VarInt140 <= 24.51
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  24.51
+|   |   |   |   |   |   |   |   |--- Angle20 <= 0.45
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle20 >  0.45
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Angle140 >  0.96
+|   |   |   |   |   |   |   |--- Angle100 <= 1.54
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle100 >  1.54
+|   |   |   |   |   |   |   |   |--- Dist <= 8.52
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  8.52
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |--- Dist <= 89.41
+|   |   |   |   |   |   |   |--- Dist <= 1.71
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.19
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.56
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.56
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.19
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.09
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  1.71
+|   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.07
+|   |   |   |   |   |   |   |   |   |--- Dist <= 31.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  31.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.07
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= 0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Dist >  89.41
+|   |   |   |   |   |   |   |--- VarInt140 <= 46.43
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  46.43
+|   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |--- VarInt140 >  47.48
+|   |   |   |   |   |--- OrientationRef100 <= 0.19
+|   |   |   |   |   |   |--- Coherency140 <= 0.33
+|   |   |   |   |   |   |   |--- Density140 <= 0.35
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.59
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  0.51
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.59
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.35
+|   |   |   |   |   |   |   |   |--- Dist <= 5.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.16
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  5.05
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.68
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.68
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Coherency140 >  0.33
+|   |   |   |   |   |   |   |--- OrientationRef140 <= -0.21
+|   |   |   |   |   |   |   |   |--- Dist <= 8.27
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 4.70
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  4.70
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  8.27
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 52.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  52.45
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef140 >  -0.21
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.78
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.78
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- OrientationRef100 >  0.19
+|   |   |   |   |   |   |--- Energy20 <= 0.08
+|   |   |   |   |   |   |   |--- VarInt140 <= 88.72
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.08
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.08
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  88.72
+|   |   |   |   |   |   |   |   |--- Dist <= 5.52
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  5.52
+|   |   |   |   |   |   |   |   |   |--- Dist <= 63.79
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  63.79
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy20 >  0.08
+|   |   |   |   |   |   |   |--- Angle20 <= 0.65
+|   |   |   |   |   |   |   |   |--- Angle60 <= 0.42
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Angle60 >  0.42
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Angle20 >  0.65
+|   |   |   |   |   |   |   |   |--- Density60 <= 0.71
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density60 >  0.71
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 13.60
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  13.60
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |--- Energy60 >  0.12
+|   |   |--- VarDensity100 <= 0.00
+|   |   |   |--- MeanInt140 <= 73.54
+|   |   |   |   |--- VarInt140 <= 141.88
+|   |   |   |   |   |--- VarInt140 <= 72.06
+|   |   |   |   |   |   |--- Energy60 <= 0.17
+|   |   |   |   |   |   |   |--- Angle140 <= 0.25
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 32.76
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  32.76
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Angle140 >  0.25
+|   |   |   |   |   |   |   |   |--- Dist <= 8.77
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 0.54
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  0.54
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  8.77
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.19
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy60 >  0.17
+|   |   |   |   |   |   |   |--- Coherency60 <= 0.22
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 19.35
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 33.82
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  33.82
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt100 >  19.35
+|   |   |   |   |   |   |   |   |   |--- Dist <= 17.36
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  17.36
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency60 >  0.22
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarInt140 >  72.06
+|   |   |   |   |   |   |--- Energy100 <= 0.19
+|   |   |   |   |   |   |   |--- MeanInt140 <= 22.60
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.03
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.03
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt140 >  22.60
+|   |   |   |   |   |   |   |   |--- Dist <= 8.15
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  8.15
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 24.35
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  24.35
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy100 >  0.19
+|   |   |   |   |   |   |   |--- Angle140 <= 0.94
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 33.24
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  33.24
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 1.45
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  1.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Angle140 >  0.94
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.15
+|   |   |   |   |   |   |   |   |   |--- Dist <= 7.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  7.34
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.15
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |--- VarInt140 >  141.88
+|   |   |   |   |   |--- Energy20 <= 0.20
+|   |   |   |   |   |   |--- VarInt140 <= 849.44
+|   |   |   |   |   |   |   |--- Energy100 <= 0.21
+|   |   |   |   |   |   |   |   |--- Dist <= 9.87
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 <= 38.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt140 >  38.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  9.87
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.39
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.39
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy100 >  0.21
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 57.29
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  57.29
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.30
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- VarInt140 >  849.44
+|   |   |   |   |   |   |   |--- MeanInt140 <= 53.97
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 57.46
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  57.46
+|   |   |   |   |   |   |   |   |   |--- VarInt20 <= 33.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt20 >  33.71
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- MeanInt140 >  53.97
+|   |   |   |   |   |   |   |   |--- VarInt20 <= 117.47
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 38.31
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  38.31
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt20 >  117.47
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.22
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- Energy20 >  0.20
+|   |   |   |   |   |   |--- Energy140 <= 0.47
+|   |   |   |   |   |   |   |--- Dist <= 42.98
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 33.50
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 297.33
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  297.33
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  33.50
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 1147.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  1147.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  42.98
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.21
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.14
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.21
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.15
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy140 >  0.47
+|   |   |   |   |   |   |   |--- MeanInt140 <= 67.38
+|   |   |   |   |   |   |   |   |--- Dist <= 10.54
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  10.54
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 <= -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef100 >  -0.02
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- MeanInt140 >  67.38
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.26
+|   |   |   |   |   |   |   |   |   |--- VarInt100 <= 853.48
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt100 >  853.48
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.26
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |--- MeanInt140 >  73.54
+|   |   |   |   |--- Energy20 <= 0.42
+|   |   |   |   |   |--- VarInt140 <= 958.97
+|   |   |   |   |   |   |--- Dist <= 8.03
+|   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  8.03
+|   |   |   |   |   |   |   |--- OrientationRef60 <= 0.04
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.71
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.71
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- OrientationRef60 >  0.04
+|   |   |   |   |   |   |   |   |--- VarInt100 <= 568.88
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt100 >  568.88
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarInt140 >  958.97
+|   |   |   |   |   |   |--- Energy20 <= 0.29
+|   |   |   |   |   |   |   |--- Dist <= 55.42
+|   |   |   |   |   |   |   |   |--- Dist <= 10.89
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Dist >  10.89
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Dist >  55.42
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.27
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.27
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Energy20 >  0.29
+|   |   |   |   |   |   |   |--- MeanInt140 <= 95.91
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.32
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 1680.97
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  1680.97
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.32
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.59
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- MeanInt140 >  95.91
+|   |   |   |   |   |   |   |   |--- Energy60 <= 0.42
+|   |   |   |   |   |   |   |   |   |--- Angle60 <= 0.90
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle60 >  0.90
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy60 >  0.42
+|   |   |   |   |   |   |   |   |   |--- VarInt60 <= 4778.32
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt60 >  4778.32
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- Energy20 >  0.42
+|   |   |   |   |   |--- MeanInt100 <= 132.81
+|   |   |   |   |   |   |--- MeanInt140 <= 117.45
+|   |   |   |   |   |   |   |--- Energy140 <= 0.50
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.07
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.50
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 184.05
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  184.05
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef60 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- MeanInt140 >  117.45
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.14
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.14
+|   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- MeanInt100 >  132.81
+|   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |--- VarDensity100 >  0.00
+|   |   |   |--- Energy20 <= 0.24
+|   |   |   |   |--- MeanInt140 <= 42.89
+|   |   |   |   |   |--- VarInt20 <= 62.65
+|   |   |   |   |   |   |--- Density140 <= 0.39
+|   |   |   |   |   |   |   |--- Coherency20 <= 0.16
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.17
+|   |   |   |   |   |   |   |   |   |--- Dist <= 46.49
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  46.49
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.17
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 39.59
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  39.59
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency20 >  0.16
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.37
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= 0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  0.27
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.37
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.33
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.33
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Density140 >  0.39
+|   |   |   |   |   |   |   |--- Dist <= 1.71
+|   |   |   |   |   |   |   |   |--- Angle100 <= 0.87
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.45
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle100 >  0.87
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 207.90
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  207.90
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Dist >  1.71
+|   |   |   |   |   |   |   |   |--- Coherency140 <= 0.33
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 <= 3.64
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt20 >  3.64
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency140 >  0.33
+|   |   |   |   |   |   |   |   |   |--- Angle140 <= 1.17
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle140 >  1.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- VarInt20 >  62.65
+|   |   |   |   |   |   |--- Energy20 <= 0.16
+|   |   |   |   |   |   |   |--- Density140 <= 0.89
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 29.61
+|   |   |   |   |   |   |   |   |   |--- Density140 <= 0.55
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density140 >  0.55
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  29.61
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.18
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Density140 >  0.89
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 34.24
+|   |   |   |   |   |   |   |   |   |--- Energy20 <= 0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy20 >  0.12
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  34.24
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.20
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy20 >  0.16
+|   |   |   |   |   |   |   |--- VarInt140 <= 211.32
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.40
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.33
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.33
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.40
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  211.32
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.36
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 39.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  39.05
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.36
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |--- MeanInt140 >  42.89
+|   |   |   |   |   |--- MeanInt140 <= 53.16
+|   |   |   |   |   |   |--- Energy20 <= 0.19
+|   |   |   |   |   |   |   |--- Energy60 <= 0.21
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 556.96
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 0.35
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  0.35
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  556.96
+|   |   |   |   |   |   |   |   |   |--- Dist <= 27.29
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  27.29
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.21
+|   |   |   |   |   |   |   |   |--- Angle140 <= 0.22
+|   |   |   |   |   |   |   |   |   |--- Energy60 <= 0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy60 >  0.34
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Angle140 >  0.22
+|   |   |   |   |   |   |   |   |   |--- Energy140 <= 0.53
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy140 >  0.53
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Energy20 >  0.19
+|   |   |   |   |   |   |   |--- VarDensity140 <= 0.04
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.33
+|   |   |   |   |   |   |   |   |   |--- Angle100 <= 1.49
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle100 >  1.49
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.33
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarDensity140 >  0.04
+|   |   |   |   |   |   |   |   |--- VarInt60 <= 507.50
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 <= 0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity20 >  0.11
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt60 >  507.50
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |--- MeanInt140 >  53.16
+|   |   |   |   |   |   |--- Dist <= 8.77
+|   |   |   |   |   |   |   |--- Energy60 <= 0.32
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.05
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  0.17
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.05
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.28
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.32
+|   |   |   |   |   |   |   |   |--- Coherency100 <= 0.36
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.08
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency100 >  0.36
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.52
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  8.77
+|   |   |   |   |   |   |   |--- Energy140 <= 0.68
+|   |   |   |   |   |   |   |   |--- VarInt140 <= 736.56
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarDensity140 >  0.01
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- VarInt140 >  736.56
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 <= -0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef140 >  -0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.68
+|   |   |   |   |   |   |   |   |--- MeanInt60 <= 34.88
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt60 >  34.88
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |--- Energy20 >  0.24
+|   |   |   |   |--- MeanInt140 <= 63.53
+|   |   |   |   |   |--- VarInt140 <= 352.16
+|   |   |   |   |   |   |--- Angle60 <= 0.71
+|   |   |   |   |   |   |   |--- VarInt20 <= 1487.48
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt20 >  1487.48
+|   |   |   |   |   |   |   |   |--- MeanInt100 <= 8.69
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt100 >  8.69
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Angle60 >  0.71
+|   |   |   |   |   |   |   |--- Energy140 <= 0.31
+|   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy140 >  0.31
+|   |   |   |   |   |   |   |   |--- Coherency20 <= 0.10
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Coherency20 >  0.10
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.31
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- VarInt140 >  352.16
+|   |   |   |   |   |   |--- Coherency20 <= 0.40
+|   |   |   |   |   |   |   |--- Energy20 <= 0.26
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 51.31
+|   |   |   |   |   |   |   |   |   |--- Dist <= 4.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  4.74
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  51.31
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 <= 62.92
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt60 >  62.92
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.26
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.49
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.04
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.49
+|   |   |   |   |   |   |   |   |   |--- Dist <= 3.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Dist >  3.08
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |--- Coherency20 >  0.40
+|   |   |   |   |   |   |   |--- Energy60 <= 0.38
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 48.89
+|   |   |   |   |   |   |   |   |   |--- Density100 <= 0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Density100 >  0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  48.89
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy60 >  0.38
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.73
+|   |   |   |   |   |   |   |   |   |--- Angle20 <= 1.52
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- Angle20 >  1.52
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.73
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |--- MeanInt140 >  63.53
+|   |   |   |   |   |--- Energy20 <= 0.34
+|   |   |   |   |   |   |--- MeanInt140 <= 74.38
+|   |   |   |   |   |   |   |--- VarInt20 <= 171.93
+|   |   |   |   |   |   |   |   |--- MeanInt20 <= 37.41
+|   |   |   |   |   |   |   |   |   |--- VarInt140 <= 2877.50
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- VarInt140 >  2877.50
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt20 >  37.41
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- VarInt20 >  171.93
+|   |   |   |   |   |   |   |   |--- Energy20 <= 0.30
+|   |   |   |   |   |   |   |   |   |--- Coherency140 <= 0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency140 >  0.03
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy20 >  0.30
+|   |   |   |   |   |   |   |   |   |--- Coherency20 <= 0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency20 >  0.25
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- MeanInt140 >  74.38
+|   |   |   |   |   |   |   |--- VarInt140 <= 6480.59
+|   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.38
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 <= -0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.38
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |--- OrientationRef20 >  -0.38
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- VarInt140 >  6480.59
+|   |   |   |   |   |   |   |   |--- Density60 <= 0.82
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Density60 >  0.82
+|   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |--- Energy20 >  0.34
+|   |   |   |   |   |   |--- Dist <= 5.52
+|   |   |   |   |   |   |   |--- Coherency140 <= 0.05
+|   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |--- Coherency140 >  0.05
+|   |   |   |   |   |   |   |   |--- VarDensity140 <= 0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- VarDensity140 >  0.01
+|   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |--- Dist >  5.52
+|   |   |   |   |   |   |   |--- Energy20 <= 0.38
+|   |   |   |   |   |   |   |   |--- MeanInt140 <= 79.26
+|   |   |   |   |   |   |   |   |   |--- Coherency60 <= 0.26
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency60 >  0.26
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- MeanInt140 >  79.26
+|   |   |   |   |   |   |   |   |   |--- Energy100 <= 0.47
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Energy100 >  0.47
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |--- Energy20 >  0.38
+|   |   |   |   |   |   |   |   |--- Energy140 <= 0.54
+|   |   |   |   |   |   |   |   |   |--- Coherency100 <= 0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- Coherency100 >  0.21
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2
+|   |   |   |   |   |   |   |   |--- Energy140 >  0.54
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 <= 123.06
+|   |   |   |   |   |   |   |   |   |   |--- class: enriched_2
+|   |   |   |   |   |   |   |   |   |--- MeanInt100 >  123.06
+|   |   |   |   |   |   |   |   |   |   |--- class: not_enriched_2

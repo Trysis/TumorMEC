@@ -5,6 +5,7 @@ from auxiliary import create_dir
 
 # Constantes class
 class Constantes():
+    """Define a class containing"""
     def __init__(self, column, value, name=None, **kwargs) -> None:
         self.column = column
         self.value = value
@@ -17,32 +18,38 @@ class Constantes():
         self.__set_dict__()
 
     def __set_dict__(self):
-        """Set the dictionnary of str and associated index"""
+        """Set the dictionnary of str and associated index,
+        and the respective attributes from **kwargs"""
         self.attributes_ = {
             "column": self.column,
             "value": self.value,
             "name": self.name,
             **self.kwargs
         }
-        self.key_index__ = {
+        self.key_index_ = {
             idx: arg for idx, arg in enumerate(self.attributes_.values())
         }
+        # Set attributes
+        for key, val in self.kwargs.items():
+            setattr(self, key, val)
 
     def __getitem__(self, key):
         """Allow the user to retrieve element with str or int key."""
         if isinstance(key, str):
             return self.attributes_.get(key, None)
         elif isinstance(key, int):
-            return self.attributes_.get(self.key_index__(key), None)
+            return self.attributes_.get(self.key_index_(key), None)
         elif isinstance(key, Constantes):
             return self.__getitem__(key.value)
         else:
             return None
 
     def __bool__(self):
+        """Define the behavior of if(self)"""
         return bool(self.value)
 
     def __eq__(self, other):
+        """Define equality (==) behavior"""
         if isinstance(other, Constantes):
             return self.__eq__(other.value)
 
@@ -56,6 +63,7 @@ class Constantes():
         return self.value == other
 
     def __gt__(self, other):
+        """Define greater than (>) behavior"""
         if isinstance(other, Constantes):
             return self.__gt__(other.value)
 
@@ -68,6 +76,7 @@ class Constantes():
         return self.value > other
 
     def __ge__(self, other):
+        """Define greater or equal (>=) behavior"""
         if isinstance(other, Constantes):
             return self.__ge__(other.value)
 
@@ -80,6 +89,7 @@ class Constantes():
         return self.value >= other
 
     def __lt__(self, other):
+        """Define less than (<) behavior"""
         if isinstance(other, Constantes):
             return self.__lt__(other.value)
 
@@ -92,6 +102,7 @@ class Constantes():
         return self.value < other
 
     def __le__(self, other):
+        """Define less or equal (<=) behavior"""
         if isinstance(other, Constantes):
             return self.__le__(other.value)
 
@@ -104,9 +115,11 @@ class Constantes():
         return self.value <= other
 
     def __repr__(self) -> str:
+        """Representation value of the object"""
         return f"{self.value}"
 
     def __str__(self) -> str:
+        """Printable value of the object"""
         return f"Constantes: {self.column} = {self.value}"
 
 
@@ -139,7 +152,7 @@ str_columns = ("Condition", "FileName", "Type")
 int_columns = ("Mask",)
 unsigned_columns = ("X", "Y")
 
-# with angle
+# With angle
 float20_columns = (
     "Angle20", "Coherency20", "Energy20", "MeanInt20",
    "VarInt20", "Density20", "VarDensity20", "OrientationRef20"

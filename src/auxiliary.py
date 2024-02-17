@@ -1,12 +1,12 @@
 """Contains utilitary functions."""
 
 import os
+import re  # Pattern matching
 
-# Pattern matching
-import re
-
+# Data Gestion
 import numpy as np
 import pandas as pd
+
 
 def isfile(filepath):
     """Checks if {filepath} is a valid path to file."""
