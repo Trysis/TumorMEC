@@ -24,7 +24,7 @@ from sklearn.model_selection import GroupKFold
 from sklearn.model_selection import StratifiedGroupKFold
 
 # Local module
-import auxiliary
+import stats
 
 SEED = 42
 
@@ -508,19 +508,18 @@ def rf_boruta_importance(estimator, x, y, colnames, n_run=50):
         )
         feature_hit = boruta_i.feature_hit
 
-    # Mass probability for the different outcome to be probable
-    prob_mass_fn = auxiliary.get_pmf_list(n_run=n_run, probability=0.5)
-    [
-        scipy.stats.binom.pmf(k=k, n=n_run, p=0.5)
-        for k in range(n_run+1)
-    ]
-
 
 def select_feature_hit(feature_hit, n_run, alpha=0.05):
+    # Mass probability for the different outcome to be probable
+    probability_mass_l = stats.get_pmf_list(n_run=n_run, probability=0.5)
+    treshold = stats.get_tail_pmf(pmf_list=probability_mass_l, alpha=alpha)
     # Boundaries f
-    left_boundary = (0, treshold)
-    middle_boundary = (treshold, n_run - treshold)
-    right_boundary = (n_run - treshold, 1)
+    left_boundary, middle_boundary, right_boundary = \
+        stats.get_tail_boundaries(treshold=treshold, n_run=n_run)
+    
+    left_dict, middle_dict, right_dict = dict(), dict(), dict()
+    for f_name, hit in feature_hit.items():
+        if stats.hit
 
 
 

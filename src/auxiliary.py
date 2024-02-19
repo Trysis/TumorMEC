@@ -2,7 +2,6 @@
 
 import os
 import re  # Pattern matching
-import operator
 
 # Data Gestion
 import numpy as np
@@ -196,27 +195,6 @@ def format_by_rows(array, ncol=1, spacing=3):
     val_str = "".join(val_str)
 
     return val_str
-
-
-def in_boundary(
-    value, boundary,
-    left_inclusion=True,
-    right_inclusion=False
-):
-    """Check if the value provided is in the specified
-    boundary"""
-    op_left, op_right = None, None
-    # include left boundary: [, or exclude (,
-    op_left = operator.ge if left_inclusion else operator.gt
-
-    # include right boundary: ,] or exclude ,)
-    op_right = operator.le if right_inclusion else operator.lt
-
-    to_check = (
-        op_left(value, boundary[0]) &
-        op_right(value, boundary[-1])
-    )
-    return to_check
 
 
 if __name__ == "__main__":
