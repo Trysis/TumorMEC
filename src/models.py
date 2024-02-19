@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 
+import scipy
 from sklearn.utils import Bunch
 from sklearn.base import clone
 import sklearn.preprocessing as preprocessing
@@ -22,6 +23,8 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import GroupKFold
 from sklearn.model_selection import StratifiedGroupKFold
 
+# Local module
+import auxiliary
 
 SEED = 42
 
@@ -349,7 +352,38 @@ def forest_permutation_importance(
     result = Bunch(**importances, colnames=colnames)
     return result
 
-def rf_boruta_importance(estimator, x, y, colnames, clone_estimator=True):
+
+def to_boruta_data(x, colnames, y=None, prefix="shadow_"):
+    """
+    """
+    # Append shadow features colnames
+    shadow_colnames = list(map(
+        lambda x: f"{prefix}{x}", colnames
+    ))
+    boruta_colnames = colnames + shadow_colnames
+
+    # Add shadow features: shuffled columns
+    x_shuffled = np.apply_along_axis(
+        func1d=np.random.permutation, axis=0, arr=x
+    )
+    x_boruta = np.concatenate([x, x_shuffled], axis=1)
+
+    # Return data and associated colnames
+    result = Bunch(
+        x=x,
+        y=y,
+        colnames=colnames,
+        x_boruta=x_boruta,
+        colnames_boruta=boruta_colnames,
+        prefix=prefix
+    )
+    return result
+
+
+def run_boruta(
+    estimator, x, y, colnames,
+    feature_hit=None, clone_estimator=True
+):
     """
     estimator: object
         A fitted or unfitted estimator that
@@ -365,36 +399,129 @@ def rf_boruta_importance(estimator, x, y, colnames, clone_estimator=True):
         column name of each features, in the
         same order as provided by x
 
+    feature_hit: dict -> {colname: hit, ...}, default=None
+        Dictionnary containing the number of times
+        a feature which fulfill boruta selection
+        criteria: Features having an higher score
+        than the most important shadow feature
+
     clone_estimator: bool
         Should we clone a new unfitted estimator
         with the same parameters ?
         Should be used if the estimator has already
         been fit.
+        It uses sklearn.base.clone function
 
-    Returns:
+    Returns: sklearn.utils.Bunch <-> ihnerit dict
+        object attributes:
+            estimator, x, y, colnames, importances,
+            highest_shadow_col, feature_hit, boruta_dict
+
+        A dictionnary containing the fitted attribute
+        {estimator}, the feature {x}, target {y} data
+        and associated column names {colnames}, the
+        feature importance named as {importances} of
+        the column features and the shadow column features.
+        The {feature_hit} attribute, contains the number
+        of columns fulfilling the boruta selection criterion.
+
     """
-    # Shuffle along first axis (column in 2d)
-    x_shuffled = np.apply_along_axis(
-        func1d=np.random.permutation, axis=0, arr=x
-    )
-    # Add show features (shuffled columns)
-    x_boruta = np.concatenate([x, x_shuffled], axis=1)
+    if clone_estimator:
+        estimator = clone(estimator)
 
-    # Colnames of actual data and the ones to append
-    shadow_colnames = list(map(
-        lambda x: f"shadow_{x}", colnames
-    ))
-    boruta_colnames = colnames + shadow_colnames
+    boruta_dict = to_boruta_data(x=x, y=y, colnames=colnames)
+    boruta_x = boruta_dict.x_boruta
+    boruta_colnames = boruta_dict.boruta_colnames
+    boruta_prefix = boruta_dict.prefix
 
-    # Dictionnary of feature importances
+    # Fit model with shadow features
+    estimator.fit(boruta_x, y)
+
+    # feature importances
     f_importances = {
         f_name: f_imp for f_name, f_imp in
         zip(boruta_colnames, estimator.feature_importances_)
     }
-    {f_name: }
-    # Importances of shadow features
-    shadow_f_importances =
-    return x_shuffled
+    # only shadow feature importance
+    shadow_f_importances = {
+        f_name: f_imp for f_name, f_imp in f_importances.items()
+        if boruta_prefix in f_name
+    }
+
+    highest_shadow_f = max(shadow_f_importances, key=shadow_f_importances.get)
+    if feature_hit is None:
+        feature_hit = {f_name: 0 for f_name in colnames}
+
+    for f_name in feature_hit:
+        if f_importances[f_name] > highest_shadow_f:
+            feature_hit[f_name] += 1
+
+    result = Bunch(
+        estimator=estimator,
+        x=x, y=y,
+        colnames=colnames,
+        importances=f_importances,
+        highest_shadow_col=highest_shadow_f,
+        feature_hit=feature_hit,
+        boruta_dict=boruta_dict
+    )
+    
+    return result
+
+
+def rf_boruta_importance(estimator, x, y, colnames, n_run=50):
+    """
+    estimator: object
+        A fitted or unfitted estimator that
+        will be cloned
+
+    x: numpy.ndarray of shape (n_samples, n_features)
+        Features of the data
+
+    y: numpy.ndarray of shape (n_features,)
+        Target data
+
+    colnames: list, tuple, or numpy.ndarray
+        column name of each features, in the
+        same order as provided by x
+
+    feature_hit: dict -> {colname: hit, ...}, default=None
+        Dictionnary containing the number of times
+        a feature which fulfill boruta selection
+        criteria: Features having an higher score
+        than the most important shadow feature
+
+    clone_estimator: bool
+        Should we clone a new unfitted estimator
+        with the same parameters ?
+        Should be used if the estimator has already
+        been fit.
+        It uses sklearn.base.clone function
+
+    Returns:
+    """
+    feature_hit = None
+    for _ in range(n_run):
+        boruta_i = run_boruta(
+            estimator=estimator, x=x, y=y, colnames=colnames,
+            feature_hit=feature_hit, clone_estimator=True
+        )
+        feature_hit = boruta_i.feature_hit
+
+    # Mass probability for the different outcome to be probable
+    prob_mass_fn = auxiliary.get_pmf_list(n_run=n_run, probability=0.5)
+    [
+        scipy.stats.binom.pmf(k=k, n=n_run, p=0.5)
+        for k in range(n_run+1)
+    ]
+
+
+def select_feature_hit(feature_hit, n_run, alpha=0.05):
+    # Boundaries f
+    left_boundary = (0, treshold)
+    middle_boundary = (treshold, n_run - treshold)
+    right_boundary = (n_run - treshold, 1)
+
 
 
 def random_forest_importance(
