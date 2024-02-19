@@ -1,3 +1,5 @@
+import os
+
 # Data gestion
 import numpy as np
 import pandas as pd
@@ -7,9 +9,16 @@ import constantes as cst
 from auxiliary import read_dataframe
 from auxiliary import to_dirpath
 
+DIRNAME = ""
+
+if __name__ == "__main__":
+    DIRNAME = "".join(
+        os.path.realpath(__file__).split("src/")[:-1]
+    )
+
 # Path to dataframes
-FILEPATH_WT = "../data/WTconcatenate.csv.gz"
-FILEPATH_KI = "../data/KIconcatenate.csv.gz"
+FILEPATH_WT = DIRNAME + "data/WTconcatenate.csv.gz"
+FILEPATH_KI = DIRNAME + "data/KIconcatenate.csv.gz"
 
 # Filter by these criteria
 MASK_CONDITION = [cst.WT, cst.KI]
@@ -157,20 +166,29 @@ def arg_mask(df, arg=None):
         return arg
 
 
-def masks_filter(df, *args, filter=np.all, return_mask=False):
+def masks_filter(df, *args, filter=np.all, return_mask=False, view=False):
     """Apply the specified mask to the dataframe.
     
     df: pandas.DataFrame
         pandas dataframe
 
-    filter: funct
-        boolean comparator function
-
     *args: list of Constantes and/or pandas.DataFrame
         list containing Constantes with the specified
         column and value for dataframe masking, or 
         pandas.DataFrame mask.
-    
+
+    filter: function
+        boolean list comparator function
+
+    return_mask: bool
+        Should we return a mask from the combined
+        condition {args} applied on the dataset
+
+    view: bool
+        If {return_mask} is False, should we return
+        a view of the masked dataset, or return a
+        copy ?
+ 
     return: pandas.DataFrame
         Filtered pandas.DataFrame
 
@@ -180,7 +198,10 @@ def masks_filter(df, *args, filter=np.all, return_mask=False):
     if return_mask:
         return combined_mask
 
-    return df[combined_mask]
+    if view:
+        return df[combined_mask]
+
+    return df[combined_mask].copy()
 
 
 def to_filtered_df(df, return_mask=False):
@@ -224,7 +245,7 @@ def to_filtered_df(df, return_mask=False):
 def to_filtered_file(
     df,
     apply_type=cst.data_type,
-    dirname=to_dirpath(cst.DATA_DIR)
+    dirname=to_dirpath(DIRNAME + "data")
 ):
     """Save dataframe after filtering
 
@@ -276,7 +297,9 @@ def to_filtered_file(
         filename = filename + "_" + "no-none"
 
     if APPLY_ABERRANT is not None:
-        filename = filename + "_" + "aberrant"
+        # Aberrant exist for None and OUT_FIBER samples
+        if not (APPLY_RMV_NONE & (MASK_DENSITY==[cst.IN_FIBER])):
+            filename = filename + "_" + "aberrant"
 
     filepath = dirname + filename + ".csv"
 
@@ -296,9 +319,9 @@ if __name__ == "__main__":
     MASK_CONDITION = [cst.WT, cst.KI]
     MASK_TYPE = [cst.CD3]
     MASK_TUMOR = [cst.IN_TUMOR]  # Only on or outside tumor
-    MASK_DENSITY = [cst.IN_FIBER, cst.OUT_FIBER]  # Only in or outside fiber
+    MASK_DENSITY = [cst.IN_FIBER]  # Only in or outside fiber
 
-    APPLY_RMV_NONE = False  # True or False
+    APPLY_RMV_NONE = True  # True or False
     APPLY_ABERRANT = -3  # Set to None or actual value
 
     # Defined classes
@@ -309,8 +332,7 @@ if __name__ == "__main__":
     ]
 
     # Read dataframes
-    df_wt = None
-    df_ki = None
+    df_wt, df_ki = None, None
     if cst.WT in MASK_CONDITION:
         df_wt = read_dataframe(FILEPATH_WT, low_memory=False)
     if cst.KI in MASK_CONDITION:

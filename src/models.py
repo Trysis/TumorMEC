@@ -269,53 +269,7 @@ def cross_validation(
     return scores 
 
 
-def forest_depth_acc(
-    x_train, y_train, x_test, y_test,
-    classifier=RandomForestClassifier,
-    depths=None, **kwargs
-):
-    """"""
-    max_depths = np.arange(10) + 1 if depths is None else depths
-    results = {
-        "depths": max_depths,
-        "auc_train": [],
-        "acc_train": [],
-        "mcc_train": [],
-        "auc_test": [],
-        "acc_test": [],
-        "mcc_test": []
-    }
-
-    for depth in max_depths:
-        # Fit model with specified depth
-        clf = classifier(max_depth=depth, **kwargs)
-        clf.fit(x_train, y_train)
-        # Train
-        y_train_pred = clf.predict(x_train)
-        fpr_train, tpr_train, _ = metrics.roc_curve(y_train, y_train_pred)
-        train_auc = metrics.auc(fpr_train, tpr_train)
-        train_accuracy = metrics.accuracy_score(y_train, y_train_pred)
-        train_mcc = metrics.matthews_corrcoef(y_train, y_train_pred)
-        # Test
-        y_test_pred = clf.predict(x_test)
-        fpr_test, tpr_test, _ = metrics.roc_curve(y_test, y_test_pred)
-        test_auc = metrics.auc(fpr_test, tpr_test)
-        test_accuracy = metrics.accuracy_score(y_test, y_test_pred)
-        test_mcc = metrics.matthews_corrcoef(y_test, y_test_pred)
-
-        # Append metrics
-        results["auc_train"].append(train_auc)
-        results["acc_train"].append(train_accuracy)
-        results["mcc_train"].append(train_mcc)
-
-        results["auc_test"].append(test_auc)
-        results["acc_test"].append(test_accuracy)
-        results["mcc_test"].append(test_mcc)
-
-    return results
-
-
-def forest_mdi_importance(rf_estimator, colnames):
+def forest_mdi_importance(rf_estimator, colnames, **kargs):
     """"""
     importances_mean = rf_estimator.feature_importances_
     importances_std = np.std(
@@ -337,7 +291,8 @@ def forest_permutation_importance(
     scoring=None,
     n_repeats=10,
     seed=SEED,
-    n_jobs=None
+    n_jobs=None,
+    **kargs
 ):
     """"""
     importances = inspection.permutation_importance(
@@ -478,38 +433,36 @@ def select_feature_hit(feature_hit, n_run, prob=0.5, alpha=0.05):
     left_boundary, middle_boundary, right_boundary = \
         stats.get_tail_boundaries(treshold=treshold, n_run=n_run)
     
-    left_dict, middle_dict, right_dict = dict(), dict(), dict()
+    left_l, middle_l, right_l = list(), list(), list()
     for f_name, hit in feature_hit.items():
         # left
         if stats.in_boundary(
             value=hit, boundary=left_boundary,
             left_inclusion=True, right_inclusion=False
         ):
-            left_dict[f_name] = hit
+            left_l.append(f_name)
         # middle
         elif stats.in_boundary(
             value=hit, boundary=middle_boundary,
             left_inclusion=True, right_inclusion=False
         ):
-            middle_dict[f_name] = hit
+            middle_l.append(f_name)
         else:
-            right_dict[f_name] = hit
-    
+            right_l.append(f_name)
+
     result = Bunch(
-        feature_hit=feature_hit,
-        left_hit=left_dict,
-        middle_hit=middle_dict,
-        right_hit=right_dict,
-        lower_treshold = middle_boundary[0],
-        upper_treshold = middle_boundary[1],
-        treshold = treshold,
-        n_run=n_run
+        left_hit=left_l,
+        middle_hit=middle_l,
+        right_hit=right_l,
+        lower_treshold=middle_boundary[0],
+        upper_treshold=middle_boundary[1],
+        treshold=treshold,
     )
 
     return result
 
 
-def rf_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
+def forest_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
     """
     estimator: object
         A fitted or unfitted estimator that
@@ -540,6 +493,7 @@ def rf_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
 
     Returns:
     """
+    # Run the boruta criterion {n_run} time and count hit
     feature_hit = None
     for _ in range(n_run):
         boruta_i = run_boruta(
@@ -548,19 +502,21 @@ def rf_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
         )
         feature_hit = boruta_i.feature_hit
 
+    # Apply stats to find important & non-important features
     selection_summary = select_feature_hit(
         feature_hit=feature_hit,
         n_run=n_run, alpha=alpha
     )
 
+    # Final summary result from the features
     result = Bunch(
         important = selection_summary.right_hit,
         non_important = selection_summary.left_hit,
         unsure_important = selection_summary.middle_hit,
-        feature_hit=selection_summary.feature_hit,
         lower_treshold = selection_summary.lower_treshold,
         upper_treshold = selection_summary.upper_treshold,
         treshold = selection_summary.treshold,
+        feature_hit=feature_hit,
         n_run=n_run,
         alpha=alpha
     )
@@ -568,125 +524,19 @@ def rf_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
     return result
 
 
-def random_forest_importance(
-        estimator, importance_fn=None, timing=True
+def rf_importance_fn(
+        estimator, importance_fn=None, timing=True,
+        **fn_args
 ):
     """"""
-    start_time = time.time()
-    importance = importance_fn(estimator, **args)
-    elapsed_time = time.time() - start_time
+    start_time = time.time() if timing else None
+    importance = importance_fn(estimator, **fn_args)
+    elapsed_time = time.time() - start_time if timing else None
 
-    return Bunch(**importance, "time"=elapsed_time)
+    if not timing:
+        return importance
 
-
-# Imported from 
-# github.com/AdrianaLecourieux/Image-Analysis-for-spatial-transcriptomic/blob/main/analysis/Random_forest.ipynb
-def perform_random_forest(
-    x_train, x_test, y_train, y_test, columns,
-    n_estimators = (20, 30, 40, 60),
-    n_depths = (2, 4, 8, 10, 15, 20),
-    class_weight=None, scale=False, seed=None,
-    verbose=True
-):
-    """Perform random forest and exctract feature importances.
-
-    Parameters
-    ----------
-    x_train, x_test: pandas dataframe
-        Train and Test features
-    Y_train, Y_test: pandas dataframe
-        Train and Test targets
-
-    """
-    # Standardization
-    if scale:
-        scaler = preprocessing.StandardScaler().fit(x_train)
-        x_train = scaler.transform(x_train)
-        x_test = scaler.transform(x_test)
-
-    param_dist = {
-        'n_estimators': n_estimators,
-        'max_depth': n_depths
-    }
-
-    # Random search to find best hyperparameters
-    rf = RandomForestClassifier()
-    rand_search = RandomizedSearchCV(
-        rf, param_distributions=param_dist, 
-        n_iter=5, cv=5, random_state=seed
-    )
-
-    rand_search.fit(x_train, y_train)  # Fit the random search object
-
-    # Best hyperparameters
-    print('Best hyperparameters:', rand_search.best_params_) if verbose else None
-    max_depth = rand_search.best_params_['max_depth']
-    n_estimators = rand_search.best_params_['n_estimators']
-
-    # Model with best parameters
-    rf = RandomForestClassifier(
-        max_depth=max_depth,
-        n_estimators=n_estimators,
-        class_weight=class_weight,
-        random_state=seed
-    )
-    rf.fit(x_train, y_train)
-
-    y_pred = rf.predict(x_test)
-    accuracy = metrics.accuracy_score(y_test, y_pred)
-    print("Test Accuracy:", accuracy) if verbose else None
-
-    # Features importance - MDI
-    start_time = time.time()
-    print("Computing MDI importances") if verbose else None
-    importances = rf.feature_importances_
-    std = np.std([tree.feature_importances_ for tree in rf.estimators_], axis=0)
-    elapsed_time = time.time() - start_time
-
-    print(
-        f"Elapsed time to compute mean decrease impurity (MDI) "
-        f"importance: {elapsed_time:.3f} seconds\n"
-    ) if verbose else None
-
-    # Plot - MDI
-    forest_importances = pd.Series(importances, index=columns)
-
-    fig, ax = plt.subplots()
-    forest_importances.plot.bar(yerr=std, ax=ax)
-    ax.set_title("Feature importances using MDI")
-    ax.set_ylabel("Mean decrease in impurity")
-    fig.tight_layout()
-
-    # Features importance - permutation
-    start_time = time.time()
-    print("Computing permutation importances ") if verbose else None
-    result = inspection.permutation_importance(
-        rf, x_test, y_test, n_repeats=10, random_state=seed, n_jobs=-1
-    )
-    elapsed_time = time.time() - start_time
-    print(
-        f"Elapsed time to compute permutation importance: "
-        f"{elapsed_time:.3f} seconds\n"
-    ) if verbose else None
-
-    # Plot - permutation
-    forest_importances = pd.Series(result.importances_mean, index=columns)
-
-    fig, ax = plt.subplots()
-    forest_importances.plot.bar(yerr=result.importances_std, ax=ax)
-    ax.set_title("Feature importances using permutation method")
-    ax.set_ylabel("Mean accuracy decrease")
-    fig.tight_layout()
-    plt.show()
-
-    to_return = {
-        "model": rf,
-        "column": columns,
-        "importance_mdi": {"mean": importances, "std": std},
-        "importance_permutation": {"mean": result.importances_mean, "std": result.importances_std}
-    }
-
-    return to_return
+    return Bunch(**importance, time=elapsed_time)
 
 
 def random_forest_search(

@@ -1,6 +1,6 @@
 SEED = 42
 
-OUTDIR = constantes.OUTDIR
+OUTDIR = constantes.OUTPUT_DIR
 FILEPATH = ""
 CROSS_VAL = 10
 PREDICT_CLASS = ""
@@ -8,27 +8,29 @@ PREDICT_CLASS = ""
 TYPE = "cd3"
 CONDITION = ["wt", "ki"]
 SESSION = f"{TYPE}_{'-'.join(CONDITION)}_main" 
-train_val (colname : train/val)
-cross_val
-    matrice de confusion somme
 
-random_forest
+if __name__ == "__main__":
+    train_val (colname : train/val)
+    cross_val
+        matrice de confusion somme
 
-importance (permu, autre)
+    random_forest
 
-explain #shap 
-https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Iris%20classification%20with%20scikit-learn.html
-https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Diabetes%20regression.html#Random-forest
+    importance (permu, autre)
 
-save specificite, sensibilite
-save matrice de confusion
+    explain #shap 
+    https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Iris%20classification%20with%20scikit-learn.html
+    https://shap.readthedocs.io/en/latest/example_notebooks/tabular_examples/model_agnostic/Diabetes%20regression.html#Random-forest
 
-save auc, acc, mcc, f1
-save auc, acc, mcc, f1 plot
+    save specificite, sensibilite
+    save matrice de confusion
 
-save_importance
-save_importance_plot
+    save auc, acc, mcc, f1
+    save auc, acc, mcc, f1 plot
 
-save_explained
-save_explained_plot
+    save_importance
+    save_importance_plot
+
+    save_explained
+    save_explained_plot
 
