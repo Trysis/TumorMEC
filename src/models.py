@@ -469,7 +469,47 @@ def run_boruta(
     return result
 
 
-def rf_boruta_importance(estimator, x, y, colnames, n_run=50):
+def select_feature_hit(feature_hit, n_run, prob=0.5, alpha=0.05):
+    """"""
+    # Mass probability for the different outcome to be probable
+    probability_mass_l = stats.get_pmf_list(n_run=n_run, probability=prob)
+    treshold = stats.get_tail_pmf(pmf_list=probability_mass_l, alpha=alpha)
+    # Boundaries f
+    left_boundary, middle_boundary, right_boundary = \
+        stats.get_tail_boundaries(treshold=treshold, n_run=n_run)
+    
+    left_dict, middle_dict, right_dict = dict(), dict(), dict()
+    for f_name, hit in feature_hit.items():
+        # left
+        if stats.in_boundary(
+            value=hit, boundary=left_boundary,
+            left_inclusion=True, right_inclusion=False
+        ):
+            left_dict[f_name] = hit
+        # middle
+        elif stats.in_boundary(
+            value=hit, boundary=middle_boundary,
+            left_inclusion=True, right_inclusion=False
+        ):
+            middle_dict[f_name] = hit
+        else:
+            right_dict[f_name] = hit
+    
+    result = Bunch(
+        feature_hit=feature_hit,
+        left_hit=left_dict,
+        middle_hit=middle_dict,
+        right_hit=right_dict,
+        lower_treshold = middle_boundary[0],
+        upper_treshold = middle_boundary[1],
+        treshold = treshold,
+        n_run=n_run
+    )
+
+    return result
+
+
+def rf_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
     """
     estimator: object
         A fitted or unfitted estimator that
@@ -508,19 +548,24 @@ def rf_boruta_importance(estimator, x, y, colnames, n_run=50):
         )
         feature_hit = boruta_i.feature_hit
 
+    selection_summary = select_feature_hit(
+        feature_hit=feature_hit,
+        n_run=n_run, alpha=alpha
+    )
 
-def select_feature_hit(feature_hit, n_run, alpha=0.05):
-    # Mass probability for the different outcome to be probable
-    probability_mass_l = stats.get_pmf_list(n_run=n_run, probability=0.5)
-    treshold = stats.get_tail_pmf(pmf_list=probability_mass_l, alpha=alpha)
-    # Boundaries f
-    left_boundary, middle_boundary, right_boundary = \
-        stats.get_tail_boundaries(treshold=treshold, n_run=n_run)
-    
-    left_dict, middle_dict, right_dict = dict(), dict(), dict()
-    for f_name, hit in feature_hit.items():
-        if stats.hit
+    result = Bunch(
+        important = selection_summary.right_hit,
+        non_important = selection_summary.left_hit,
+        unsure_important = selection_summary.middle_hit,
+        feature_hit=selection_summary.feature_hit,
+        lower_treshold = selection_summary.lower_treshold,
+        upper_treshold = selection_summary.upper_treshold,
+        treshold = selection_summary.treshold,
+        n_run=n_run,
+        alpha=alpha
+    )
 
+    return result
 
 
 def random_forest_importance(
