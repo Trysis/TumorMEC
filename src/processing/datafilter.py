@@ -9,16 +9,16 @@ import constantes as cst
 from auxiliary import read_dataframe
 from auxiliary import to_dirpath
 
-DIRNAME = ""
+DIRNAME = "../"
 
 if __name__ == "__main__":
     DIRNAME = "".join(
         os.path.realpath(__file__).split("src/")[:-1]
-    )
+    ) + "data/"
 
 # Path to dataframes
-FILEPATH_WT = DIRNAME + "data/WTconcatenate.csv.gz"
-FILEPATH_KI = DIRNAME + "data/KIconcatenate.csv.gz"
+FILEPATH_WT = DIRNAME + "WTconcatenate.csv.gz"
+FILEPATH_KI = DIRNAME + "KIconcatenate.csv.gz"
 
 # Filter by these criteria
 MASK_CONDITION = [cst.WT, cst.KI]

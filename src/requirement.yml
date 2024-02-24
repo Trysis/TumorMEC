@@ -1,0 +1,13 @@
+name: BI
+channels:
+  - defaults
+dependencies:
+  - anaconda::jupyter
+  - anaconda::numpy
+  - conda-forge::matplotlib
+  - anaconda::pandas
+  - python-graphviz
+  - anaconda::scikit-learn
+  - anaconda::seaborn
+  - conda-forge::pydotplus
+
