@@ -1,11 +1,14 @@
-"""Contains utilitary functions."""
+"""Contains auxiliary functions."""
 
-import os
 import re  # Pattern matching
+import os
 
 # Data Gestion
 import numpy as np
 import pandas as pd
+
+__author__ = "Roude JEAN MARIE"
+__email__ = "roude.bioinfo@gmail.com"
 
 
 def isfile(filepath):
@@ -27,7 +30,7 @@ def to_dirpath(dirpath, dir_sep="/"):
 
 
 def create_dir(dirpath, dir_sep="/", add_suffix=False):
-    """Create a directory."""
+    """Create a directory and return its path."""
     dirpath_ = to_dirpath(dirpath, dir_sep=dir_sep)
     if add_suffix:
         dirpath_ = append_suffix(dirpath_)
@@ -64,8 +67,13 @@ def min_max_normalization(values, min_scale=0, max_scale=1, ignore_nan=True):
         Upper range limit to apply on values so that
         values range from [values.min, values.max] to values[values.min, max_scale]
 
-    Returns: array-like of shape (n_samples, x)
-        Normalized array in range [min_scale, max_scale]
+    Returns: dict
+        values: array-like of shape (n_samples, x)
+            Normalized array in range [min_scale, max_scale]
+        min: scalar
+            minimum value of input values
+        max: scaler
+            maximum value of inpurt values
 
     """
     min_val = values.min() if not ignore_nan else np.nanmin(values)
@@ -77,13 +85,18 @@ def min_max_normalization(values, min_scale=0, max_scale=1, ignore_nan=True):
     flex_normalized = (flex_shift * (scale_plage/val_plage)) + min_scale
 
     # Returns
-    return flex_normalized
+    to_return = {
+        "values": flex_normalized,
+        "min": min_val,
+        "max": max_val
+    }
+    return to_return
 
 
 def replace_extension(name, new_ext):
     """Takes a name and replace the existing extension
-        by a specified extension. Or simply add the specified
-        extension.
+        by a specified extension. Or simply add the
+        specified extension.
 
     name: str
         Name of the string to add the extension to
@@ -96,7 +109,7 @@ def replace_extension(name, new_ext):
     """
     root, _ = os.path.splitext(name)
     new_ext = new_ext.replace(".", "")
-    if new_ext == "":
+    if new_ext in ("", None):
         return root
 
     name_ext = root + "." + new_ext
@@ -155,6 +168,23 @@ def append_suffix(filepath, path_sep="/", suffix_sep="_"):
 def get_metrics(array, q=(0, 0.25, 0.5, 0.75, 1), ignore_nan=False):
     """This function returns a panel of statistics calculated on the
         provided {array} argument.
+
+    array: array-like (list, tuple, numpy.ndarray, ...)
+        list containing the values to mesure metrics on
+
+    q: array-like
+        probability for the quantiles, such that all
+        values are comprised between [0, 1]
+
+    ignore_nan: bool
+        Should we ignore nan values during the 
+        computation ?
+
+    Returns: dict
+        Dictionnary containing the different calculated
+        metrics of {values}. Such as mean, std, median,
+        and quantile.
+
     """
     if not isinstance(array, np.ndarray):
         try:
@@ -179,7 +209,23 @@ def get_metrics(array, q=(0, 0.25, 0.5, 0.75, 1), ignore_nan=False):
 
 
 def format_by_rows(array, ncol=1, spacing=3):
-    """Returns values aranged in a specified format."""
+    """Returns values aranged in a specified format.
+    
+    array: array like
+        a list of values to display, such as str,
+        int, float or even bool
+
+    ncol: int
+        number of column for the formating
+
+    spacing: int
+        space between each array value
+
+    Returns: str
+        A string representation of the values
+        from {array} as specified by the argument
+
+    """
     arr_str = [f"{value}" for value in array]
     arr_len = [len(value) for value in arr_str]
     max_len = max(arr_len)
