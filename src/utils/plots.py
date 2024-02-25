@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-"""This scripts contains plot and plot saving functions."""
+"""This scripts contains plot function and plot saving functions."""
 
 import os
 
@@ -26,7 +26,7 @@ __email__ = "roude.bioinfo@gmail.com"
 
 def node_color(
     dot_data, colors=('#33aaff', '#ff664d'),
-    by="entropy", attr="label"
+    by="entropy", attr="label", n_labels=2
 ):
     """Apply the selected colors on a decision tree
     with transparency depending on node impurity.
@@ -34,14 +34,14 @@ def node_color(
     -----
     Exemple:
     
-        dtree_plus = DecisionTreeClassifier(...)  # object
-        columns = ...  # features in str
-        labels = ... # class in tuple(str, ...)
+        dtree = DecisionTreeClassifier(...)  # object
+        columns = ...  # features in tuple(str, ...)
+        labels = ... # label class in tuple(str, ...)
     
         dot_data = tree.export_graphviz(
-            dtree_plus,
-            feature_names=x_columns,
-            class_names=labels_class,
+            dtree,
+            feature_names=columns,
+            class_names=labels,
         )
         dot_data = node_color(dot_data, by="entropy")
         graph = graphviz.Source(dot_data, format="png")
@@ -84,7 +84,7 @@ def node_color(
 
     for edge in edges:
         edges[edge].sort()
-        for i in range(2):
+        for i in range(n_labels):
             node = graph_dot.get_node(str(edges[edge][i]))[0]
             node_label = node.get_attributes()[attr]
             entropy = float(node_label.split(criterion_str)[1].split(sep)[0])
