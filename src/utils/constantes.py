@@ -29,16 +29,19 @@ class Constantes():
         self.key_index_ = {
             idx: arg for idx, arg in enumerate(self.attributes_.values())
         }
+
         # Set attributes
         for key, val in self.kwargs.items():
             setattr(self, key, val)
+
+        self.n_key = max(self.key_index_.keys())
 
     def __getitem__(self, key):
         """Allow the user to retrieve element with str or int key."""
         if isinstance(key, str):
             return self.attributes_.get(key, None)
         elif isinstance(key, int):
-            return self.attributes_.get(self.key_index_(key), None)
+            return self.key_index_.get(key)
         elif isinstance(key, Constantes):
             return self.__getitem__(key.value)
         else:
@@ -124,8 +127,8 @@ class Constantes():
 
 
 # Output file path
-OUTPUT_DIR = "../out"
-DATA_DIR = "../data"
+OUTPUT_DIR = "../../out"
+DATA_DIR = "../../data"
 SOURCE_DIR = "../src"
 
 # Column, Val association
