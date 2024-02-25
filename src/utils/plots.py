@@ -96,27 +96,6 @@ def node_color(
     # Final decision tree graph
     return graph_dot.to_string()
 
-#fig, ax = plt.subplots(figsize=(400, 120))
-#colors = ('#33aaff', '#ff664d')
-#
-#artists = tree.plot_tree(
-#    dtree_plus,
-#    feature_names=x_columns,
-#    class_names=labels_class,
-#    rounded=True,
-#    fontsize=18,
-#    ax=ax
-#)
-#
-#from matplotlib.colors import ListedColormap, to_rgb
-#for artist, impurity, value in zip(artists, dtree_plus.tree_.impurity, dtree_plus.tree_.value):
-#    # let the max value decide the color; whiten the color depending on impurity (gini)
-#    transparency = hex(int((1 - impurity) * 255))[2:]
-#    if len(transparency) == 1:
-#        transparency = '1' + transparency
-#    artist.get_bbox_patch().set_facecolor(colors[np.argmax(value)] + transparency)
-#    artist.get_bbox_patch().set_edgecolor('black')
-
 
 def to_pdf(filepath, figures, then_close=False, bbox_inches=None):
     """Save a list of figure in pdf format
@@ -124,7 +103,7 @@ def to_pdf(filepath, figures, then_close=False, bbox_inches=None):
     filepath: str
         Path indicating where to create the file
 
-    figures: List -> List(matplotlib.figure.Figure)
+    figures: Generator or List -> List(matplotlib.figure.Figure)
         A list of matplotlib figures
 
     Exemple:

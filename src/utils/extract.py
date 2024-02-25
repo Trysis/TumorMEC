@@ -8,18 +8,22 @@ import numpy as np
 import auxiliary
 import plots
 
+__author__ = "Roude JEAN MARIE"
+__email__ = "roude.bioinfo@gmail.com"
+
 
 def extract_map(
     data, feature_name, sample_name=None,
     name_column="FileName", x_column="X", y_column="Y",
     scale=40, coord_type=np.int32
 ):
-    """Extract the feature map containing in a matrix
+    """Created on Wed Sep 7 11:50:57 2022
+    @author: paolo pierobon
+    
+    Extract the feature map containing in a matrix
         the features at the respective position. It is
         used to show regions intensity.
 
-    Created on Wed Sep 7 11:50:57 2022
-    @author: paolo pierobon
     -----
     Extract a feature as a map from a given dataframe
     Exemple:
@@ -289,6 +293,7 @@ def plot_cells(
     kwargs:
         key=value arguments to provide to plots.plot
         from generator_plot_cells, and plots.to_pdf
+
     """
     then_close = kwargs.pop("then_close") if "then_close" in kwargs else True
     bbox_inches = kwargs.pop("bbox_inches") if "bbox_inches" in kwargs else None
@@ -299,10 +304,10 @@ def plot_cells(
         name_column=name_column,
         **kwargs
     )
-    # Plot
+    # Save plots to pdf
     plots.to_pdf(
-        filepath,
-        gen_figures,
+        filepath=filepath,
+        figures=gen_figures,
         then_close=then_close,
         bbox_inches=bbox_inches
     )

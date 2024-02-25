@@ -1,28 +1,44 @@
+"""Scripts containing function computing statistics."""
 import operator
 
 import scipy
 
+__author__ = "Roude JEAN MARIE"
+__email__ = "roude.bioinfo@gmail.com"
+
 
 def get_pmf(n_run, probability=0.5):
-    """Binomial distribution list of probability 
-    for an event of {n_run} trials"""
-    prob_mass_fn = [
+    """Binomial distribution list of probability for an
+    event of {n_run} trials from a probability mass function
+
+    n_run: int
+        Number of trial
+
+    probability: float
+        Probability of succes comprised in [0;1]
+
+    Returns: list -> list from i to {n_run}
+        Probability distribution list of the chance of
+        succes for each event {i}
+
+    """
+    pmf_list = [
         scipy.stats.binom.pmf(k=k, n=n_run, p=probability)
         for k in range(n_run+1)
     ]
-    return prob_mass_fn
+    return pmf_list
 
 
 def get_tail_pmf(pmf_list, alpha=0.05):
     """Returns the index of the element forming the tail
-    from 0 to the index according to a mass probability list
-    of a bell shaped distribution
-    
-    prob_mass_l: list, tuple or iterable
+    from 0 to the index according to a probability distribution
+    of a symetric shaped distribution such as a bell distribution
+
+    pmf_list: list, tuple or iterable
         List containing the probability for an outcome
         i in a list of n different outcome
     
-    treshold: float
+    alpha: float
         float from 0 to 1 used to define the
         cumulative probability region summing to
         this treshold value, such that each probability
@@ -43,11 +59,27 @@ def get_tail_pmf(pmf_list, alpha=0.05):
     return -1
 
 
-def get_tail_boundaries(treshold=-1, n_run=-1):
-    """Returns the left, middle and right boundary from
-    a specified index treshold and the number of trial
-    for a bell curve shaped distribution function"""
+def get_boundaries(treshold=-1, n_run=-1):
+    """Returns the left, middle and right boundary from a specified
+    index treshold and the number of trial for symetric shaped
+    distribution such as a bell distribution
+    
+    treshold: int
+        Treshold index value
+
+    n_run: int
+        Number of trials
+
+    Returns: tuple -> tuple(tuple(), tuple(), tuple())
+        An array of value containing at each index the
+        left, middle and right boundary associated with
+        the treshold and the number of trials
+
+    """
     if treshold == -1 or n_run == -1:
+        return None
+
+    if n_run/2 < treshold:
         return None
 
     left = (0, treshold)
@@ -61,8 +93,26 @@ def in_boundary(
     left_inclusion=True,
     right_inclusion=False
 ):
-    """Check if the value provided is in the specified
-    boundary"""
+    """Check if the value provided is in the specified boundary
+    
+    value: scalar, such as a float or int
+        A value to check if in {boundary}
+    
+    boundary: list of len==2
+        List containing two values associated with
+        the min and max boundary
+
+    left_inclusion: bool
+        Do we include the left boundary ?
+
+    right_inclusion: bool
+        Do we include the right boundary ?
+
+    Returns: bool
+        A boolean value that is true if {value} in
+        boundary, with the specified parameters.
+
+    """
     op_left, op_right = None, None
     # include left boundary: [, or exclude (,
     op_left = operator.ge if left_inclusion else operator.gt
