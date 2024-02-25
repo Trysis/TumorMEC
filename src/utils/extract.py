@@ -82,7 +82,8 @@ def extract_cells_metrics(
     data, feature_name, sample_name=None,
     name_column="FileName", **kwargs
 ):
-    """...
+    """Returns the calculated metrics with the specified
+        sample and feature names
 
     data: pandas.Dataframe
         A dataframe formatted such that it contains
@@ -170,31 +171,63 @@ def extract_cells_metrics(
     return cells_metrics_dict
 
 
-def gen_cells_distribution(
-    data, feature_name, obs_names=None, name_column="FileName",
-    **kwargs
+def generator_plots_cells(
+    data, feature_name, sample_name=None,
+    name_column="FileName", **kwargs
 ):
-    """"""
+    """Generate matplotlib.figure.Figure to plot
+
+    data: pandas.Dataframe
+        A dataframe formatted such that it contains
+        an X and Y column corresponding to positions
+        where a specfic observation has been made.
+
+    feature_name: str, or list -> list(str)
+        Name(s) of feature(s) to evaluate metrics
+        on
+
+    sample_name: str, or list -> list(str)
+        Specified sample name to apply statistics
+        on, on {name_column} column name.
+        If None, the same calculation is performed
+        on each unique sample (previously identified
+        with {name_column}).
+
+    name_column: str, default="FileName"
+        Column of the dataframe specifiying filenames
+        attributed to each sample. If None, then the
+        metrics are calculated on every observations.
+
+    kwargs:
+        metrics to provide to plots.plot
+
+    Yields: matplotlib.figure.Figure
+        A Figure to be plotted, according to the
+        different sample and feature name specified
+
+    """
     # List of files to plot features on
-    # Selection of observation to analyse on
+    # Selection of observation to perform analyse on
     on_files = None
-    if obs_names is not None:
-        if isinstance(obs_names, str):
-            # Perform the mean, std, etc computation
-            # on the chosen file.
-            on_files = [obs_names]
-        elif isinstance(obs_names, (list, tuple, np.ndarray)):
-            if all(isinstance(filename, str) for name in obs_names):
-                # Perform the same calcul on multiple filename.
-                on_files = list(obs_names)
+    if sample_name is not None:
+        # Perform the mean, std, etc computation
+        # on the chosen file.
+        if isinstance(sample_name, str):
+            on_files = [sample_name]
+        # Perform the same tasks on multiple filename.
+        elif isinstance(sample_name, (list, tuple, np.ndarray)):
+            if all(isinstance(name, str) for name in sample_name):
+                on_files = list(sample_name)
         else:
             raise Exception(
                 "If {obs_names} is specified, it should be "
                 "a filename (of type str) or a list of filename "
                 "of type (list(str))."
             )
-    else:  # Else perform on all cells (indicated by {name_column} column)
-        on_files = data[name_column].unique()
+    # Else perform on all cells (indicated by {name_column} column)
+    else:
+        if name_column is not None:
+            on_files = data[name_column].unique()
 
     # Selection of features
     features = None
@@ -212,7 +245,7 @@ def gen_cells_distribution(
     for filename in on_files:
         for feature in features:
             title_plt = f"{filename}\n{feature} Distribution"
-            fig, ax = plots.plot(
+            fig, _ = plots.plot(
                 data[data[name_column] == filename][feature],
                 title=title_plt,
                 **kwargs
@@ -220,21 +253,49 @@ def gen_cells_distribution(
             yield fig
 
 
-def plot_cells_distribution(
-    data,
-    feature_name,
-    obs_names=None,
-    name_column="FileName",
-    filepath=None,
+def plot_cells(
+    data, feature_name, sample_name=None,
+    name_column="FileName", filepath=None,
     **kwargs
 ):
-    """"""
+    """Save distribution plots from the dataframe,
+    with the specified sample and feature names.
+    Uses generator_plot_cells.
+
+    data: pandas.Dataframe
+        A dataframe formatted such that it contains
+        an X and Y column corresponding to positions
+        where a specfic observation has been made.
+
+    feature_name: str, or list -> list(str)
+        Name(s) of feature(s) to evaluate metrics
+        on
+
+    sample_name: str, or list -> list(str)
+        Specified sample name to apply statistics
+        on, on {name_column} column name.
+        If None, the same calculation is performed
+        on each unique sample (previously identified
+        with {name_column}).
+
+    name_column: str, default="FileName"
+        Column of the dataframe specifiying filenames
+        attributed to each sample. If None, then the
+        metrics are calculated on every observations.
+
+    filepath: str
+        Path to save pdf containing the plots
+
+    kwargs:
+        key=value arguments to provide to plots.plot
+        from generator_plot_cells, and plots.to_pdf
+    """
     then_close = kwargs.pop("then_close") if "then_close" in kwargs else True
     bbox_inches = kwargs.pop("bbox_inches") if "bbox_inches" in kwargs else None
-    gen_figures = gen_cells_distribution(
+    gen_figures = generator_plots_cells(
         data=data,
         feature_name=feature_name,
-        obs_names=obs_names,
+        sample_name=sample_name,
         name_column=name_column,
         **kwargs
     )
