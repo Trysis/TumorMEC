@@ -403,7 +403,7 @@ def run_boruta(
     estimator, x, y, colnames,
     feature_hit=None, clone_estimator=True
 ):
-    """
+    """Perform the boruta algorithm, 
     estimator: object
         A fitted or unfitted estimator that
         will be cloned
@@ -420,15 +420,15 @@ def run_boruta(
 
     feature_hit: dict -> {colname: hit, ...}, default=None
         Dictionnary containing the number of times
-        a feature which fulfill boruta selection
-        criteria: Features having an higher score
-        than the most important shadow feature
+        a feature fulfilling the boruta selection
+        criterion corresponding to
+        Features having an higher score than the most
+        important shadow feature
 
     clone_estimator: bool
         Should we clone a new unfitted estimator
-        with the same parameters ?
-        Should be used if the estimator has already
-        been fit.
+        with the same parameters ? Should be used
+        if the estimator has already been fit.
         It uses sklearn.base.clone function
 
     Returns: sklearn.utils.Bunch <-> ihnerit dict
@@ -489,14 +489,43 @@ def run_boruta(
     return result
 
 
-def select_feature_hit(feature_hit, n_run, prob=0.5, alpha=0.05):
-    """"""
+def select_feature_hit(feature_hit, n_trials, prob=0.5, alpha=0.05):
+    """Returns the features found as 'non-important', 'unsure' and 'important'
+    based on the number of features hit based on an importance algorithm performing
+    features hit such as boruta algorithm.
+
+    feature_hit: dict -> {colname: hit, ...}, default=None
+        Dictionnary containing the number of times
+        a feature which fulfill boruta selection
+        criteria: Features having an higher score
+        than the most important shadow feature
+
+    n_trials: int
+        Number of trials performed for the selected
+        algorithm. It is used for comparison with the
+        number of hit for each features.
+
+    prob: float
+        float value in [0;1] associated with the probability
+        of an event to occur
+
+    alpha: float
+        Alpha criterion used to estimate an event as
+        non-random
+
+    Returns: sklearn.utils.Bunch <- dict like
+        It contains all informations about the features
+        found as 'non-important', 'unsure', and 'important'
+        in left_hit, middle_hit and right hit keys.
+        Threshold are also given.
+
+    """
     # Mass probability for the different outcome to be probable
-    probability_mass_l = stats.get_pmf_list(n_run=n_run, probability=prob)
+    probability_mass_l = stats.get_pmf(n_trials=n_trials, probability=prob)
     treshold = stats.get_tail_pmf(pmf_list=probability_mass_l, alpha=alpha)
     # Boundaries f
     left_boundary, middle_boundary, right_boundary = \
-        stats.get_tail_boundaries(treshold=treshold, n_run=n_run)
+        stats.get_boundaries(treshold=treshold, n_trials=n_trials)
     
     left_l, middle_l, right_l = list(), list(), list()
     for f_name, hit in feature_hit.items():
@@ -527,8 +556,9 @@ def select_feature_hit(feature_hit, n_run, prob=0.5, alpha=0.05):
     return result
 
 
-def forest_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
-    """
+def forest_boruta_importance(estimator, x, y, colnames, n_trials=50, alpha=0.05):
+    """Compute boruta importance on the given estimator.
+
     estimator: object
         A fitted or unfitted estimator that
         will be cloned
@@ -543,24 +573,23 @@ def forest_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
         column name of each features, in the
         same order as provided by x
 
-    feature_hit: dict -> {colname: hit, ...}, default=None
-        Dictionnary containing the number of times
-        a feature which fulfill boruta selection
-        criteria: Features having an higher score
-        than the most important shadow feature
+    n_trials: int, default=50
+        Number of trials to perform boruta algorithm, for
+        estimating the number of feature hit
 
-    clone_estimator: bool
-        Should we clone a new unfitted estimator
-        with the same parameters ?
-        Should be used if the estimator has already
-        been fit.
-        It uses sklearn.base.clone function
+    alpha: float
+        alpha criterion to consider an event as not "random"
 
-    Returns:
+    Returns: sklearn.utils.Bunch <- dict like
+        A "dictionnary" containing the important, and non-important
+        features from the given model. With other information
+        such as the lower and upper treshold defining non-important,
+        unsure and important features.
+
     """
-    # Run the boruta criterion {n_run} time and count hit
+    # Run the boruta criterion {n_trials} time and count hit
     feature_hit = None
-    for _ in range(n_run):
+    for _ in range(n_trials):
         boruta_i = run_boruta(
             estimator=estimator, x=x, y=y, colnames=colnames,
             feature_hit=feature_hit, clone_estimator=True
@@ -570,7 +599,7 @@ def forest_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
     # Apply stats to find important & non-important features
     selection_summary = select_feature_hit(
         feature_hit=feature_hit,
-        n_run=n_run, alpha=alpha
+        n_trials=n_trials, alpha=alpha
     )
 
     # Final summary result from the features
@@ -582,26 +611,29 @@ def forest_boruta_importance(estimator, x, y, colnames, n_run=50, alpha=0.05):
         upper_treshold = selection_summary.upper_treshold,
         treshold = selection_summary.treshold,
         feature_hit=feature_hit,
-        n_run=n_run,
+        n_trials=n_trials,
         alpha=alpha
     )
 
     return result
 
 
-def rf_importance_fn(
-        estimator, importance_fn=None, timing=True,
-        **fn_args
-):
-    """"""
-    start_time = time.time() if timing else None
-    importance = importance_fn(estimator, **fn_args)
-    elapsed_time = time.time() - start_time if timing else None
+def time_fn(lambda_fn):
+    """Time the specified function
+    
+    lambda_fn: funct
+        A lambda function to be called, with the
+        pre-specified argument provided
 
-    if not timing:
-        return importance
+    Returns: sklearn.utils.Bunch
+        A dictionnary containing the result of the
+        lambda function and the elapsed time
 
-    return Bunch(**importance, time=elapsed_time)
+    """
+    start_time = time.time()
+    result = lambda_fn()
+    elapsed_time = time.time() - start_time
+    return Bunch(result=result, time=elapsed_time)
 
 
 def random_forest_search(
