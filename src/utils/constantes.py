@@ -1,7 +1,6 @@
 """"""
-
 import numpy as np  # for data type
-from auxiliary import create_dir
+
 
 # Constantes class
 class Constantes():
@@ -43,6 +42,7 @@ class Constantes():
         elif isinstance(key, int):
             return self.key_index_.get(key)
         elif isinstance(key, Constantes):
+            print("hey")
             return self.__getitem__(key.value)
         else:
             return None
@@ -50,6 +50,10 @@ class Constantes():
     def __bool__(self):
         """Define the behavior of if(self)"""
         return bool(self.value)
+
+    def __contains__(self, value):
+        """Defines (in) behavior"""
+        return self.__eq__(value)
 
     def __eq__(self, other):
         """Define equality (==) behavior"""
@@ -126,10 +130,10 @@ class Constantes():
         return f"Constantes: {self.column} = {self.value}"
 
 
-# Output file path
-OUTPUT_DIR = "../../out"
-DATA_DIR = "../../data"
-SOURCE_DIR = "../src"
+# Directory path
+OUTPUT_DIRNAME = "out"
+DATA_DIRNAME = "data"
+SOURCE_DIRNAME = "src"
 
 # Column, Val association
 WT = Constantes("Condition", "WT")
@@ -146,9 +150,9 @@ CELLS = Constantes("Cells", True)
 CELLS100UM = Constantes("Cells100um", True)
 
 # Classes column
-T_PLUS = Constantes("class_t_plus", 1, "t-plus")
-T_ENRICHED = Constantes("class_t_enriched", 1, "t-enriched")
-T_ENRICHED_2 = Constantes("class_t_enriched_2", 1, "t-enriched-2")
+T_PLUS = Constantes("t_plus", 1, "t-plus")
+T_ENRICHED = Constantes("t_enrich", 1, "t-enrich")
+T_ENRICHED_2 = Constantes("t_enrich_2", 1, "t-enrich-2")
 
 # Columns definition
 str_columns = ("Condition", "FileName", "Type")
@@ -156,42 +160,36 @@ int_columns = ("Mask",)
 unsigned_columns = ("X", "Y")
 
 # With angle
-float20_columns = (
+float20_columns = [
     "Angle20", "Coherency20", "Energy20", "MeanInt20",
    "VarInt20", "Density20", "VarDensity20", "OrientationRef20"
-)
-float60_columns = (
+]
+float60_columns = [
     "Angle60", "Coherency60", "Energy60", "MeanInt60",
    "VarInt60", "Density60", "VarDensity60", "OrientationRef60"
-)
-float100_columns = (
+]
+float100_columns = [
     "Angle100", "Coherency100", "Energy100", "MeanInt100",
     "VarInt100", "Density100", "VarDensity100", "OrientationRef100"
-)
-float140_columns = (
+]
+float140_columns = [
     "Angle140", "Coherency140", "Energy140", "MeanInt140",
     "VarInt140", "Density140", "VarDensity140", "OrientationRef140"
-)
+]
 
 # Without angle
-float20_columns_unloc = (
-    "Coherency20", "Energy20", "MeanInt20",
-    "VarInt20", "Density20", "VarDensity20", "OrientationRef20"
-)
-float60_columns_unloc = (
-   "Coherency60", "Energy60", "MeanInt60",
-   "VarInt60", "Density60", "VarDensity60", "OrientationRef60"
-)
-float100_columns_unloc = (
-    "Coherency100", "Energy100", "MeanInt100",
-    "VarInt100", "Density100", "VarDensity100", "OrientationRef100"
-)
-float140_columns_unloc = (
-    "Coherency140", "Energy140", "MeanInt140",
-    "VarInt140", "Density140", "VarDensity140", "OrientationRef140"
+float20_columns_unloc = float20_columns.copy()
+float60_columns_unloc = float60_columns.copy()
+float100_columns_unloc = float100_columns.copy()
+float140_columns_unloc = float140_columns.copy()
+
+angle_columns = (
+    float20_columns_unloc.pop(float20_columns.index("Angle20")),
+    float60_columns_unloc.pop(float60_columns_unloc.index("Angle60")),
+    float100_columns_unloc.pop(float100_columns_unloc.index("Angle100")),
+    float140_columns_unloc.pop(float140_columns_unloc.index("Angle140"))
 )
 
-angle_columns = ("Angle20", "Angle60", "Angle100", "Angle140")
 dist_columns = ("Dist",)
 shape_columns = ("Frac",)
 cells_shape_columns = ("CellArea", "CellEcc")
@@ -225,10 +223,6 @@ data_type = {
 }
 
 if __name__ == "__main__":
-    # Create output directory
-    create_dir(DATA_DIR, add_suffix=False)
-    create_dir(OUTPUT_DIR, add_suffix=False)
-    #
     hey = Constantes("Condition", "KI")
     print(f"column = {hey[0]}")
     print(f"value = {hey[1]}")

@@ -142,12 +142,14 @@ def legend_patch(label, color="none"):
 
 
 def single_plot(
-    yvalues, xvalues=None, scale="linear", mode="plot",
-    title="", xlabel="", ylabel="", label="", alphas=(1,),
+    yvalues, xvalues=None, scale=None, mode="plot",
+    scale_x="linear", scale_y="linear", title="",
+    xlabel="", ylabel="", label="", alphas=(1,),
     xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
     figure=None, figsize=None,  anchor_x=1.05, anchor_y=0.9,
     color=None, r2=None, showY=True, showR2=True,
-    save_to=None, filename="plot", ext="png", forcename=False, overwrite=True,
+    save_to=None, filename="plot", ext="png",
+    forcename=False, overwrite=True,
     ignore_nan=True, **kwargs
 ):
     """Generate a specified figure from a set of values.
@@ -170,6 +172,9 @@ def single_plot(
         "scatter" -> scatter plot
         "violin" -> violin plot
 
+    scale_x_, scale_y: str, default="linear"
+        Chosen scale on x and y axis.
+
     title, xlabel, ylabel: str
         Title, x-axis and y-axis labels to assign to
         the figure
@@ -187,20 +192,20 @@ def single_plot(
         lower and upper y limit
 
     normalize: bool
-        Normalize values so that it is bound to [0; 1]
+        Normalize yvalues so that it is bound to [0; 1]
 
     figure: matplotlib.figure.Figure -> (fig, ax)
         A tuple corresponding to a Figure returned by
         matplotlib.figure.figure, the axis {ax} should
         correspond to only one
 
-    figsize: tuple -> tuple(float, float), optional
+    figsize: tuple -> tuple(float, float), default=(8, 7)
         Width and height in inches.
 
     anchor_x, anchor_y: float, float
         Box legend position visible with {showY} and {showR2}
 
-    color: tuple, optional
+    color: tuple, default=blue (#1f77b4)
         Associated color for each {values} plots
 
     r2: float
@@ -238,7 +243,7 @@ def single_plot(
         and calculating metrics such as mean, median
         and std
 
-    Returns: tuple (matplotlib.figure, matplotlib.axes.Axes)
+    Returns: tuple (matplotlib.figure.Figure, matplotlib.axes.Axes)
         Figure and Axes for graphical purposes
 
     """
@@ -256,7 +261,7 @@ def single_plot(
 
     # Check mode
     if mode not in plotting_mode.keys():
-        raise Exception("Selected mode is invalid")
+        raise Exception(f"Selected mode={mode} is invalid")
 
     # x-axis equals indices if not set
     if xvalues is None:
@@ -270,9 +275,9 @@ def single_plot(
         kwargs["bins"] = kwargs.get("bins", 100)
     kwargs["color"] = "#1f77b4" if color is None else color
 
-    xticks = kwargs.get("xticks", None)
-    yticks = kwargs.get("yticks", None)
-    grid = kwargs.get("grid", False)
+    xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) is not None else None
+    yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) is not None else None
+    grid = kwargs.pop("grid") if kwargs.get("grid", False) else False
 
     # Conversion
     if not isinstance(yvalues, np.ndarray):
@@ -284,7 +289,9 @@ def single_plot(
     # Metrics
     isnotnan = ~np.isnan(yvalues)  # index of not NaN values
     if normalize:  # Normalization of value, if specified
-        yvalues = auxiliary.min_max_normalization(yvalues, 0, 1, ignore_nan=ignore_nan)
+        yvalues = auxiliary.min_max_normalization(
+            yvalues, 0, 1, ignore_nan=ignore_nan
+        )
 
     # Observed and Predicted : Mean, std, median
     mean_yvalues = yvalues.mean() if not ignore_nan else np.nanmean(yvalues)
@@ -295,16 +302,20 @@ def single_plot(
     fig, ax = plt.subplots(figsize=figsize) if figure is None else figure
     if (mode == "plot"):
         plotting_mode[mode](ax)(xvalues, yvalues, label=label, alpha=alphas[0], **kwargs)
+    # Histogram
     elif (mode == "hist"):
         bins=kwargs["bins"]
         plotting_mode[mode](ax)(yvalues, bins=bins, label=label, alpha=alphas[0])
+    # Barplot
     elif (mode == "bar"):
         plotting_mode[mode](ax)(xvalues, yvalues, label=label, alpha=alphas[0], **kwargs)
+    # Violin (TODO: More option for violin plot)
     elif (mode == "violin"):
         v1 = plotting_mode[mode](ax)(yvalues, positions=[0], **kwargs)
         v1_label = [mpatches.Patch(color=v1["bodies"][0].get_facecolor().flatten()), label]
         main_legend = ax.legend(*zip(*v1_label), loc=2)
         ax.add_artist(main_legend)
+    # Scatter plot
     elif (mode == "scatter"):
         plotting_mode[mode](ax)(xvalues, yvalues, alpha=alphas[0], **kwargs)
 
@@ -315,6 +326,7 @@ def single_plot(
             main_legend = ax.legend(handles, labels, loc="best")
             ax.add_artist(main_legend)
 
+        # Show statistics about {yvalues}
         if showY:
             handles_y, labels_y = [], []
             mean_yvalues_label, mean_yvalues_patch = legend_patch(f"mean = {mean_yvalues:.3f}")
@@ -332,6 +344,7 @@ def single_plot(
 
             ax.add_artist(msm_observed_legend)  # Add legend to artist
 
+        # Show correlation value between x and y values
         if showR2:  # R2
             r2 = r2 if r2 else r2_score(xvalues[isnotnan], yvalues[isnotnan])
             handles_r2, labels_r2 = [], []
@@ -348,8 +361,13 @@ def single_plot(
             ax.add_artist(r2_legend)
 
     # Set scale selected by user
-    ax.set_xscale(scale)
-    ax.set_yscale(scale)
+    if scale is not None:
+        scale_x = scale
+        scale_y = scale
+
+    ax.set_xscale(scale_x)
+    ax.set_yscale(scale_y)
+
     # Option for specific mode
     if (mode == "scatter"):
         # Range to have xlim=ylim
@@ -364,7 +382,6 @@ def single_plot(
         ax.set_yticks(yticks)
 
     # Label
-    title = title if title == "" else f"{title}\nscale={scale}"
     ax.set_title(title)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -394,7 +411,7 @@ def single_plot(
 
 
 def dual_plot(
-    observed, predicted, indices=None, scale = "linear", mode="plot",
+    observed, predicted, indices=None, scale="linear", mode="plot",
     title="", xlabel="", ylabel="", metric="",
     label_1="observed", label_2="predicted", alphas=(1, 1),
     xleft=None, xright=None, ytop=None, ybottom=None, normalize=False,
@@ -435,9 +452,6 @@ def dual_plot(
     metric: str
         Name of the supervised metric
 
-    xlabel, ylabel: str, str
-        X and Y axis label
-
     label_1, label_2: str, str
         Label associated with {observed} and {predicted} values
 
@@ -453,6 +467,17 @@ def dual_plot(
     normalize: bool
         Normalize values so that it is bound to [0; 1] values
         or [-1; 1] values if {delta}=True
+
+    figure: matplotlib.figure.Figure -> (fig, ax)
+        A tuple corresponding to a Figure returned by
+        matplotlib.figure.figure, the axis {ax} should
+        correspond to one matplotlib.axes.Axes
+
+    figsize: tuple -> tuple(float, float), optional
+        Width and height in inches.
+
+    anchor_x, anchor_y: float, default=1.06; 0.88
+        Box legend position visible with {showY} and {showR2}
 
     color_1, color_2: matplotlib color, matplotlib color
         color associated to {observed} and {predicted}
@@ -521,9 +546,12 @@ def dual_plot(
         kwargs["cmap"] = kwargs.get("cmLoadap", plt.cm.jet)
         kwargs["norm"] = kwargs.get("norm", mcolors.LogNorm())
 
-    xticks = kwargs.get("xticks", None)
-    yticks = kwargs.get("yticks", None)
-    grid = kwargs.get("grid", False)
+    xticks = kwargs.pop("xticks") if kwargs.get("xticks", None) is not None else None
+    yticks = kwargs.pop("yticks") if kwargs.get("yticks", None) is not None else None
+    grid = kwargs.pop("grid") if kwargs.get("grid", False) else False
+
+    if len(observed) != len(predicted):
+        raise Exception("Observed and Predicted value should have the same length")
 
     # Conversion
     if not isinstance(indices, np.ndarray):
@@ -698,7 +726,6 @@ def dual_plot(
         ax.set_yticks(yticks)
 
     # Label
-    title = title if title == "" else f"{title}\nscale={scale}"
     ax.set_title(title)
     ax.set_xlabel(xlabel)
     ax.set_ylabel(ylabel)
@@ -776,7 +803,7 @@ def plot(
     xleft, xright: float, optional
         lower and upper x limit
 
-    ybottom, ytop: int, optional
+    ytop, ybottom: int, optional
         lower and upper y limit
 
     normalize: bool
@@ -785,13 +812,17 @@ def plot(
     figure: matplotlib.figure.Figure -> (fig, ax)
         A tuple corresponding to a Figure returned by
         matplotlib.figure.figure, the axis {ax} should
-        correspond to only one
+        correspond to one matplotlib.axes.Axes
 
     figsize: tuple -> tuple(float, float), optional
         Width and height in inches.
 
-    anchor_x, anchor_y: float, float
+    anchor_x, anchor_y: float, default=1.05; 0.9
         Box legend position visible with {showY} and {showR2}
+
+    loc_label, loc_r2: str, default="upper left"; "upper right"
+        Matplotlib legend location for when {showY=True}
+        and {showR2=True}
 
     color: tuple, optional
         Associated color for each {values} plots
@@ -806,8 +837,9 @@ def plot(
     showR2: bool
         show R2 values for each {values}
 
-    save_to: str
-        Directory to save plot to
+    save_to: str, default=None
+        Directory to save plot to. If None, no saving
+        is applied.
 
     filename: str
         Name of the file to create
@@ -1094,7 +1126,7 @@ def plot(
             filepath = save_to + filename if overwrite else \
                        auxiliary.filepath_with_suffix(save_to + filename)
 
-        plt.savefig(filepath, bbox_inches = 'tight')
+        plt.savefig(filepath, bbox_inches='tight')
 
     return fig, ax
 

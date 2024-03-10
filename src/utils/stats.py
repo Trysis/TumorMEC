@@ -7,24 +7,24 @@ __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
 
 
-def get_pmf(n_run, probability=0.5):
+def get_pmf(n_trials, probability=0.5):
     """Binomial distribution list of probability for an
-    event of {n_run} trials from a probability mass function
+    event of {n_trials} trials from a probability mass function
 
-    n_run: int
+    n_trials: int
         Number of trial
 
     probability: float
         Probability of succes comprised in [0;1]
 
-    Returns: list -> list from i to {n_run}
+    Returns: list -> list from i to {n_trials}
         Probability distribution list of the chance of
         succes for each event {i}
 
     """
     pmf_list = [
-        scipy.stats.binom.pmf(k=k, n=n_run, p=probability)
-        for k in range(n_run+1)
+        scipy.stats.binom.pmf(k=k, n=n_trials, p=probability)
+        for k in range(n_trials+1)
     ]
     return pmf_list
 
@@ -59,7 +59,7 @@ def get_tail_pmf(pmf_list, alpha=0.05):
     return -1
 
 
-def get_boundaries(treshold=-1, n_run=-1):
+def get_boundaries(treshold=-1, n_trials=-1):
     """Returns the left, middle and right boundary from a specified
     index treshold and the number of trial for symetric shaped
     distribution such as a bell distribution
@@ -67,7 +67,7 @@ def get_boundaries(treshold=-1, n_run=-1):
     treshold: int
         Treshold index value
 
-    n_run: int
+    n_trials: int
         Number of trials
 
     Returns: tuple -> tuple(tuple(), tuple(), tuple())
@@ -76,15 +76,15 @@ def get_boundaries(treshold=-1, n_run=-1):
         the treshold and the number of trials
 
     """
-    if treshold == -1 or n_run == -1:
+    if treshold == -1 or n_trials == -1:
         return None
 
-    if n_run/2 < treshold:
+    if n_trials/2 < treshold:
         return None
 
     left = (0, treshold)
-    middle = (treshold, n_run - treshold)
-    right = (n_run - treshold, 1)
+    middle = (treshold, n_trials - treshold)
+    right = (n_trials - treshold, 1)
     return left, middle, right
 
 

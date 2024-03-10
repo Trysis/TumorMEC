@@ -14,7 +14,7 @@ __email__ = "roude.bioinfo@gmail.com"
 
 def extract_map(
     data, feature_name, sample_name=None,
-    name_column="FileName", x_column="X", y_column="Y",
+    sample_column="FileName", x_column="X", y_column="Y",
     scale=40, coord_type=np.int32
 ):
     """Created on Wed Sep 7 11:50:57 2022
@@ -40,7 +40,7 @@ def extract_map(
     chosen_file: str
         In case if dataframe is formatted such that
 
-    name_column: str
+    sample_column: str
         Column of the dataframe specifiying filenames
         attributed to each sample
 
@@ -65,7 +65,7 @@ def extract_map(
     df = data
     # Change to chosen image sample, if specified
     if isinstance(sample_name, str):
-        df = data[data[name_column] == sample_name]
+        df = data[data[sample_column] == sample_name]
 
     # Number of samples
     n_points = df.shape[0]
@@ -84,7 +84,7 @@ def extract_map(
 
 def extract_cells_metrics(
     data, feature_name, sample_name=None,
-    name_column="FileName", **kwargs
+    sample_column="FileName", **kwargs
 ):
     """Returns the calculated metrics with the specified
         sample and feature names
@@ -100,12 +100,12 @@ def extract_cells_metrics(
 
     sample_name: str, or list -> list(str)
         Specified sample name to apply statistics
-        on, on {name_column} column name.
+        on, on {sample_column} column name.
         If None, the same calculation is performed
         on each unique sample (previously identified
-        with {name_column}).
+        with {sample_column}).
 
-    name_column: str, default="FileName"
+    sample_column: str, default="FileName"
         Column of the dataframe specifiying filenames
         attributed to each sample. If None, then the
         metrics are calculated on every observations.
@@ -136,10 +136,10 @@ def extract_cells_metrics(
                 "a filename (of type str) or a list of filename "
                 "of type (list(str))."
             )
-    # Else perform on all cells (indicated by {name_column} column)
+    # Else perform on all cells (indicated by {sample_column} column)
     else:
-        if name_column is not None:
-            on_files = data[name_column].unique()
+        if sample_column is not None:
+            on_files = data[sample_column].unique()
 
     # Selection of features
     features = None
@@ -156,7 +156,7 @@ def extract_cells_metrics(
     # Dictionary that will contain all the data
     cells_metrics_dict = dict()
     # Measure only metrics on each observation
-    if name_column is not None:
+    if sample_column is not None:
         for feature in features:
             cells_metrics_dict[feature] = \
                 auxiliary.get_metrics(data_file[feature], **kwargs)
@@ -165,7 +165,7 @@ def extract_cells_metrics(
         # For each sample
         for filename in on_files:
             cells_metrics_dict[filename] = dict()
-            data_file = data[data[name_column] == filename]
+            data_file = data[data[sample_column] == filename]
             # Each feature
             for feature in features:
                 # Metrics are calculated
@@ -177,7 +177,7 @@ def extract_cells_metrics(
 
 def generator_plots_cells(
     data, feature_name, sample_name=None,
-    name_column="FileName", **kwargs
+    sample_column="FileName", **kwargs
 ):
     """Generate matplotlib.figure.Figure to plot
 
@@ -192,12 +192,12 @@ def generator_plots_cells(
 
     sample_name: str, or list -> list(str)
         Specified sample name to apply statistics
-        on, on {name_column} column name.
+        on, on {sample_column} column name.
         If None, the same calculation is performed
         on each unique sample (previously identified
-        with {name_column}).
+        with {sample_column}).
 
-    name_column: str, default="FileName"
+    sample_column: str, default="FileName"
         Column of the dataframe specifiying filenames
         attributed to each sample. If None, then the
         metrics are calculated on every observations.
@@ -228,10 +228,10 @@ def generator_plots_cells(
                 "a filename (of type str) or a list of filename "
                 "of type (list(str))."
             )
-    # Else perform on all cells (indicated by {name_column} column)
+    # Else perform on all cells (indicated by {sample_column} column)
     else:
-        if name_column is not None:
-            on_files = data[name_column].unique()
+        if sample_column is not None:
+            on_files = data[sample_column].unique()
 
     # Selection of features
     features = None
@@ -250,7 +250,7 @@ def generator_plots_cells(
         for feature in features:
             title_plt = f"{filename}\n{feature} Distribution"
             fig, _ = plots.plot(
-                data[data[name_column] == filename][feature],
+                data[data[sample_column] == filename][feature],
                 title=title_plt,
                 **kwargs
             )
@@ -259,7 +259,7 @@ def generator_plots_cells(
 
 def plot_cells(
     data, feature_name, sample_name=None,
-    name_column="FileName", filepath=None,
+    sample_column="FileName", filepath=None,
     **kwargs
 ):
     """Save distribution plots from the dataframe,
@@ -277,12 +277,12 @@ def plot_cells(
 
     sample_name: str, or list -> list(str)
         Specified sample name to apply statistics
-        on, on {name_column} column name.
+        on, on {sample_column} column name.
         If None, the same calculation is performed
         on each unique sample (previously identified
-        with {name_column}).
+        with {sample_column}).
 
-    name_column: str, default="FileName"
+    sample_column: str, default="FileName"
         Column of the dataframe specifiying filenames
         attributed to each sample. If None, then the
         metrics are calculated on every observations.
@@ -301,7 +301,7 @@ def plot_cells(
         data=data,
         feature_name=feature_name,
         sample_name=sample_name,
-        name_column=name_column,
+        sample_column=sample_column,
         **kwargs
     )
     # Save plots to pdf
