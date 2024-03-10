@@ -30,58 +30,6 @@ SEED = 42
 
 # TODO: Youden Index, Precision Recall Curve
 
-
-def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
-    """Returns a cross-validation sklearn object for cross-validation
-    depending on the user input. See sklearn.model_selection.KFold,
-    StratifiedKFold, GroupKFold and StratifiedGroupKFold
-
-    groups: array-like of shape (n_samples,), default=None
-        group labels for the samples, used
-        to split data while conserving a group in
-        one set only (train or test). If used, then
-        the cross-validation object takes into account
-        groups (GroupKFold & StratifiedGroupKFold)
-
-    n_split: int, default=None
-        Number of repeated split of the data,
-        must at least be equal to 2
-
-    stratify: bool, default=True
-        Should the split be stratified ? Such
-        that the percentage of the target class
-        is the same across the sets (unavailable
-        with groups!=None)
-
-    Returns: sklearn.model_selection._BaseKFold child class
-        The cross-validation object, ihniriting 
-        sklearn.model_selection._BaseKFold
-
-    """
-    cv_generator = None
-    if all(v is None for v in [n_split, groups, stratify]):
-        return None
-
-    cv_args = {
-        "n_splits": n_split,
-        "shuffle": True if seed is not None else False,
-        "random_state": seed
-    }
-    if groups is None:
-        cv_generator = (
-            KFold(**cv_args) if not stratify
-            else StratifiedKFold(**cv_args)
-        )
-    else:
-        cv_generator = (
-            GroupKFold(n_splits=cv_args["n_splits"])
-            if not stratify
-            else StratifiedGroupKFold(**cv_args)
-        )
-
-    return cv_generator
-
-
 def split_data(
         x, y, groups=None,
         n_splits=1, test_size=0.2,
@@ -269,8 +217,75 @@ def cross_validation(
     return scores 
 
 
-def forest_mdi_importance(rf_estimator, colnames, **kargs):
-    """"""
+def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
+    """Returns a cross-validation sklearn object for cross-validation
+    depending on the user input. See sklearn.model_selection.KFold,
+    StratifiedKFold, GroupKFold and StratifiedGroupKFold
+
+    groups: array-like of shape (n_samples,), default=None
+        group labels for the samples, used
+        to split data while conserving a group in
+        one set only (train or test). If used, then
+        the cross-validation object takes into account
+        groups (GroupKFold & StratifiedGroupKFold)
+
+    n_split: int, default=None
+        Number of repeated split of the data,
+        must at least be equal to 2
+
+    stratify: bool, default=True
+        Should the split be stratified ? Such
+        that the percentage of the target class
+        is the same across the sets (unavailable
+        with groups!=None)
+
+    Returns: sklearn.model_selection._BaseKFold child class
+        The cross-validation object, ihniriting 
+        sklearn.model_selection._BaseKFold
+
+    """
+    cv_generator = None
+    if all(v is None for v in [n_split, groups, stratify]):
+        return None
+
+    cv_args = {
+        "n_splits": n_split,
+        "shuffle": True if seed is not None else False,
+        "random_state": seed
+    }
+    if groups is None:
+        cv_generator = (
+            KFold(**cv_args) if not stratify
+            else StratifiedKFold(**cv_args)
+        )
+    else:
+        cv_generator = (
+            GroupKFold(n_splits=cv_args["n_splits"])
+            if not stratify
+            else StratifiedGroupKFold(**cv_args)
+        )
+
+    return cv_generator
+
+
+def forest_mdi_importance(rf_estimator, colnames, **kwargs):
+    """Retrieve computed mdi importance of RandomForest estimator
+    
+    rf_estimator: object
+        estimator object implementing fit
+
+    colnames: list(str)
+        column names used during estimator fitting,
+        the order should be kept the same as when fitted
+
+    **kwargs:
+        Added for compatibility
+
+    Returns: sklearn.utils.Bunch <- dict like
+        A "dictionnary" containing mean importance values
+        with std and associated colnames.
+
+    """
     importances_mean = rf_estimator.feature_importances_
     importances_std = np.std(
         [tree.feature_importances_ for tree in rf_estimator.estimators_],
@@ -292,9 +307,40 @@ def forest_permutation_importance(
     n_repeats=10,
     seed=SEED,
     n_jobs=None,
-    **kargs
+    **kwargs
 ):
-    """"""
+    """Compute permutation importance an the fitted estimator.
+
+    x: ndarray or DataFrame, of shape (n_samples, n_features)
+        Dataframe on which permutation importance is computed
+
+    y: array-like, of shape (n_samples,) or (n_samples, n_classes)
+        Target class for supervised learning
+
+    colnames: list(str), of size=n_features
+        Associated colnames of {x}
+
+    scoring: str, callable, list, tuple or dict, default=None
+        Score used to compute importance,
+        Same as sklearn.inspection.permutation_importance
+
+    n_repeats: int, default=10
+        Number of times to permute a feature
+
+    seed: int
+        Random seed
+
+    n_jobs: int or None, default=None
+        Number of jobs to run in parallel
+
+    **kwargs:
+        Added for compatibility
+
+    Returns: sklearn.utils.Bunch <- dict like
+        A "dictionnary" containing as key {importances_mean},
+        {importances_std}, and {colnames} keys
+
+    """
     importances = inspection.permutation_importance(
         estimator=estimator,
         X=x, y=y,
@@ -308,14 +354,35 @@ def forest_permutation_importance(
     return result
 
 
-def to_boruta_data(x, colnames, y=None, prefix="shadow_"):
+def to_boruta_data(x, colnames, prefix="shadow_"):
+    """Generate a boruta dataframe such that we add shadow
+    features to the original dataframe. shadow features correspond
+    to shuffled features of the original features.
+
+    x: ndarray, of shape (n_samples, n_features)
+        Dataframe to add shadow features on
+
+    colnames: list(str), of size=n_features
+        Associated column names
+
+    prefix: str, default="shadow_"
+        shadow features will be prefixed with {prefix}
+
+    Returns: sklearn.utils.Bunch
+        A "dictionnary" containing the keys:
+            x_boruta: ndarray of shape (n_samples, n_features*2)
+            colnames_boruta: associated column names with shadow columns
+            prefix: the specified prefix of shadow columns
+
     """
-    """
+    if prefix is None or prefix=="":
+        prefix = "shadow_"
+
     # Append shadow features colnames
     shadow_colnames = list(map(
         lambda x: f"{prefix}{x}", colnames
     ))
-    boruta_colnames = colnames + shadow_colnames
+    colnames_boruta = colnames + shadow_colnames
 
     # Add shadow features: shuffled columns
     x_shuffled = np.apply_along_axis(
@@ -325,11 +392,8 @@ def to_boruta_data(x, colnames, y=None, prefix="shadow_"):
 
     # Return data and associated colnames
     result = Bunch(
-        x=x,
-        y=y,
-        colnames=colnames,
         x_boruta=x_boruta,
-        colnames_boruta=boruta_colnames,
+        colnames_boruta=colnames_boruta,
         prefix=prefix
     )
     return result
@@ -384,9 +448,9 @@ def run_boruta(
     if clone_estimator:
         estimator = clone(estimator)
 
-    boruta_dict = to_boruta_data(x=x, y=y, colnames=colnames)
+    boruta_dict = to_boruta_data(x=x, colnames=colnames)
     boruta_x = boruta_dict.x_boruta
-    boruta_colnames = boruta_dict.boruta_colnames
+    boruta_colnames = boruta_dict.colnames_boruta
     boruta_prefix = boruta_dict.prefix
 
     # Fit model with shadow features
@@ -403,6 +467,7 @@ def run_boruta(
         if boruta_prefix in f_name
     }
 
+    # Most important shadow feature to apply criterion on
     highest_shadow_f = max(shadow_f_importances, key=shadow_f_importances.get)
     if feature_hit is None:
         feature_hit = {f_name: 0 for f_name in colnames}
@@ -420,7 +485,7 @@ def run_boruta(
         feature_hit=feature_hit,
         boruta_dict=boruta_dict
     )
-    
+
     return result
 
 
