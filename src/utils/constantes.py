@@ -154,7 +154,7 @@ T_PLUS = Constantes("t_plus", 1, "t-plus")
 T_ENRICHED = Constantes("t_enrich", 1, "t-enrich")
 T_ENRICHED_2 = Constantes("t_enrich_2", 1, "t-enrich-2")
 
-# Columns definition
+# Columns definition -----
 str_columns = ("Condition", "FileName", "Type")
 int_columns = ("Mask",)
 unsigned_columns = ("X", "Y")
@@ -177,7 +177,7 @@ float140_columns = [
     "VarInt140", "Density140", "VarDensity140", "OrientationRef140"
 ]
 
-# Without angle
+# Without angle ---
 float20_columns_unloc = float20_columns.copy()
 float60_columns_unloc = float60_columns.copy()
 float100_columns_unloc = float100_columns.copy()
@@ -189,6 +189,7 @@ angle_columns = (
     float100_columns_unloc.pop(float100_columns_unloc.index("Angle100")),
     float140_columns_unloc.pop(float140_columns_unloc.index("Angle140"))
 )
+# ---
 
 dist_columns = ("Dist",)
 shape_columns = ("Frac",)
@@ -221,6 +222,31 @@ data_type = {
     **dict.fromkeys(float_columns, np.float64),
     **dict.fromkeys(int_columns, np.int32)
 }
+
+# Features columns for training
+
+## Learning fiber features to predict enriched zones
+# with Dist & Angle attributes
+x_fiber_columns = [
+    *float20_columns,
+    *float60_columns,
+    *float100_columns,
+    *float140_columns,
+    *dist_columns,
+    *shape_columns,
+]
+
+# without Dist & Angle information
+x_fiber_unloc_columns = [
+    *float20_columns_unloc,
+    *float60_columns_unloc,
+    *float100_columns_unloc,
+    *float140_columns_unloc,
+    *shape_columns,
+]
+
+## Learning cells features to predict fiber values
+# TODO
 
 if __name__ == "__main__":
     hey = Constantes("Condition", "KI")
