@@ -24,13 +24,48 @@ from sklearn.model_selection import GroupKFold
 from sklearn.model_selection import StratifiedGroupKFold
 
 # Local module
-import stats
+from . import stats
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
 
 SEED = 42
 # TODO: Youden Index, Precision Recall Curve
+
+
+def split_xy(df, x_columns, y_columns):
+    """Returns the set of predictor (x) and the associated
+    target (y) from the defined columns without na values
+
+    dataframe: pandas.Dataframe
+        A pandas dataframe containing the descriptors
+        and the target columns
+
+    x_columns: str or list(str)
+        A single column name, or a set of columns
+        defined in df
+
+    y_columns: str, list(str)
+        A single target column name or a set of column
+        defining the selected target columns(s)
+
+    Returns: numpy.ndarray, numpy.ndarray
+        Respectively the {x} and {y} array
+
+    """
+    if None in (x_columns, y_columns) or df is None:
+        raise Exception("Args should not be equals to None")
+    if isinstance(x_columns, str):
+        x_columns = [x_columns]
+    if isinstance(y_columns, str):
+        y_columns = [y_columns]
+    # Defines the main dataframe without na
+    xy = df[x_columns + y_columns].dropna()
+    x = xy[x_columns].values  # features
+    y = xy[y_columns].values  # target
+
+    return x, y
+
 
 def split_data(
         x, y, groups=None,
@@ -70,10 +105,13 @@ def split_data(
         have reproductible results
 
     if n_split == 1:
-        Returns: tuple -> tuple(ndarray) * 6
-            A tuple containing the list of train and test
-            split of inputs, represented as tuple(x_train,
-            x_test, y_train, y_test, groups_train, groups_test)
+        if groups is not None:
+            Returns: tuple -> tuple(ndarray) * 6
+                A tuple containing the list of train and test
+                split of inputs, represented as tuple(x_train,
+                x_test, y_train, y_test, groups_train, groups_test)
+        else:
+            x_train, x_test, y_train, y_test
 
     elif n_split > 1:
         Yiels: tuple -> tuple(ndarray, ndarray)
