@@ -38,18 +38,38 @@ def generic_score_fn(fn, key=None, to_scorer=False, **kwargs):
 
 def accuracy_score(key=None, to_scorer=False, **kwargs):
     fn = metrics.accuracy_score
-    
-    return fn
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
 
-def balanced_accuracy_score():
-    pass
 
-def precision_score():
+def balanced_accuracy_score(key=None, to_scorer=False, **kwargs):
+    fn = metrics.balanced_accuracy_score
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+def precision_score(key=None, to_scorer=False, **kwargs):
+    fn = metrics.precision_score
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+def recall_score(key=None, to_scorer=False, **kwargs):
+    fn = metrics.recall_score
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+def roc_auc_score(key=None, to_scorer=False, **kwargs):
+    fn = metrics.roc_auc_score
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+def matthews_corrcoef(key=None, to_scorer=False, **kwargs):
+    fn = metrics.matthews_corrcoef
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+def f1_score(key=None, to_scorer=False, **kwargs):
+    fn = metrics.f1_score
+    return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
+
+
+if __name__ == "__main__":
     pass
-"accuracy": ,
-                    "balanced_accuracy": metrics.balanced_accuracy_score,
-                    "precision": metrics.precision_score,
-                    "recall": metrics.recall_score,
-                    "auc": metrics.roc_auc_score,
-                    "mcc": metrics.matthews_corrcoef,
-                    "f1": metrics.f1_score,
