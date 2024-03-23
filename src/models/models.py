@@ -1,13 +1,10 @@
 import time
 
 import numpy as np
-import pandas as pd
-import matplotlib.pyplot as plt
 
 import scipy
 from sklearn.utils import Bunch
 from sklearn.base import clone
-import sklearn.preprocessing as preprocessing
 from sklearn.ensemble import RandomForestClassifier
 import sklearn.inspection as inspection
 
@@ -33,7 +30,25 @@ SEED = 42
 # TODO: Youden Index, Precision Recall Curve
 
 
-def split_xy(df, x_columns, y_columns):
+def time_fn(lambda_fn):
+    """Time the specified function
+    
+    lambda_fn: funct
+        A lambda function to be called, with the
+        pre-specified argument provided
+
+    Returns: sklearn.utils.Bunch
+        A dictionnary containing the result of the
+        lambda function and the elapsed time
+
+    """
+    start_time = time.time()
+    result = lambda_fn()
+    elapsed_time = time.time() - start_time
+    return Bunch(result=result, time=elapsed_time)
+
+
+def split_xy(df, x_columns, y_columns, groups=None):
     """Returns the set of predictor (x) and the associated
     target (y) from the defined columns without na values
 
@@ -49,8 +64,19 @@ def split_xy(df, x_columns, y_columns):
         A single target column name or a set of column
         defining the selected target columns(s)
 
-    Returns: numpy.ndarray, numpy.ndarray
-        Respectively the {x} and {y} array
+    groups: str, list(str)
+        Used column to define rows from the same sample,
+        it can be a column containing patient identifier
+        so that we maintain a patient in the same split
+        for future splitting,
+        this column won't be in {x} or {y}
+
+    if groups is None:
+        Returns: numpy.ndarray, numpy.ndarray
+            Respectively the {x} and {y} array
+    else:
+        Returns: numpy.ndarray, numpy.ndarray, numpy.ndarray
+            The {x}, {y} and {groups} array
 
     """
     if None in (x_columns, y_columns) or df is None:
@@ -59,10 +85,36 @@ def split_xy(df, x_columns, y_columns):
         x_columns = [x_columns]
     if isinstance(y_columns, str):
         y_columns = [y_columns]
+    # Columns verification, if specified columns in {df}
+    df_column_set = set(df.columns)
+    x_column_set, y_column_set = set(x_columns), set(y_columns)
+    groups_set = set(groups) if groups is not None else None
+    if not x_column_set.issubset(df_column_set):
+        raise Exception(
+            "{x_columns} is not a subset of {df.columns}\n"
+            f"\t{x_columns = }\n\tdiff={x_column_set - df_column_set}"
+        )
+    if not set(y_columns).issubset(df_column_set):
+        raise Exception(
+            "{y_columns} is not a subset of {df.columns}\n"
+            f"\t{y_columns = }\n\tdiff={y_column_set - df_column_set}"
+        )
+    if groups_set is not None and not set(groups).issubset(df_column_set):
+        raise Exception(
+            "{groups} is not a subset of {df.columns}\n"
+            f"\t{groups = }\n\tdiff={groups_set - df_column_set}"
+        )
     # Defines the main dataframe without na
     xy = df[x_columns + y_columns].dropna()
     x = xy[x_columns].values  # features
     y = xy[y_columns].values  # target
+    if groups is not None:
+        if isinstance(groups, str): groups = [groups]
+        if len(groups) != 0:
+            groups = df.groupby(groups).ngroup().values
+            return x, y, groups
+        else:
+            print("len{groups}=0, only {x} and {y} have been returned")
 
     return x, y
 
@@ -156,6 +208,145 @@ def split_data(
             )
         else:
             return sss_gen
+
+
+def random_forest_search(
+    x, y, groups=None, n_split=5,
+    stratify=True, seed=SEED, verbose=0,
+    scoring={
+            "accuracy": metrics.accuracy_score,
+            "balanced_accuracy": metrics.balanced_accuracy_score,
+            "precision": metrics.precision_score,
+            "recall": metrics.recall_score,
+            "auc": metrics.roc_auc_score,
+            "mcc": metrics.matthews_corrcoef,
+            "f1": metrics.f1_score,
+    },
+    n_iter=5, refit=True, n_jobs=None,
+    class_weight="balanced", random_state=SEED,
+    param_criterion=("entropy",),
+    param_n_estimators=(20, 30, 40, 60),
+    param_max_features=("sqrt,"),
+    param_max_depths=(2, 4, 8, 10, 15, 20),
+    param_min_s_split=(2, 4, 16, 32),
+    param_min_s_leaf=(1, 5),
+    param_bootstrap=(False, True),
+):
+    """Perform a random search on random forest classifier algorithm
+
+    x: pandas.DataFrame
+        Features
+
+    y: pandas.DataFrame
+        Target(s)
+
+    groups: array-like of shape (n_samples,), default=None
+        group labels for the samples, should be
+        used in conjunction with a Group cv instance
+        (e.g., sklearn.model_selection.GroupKFold,
+        sklearn.model_selection.StratifiedGroupKFold, ...)
+
+    class_weight: str, default=None
+        Associated weights to the target, can be
+        "balanced", "balanced_subsample", or None
+        See sklearn.ensemble.RandomForestClassifier
+        class_weight argument.
+
+    n_split: int, default=5
+        Number of repeated split of the data
+    
+    stratify: bool, default=True
+        Should the different split across the
+        folds be stratified ? Such that we
+        attempt to preserve the percentage
+        of the target class across the sets
+
+    seed: int, default=models.SEED
+        Seed to control the randomness and
+        have reproductible results, control splitting
+        and randomsearch sampling
+
+    verbose: int, default=0
+        Should we output log output ? verbose can
+        equal 1, 2 or 3 for different level of
+        verbosity
+
+    scoring: str, callable, list, tuple, or dict
+        see the {scoring} argument from
+        sklearn.model_selection.cross_validate
+        documentation
+
+    n_iter: int, default=5
+        Number of parameter settings that are sampled.
+
+    refit: bool, str, or callable, default=True
+        Refit the model using the best found parameters,
+        for multiple metric evaluation, this needs to be
+        a {str} specifying the scorer that will be used.
+        See sklearn.model_selection.RandomizedSearchCV
+        documentation.
+
+    n_jobs: int, default=None
+        Number of jobs to run in parallel for the search
+        algorithm. See 'sklearn.model_selection.
+        RandomizedSearchCV'
+
+    class_weight: str, dict, list(dict) or None, default="balanced"
+        Weights associated with each classes, if not given each
+        class is supposed to have weight one.
+        -> RandomForestClassifier inner parameters
+
+    random_state: intn RandomState instance or None, default=models.SEED
+        Controls the randomness of the random forest algorithm if
+        specified such as bootstrapping and best_split.
+        See sklearn.ensemble.RandomForestClassifier
+        -> RandomForestClassifier inner parameters
+
+    param_{str}: list
+        List corresponding to the distribution or
+        a set of parameters to try for the corresponding
+        {str} parameter name from the estimator object.
+        See sklearn.ensemble.RandomForestClassifier
+        documentation.
+
+    Returns: object
+        Instance of the fitted estimator having
+        multiple attributes specified in
+        sklearn.model_selection.RandomizedSearchCV
+        such as, cv_results_, best_estimator_,
+        best_score_, best_params_, best_index_,
+        scorer_ and other.
+
+    """
+    # Search parameters
+    param_search_cv = {
+        'criterion': param_criterion,
+        'n_estimators': param_n_estimators,
+        'max_feature': param_max_features,
+        'max_depth': param_max_depths,
+        'min_samples_split': param_min_s_split,
+        'min_samples_leaf': param_min_s_leaf,
+        'bootstrap': param_bootstrap,
+    }
+
+    # Cross-validation object generator
+    cv_generator = cv_object(
+        n_split=n_split, groups=groups, stratify=stratify, seed=seed
+    )
+
+    # Random search to find best hyperparameters
+    random_search = RandomizedSearchCV(
+        estimator=RandomForestClassifier(class_weight=class_weight, random_state=random_state),
+        param_distributions=param_search_cv, 
+        n_iter=n_iter, scoring=scoring, cv=cv_generator,
+        refit=refit, n_jobs=n_jobs, verbose=verbose,
+        random_state=seed
+    )
+
+    # Fit the random search object
+    random_search.fit(x, y)
+
+    return random_search
 
 
 def cross_validation(
@@ -656,154 +847,6 @@ def forest_boruta_importance(estimator, x, y, colnames, n_trials=50, alpha=0.05)
     )
 
     return result
-
-
-def time_fn(lambda_fn):
-    """Time the specified function
-    
-    lambda_fn: funct
-        A lambda function to be called, with the
-        pre-specified argument provided
-
-    Returns: sklearn.utils.Bunch
-        A dictionnary containing the result of the
-        lambda function and the elapsed time
-
-    """
-    start_time = time.time()
-    result = lambda_fn()
-    elapsed_time = time.time() - start_time
-    return Bunch(result=result, time=elapsed_time)
-
-
-def random_forest_search(
-    x_train, y_train, groups=None,
-    class_weight="balanced", n_split=5,
-    stratify=True, seed=SEED, verbose=0,
-    scoring={
-            "accuracy": metrics.accuracy_score,
-            "balanced_accuracy": metrics.balanced_accuracy_score,
-            "precision": metrics.precision_score,
-            "recall": metrics.recall_score,
-            "auc": metrics.roc_auc_score,
-            "mcc": metrics.matthews_corrcoef,
-            "f1": metrics.f1_score,
-    },
-    n_iter=5, refit=True, n_jobs=None,
-    param_criterion = ("entropy",),
-    param_n_estimators = (20, 30, 40, 60),
-    param_max_features = ("sqrt,"),
-    param_max_depths = (2, 4, 8, 10, 15, 20),
-    param_min_s_split = (2, 4, 16, 32),
-    param_min_s_leaf = (1, 5),
-    param_bootstrap = (False, True),
-    param_random_state = SEED
-):
-    """Perform a random searchrandom forest and exctract feature importances.
-
-    x_train, x_test: pandas dataframe
-        Train and Test features
-
-    y_train, y_test: pandas dataframe
-        Train and Test targets
-
-    groups: array-like of shape (n_samples,), default=None
-        group labels for the samples, should be
-        used in conjunction with a Group cv instance
-        (e.g., sklearn.model_selection.GroupKFold,
-        sklearn.model_selection.StratifiedGroupKFold, ...)
-
-    class_weight: str, default=None
-        Associated weights to the target, can be
-        "balanced", "balanced_subsample", or None
-        See sklearn.ensemble.RandomForestClassifier
-        class_weight argument.
-
-    n_split: int, default=5
-        Number of repeated split of the data
-    
-    stratify: bool, default=True
-        Should the different split across the
-        folds be stratified ? Such that we
-        attempt to preserve the percentage
-        of the target class across the sets
-
-    seed: int, default=models.SEED
-        Seed to control the randomness and
-        have reproductible results
-
-    verbose: int, default=0
-        Should we output log output ? verbose can
-        equal 1, 2 or 3 for different level of
-        verbosity
-
-    scoring: str, callable, list, tuple, or dict
-        see the {scoring} argument from
-        sklearn.model_selection.cross_validate
-        documentation
-
-    n_iter: int, default=5
-        Number of parameter settings that are sampled.
-
-    refit: bool, str, or callable, default=True
-        Refit the model using the best found parameters,
-        for multiple metric evaluation, this needs to be
-        a {str} specifying the scorer that will be used.
-        See sklearn.model_selection.RandomizedSearchCV
-        documentation.
-
-    n_jobs: int, default=None
-        Number of jobs to run in parallel for the search
-        algorithm. See 'sklearn.model_selection.
-        RandomizedSearchCV'
-
-    param_{str}: list
-        List corresponding to the distribution or
-        a set of parameters to try for the corresponding
-        {str} parameter name from the estimator object.
-        See sklearn.ensemble.RandomForestClassifier
-        documentation.
-
-    Returns: object
-        Instance of the fitted estimator having
-        multiple attributes specified in
-        sklearn.model_selection.RandomizedSearchCV
-        such as, cv_results_, best_estimator_,
-        best_score_, best_params_, best_index_,
-        scorer_ and other.
-
-    """
-    # Search parameters
-    param_search_cv = {
-        'criterion': param_criterion,
-        'n_estimators': param_n_estimators,
-        'max_feature': param_max_features,
-        'max_depth': param_max_depths,
-        'min_samples_split': param_min_s_split,
-        'min_samples_leaf': param_min_s_leaf,
-        'bootstrap': param_bootstrap,
-        'class_weight': class_weight,
-        'random_state': param_random_state
-    }
-
-    # Cross-validation object generator
-    cv_generator = cv_object(
-        n_split=n_split, groups=groups, stratify=stratify, seed=seed
-    )
-
-    # Random search to find best hyperparameters
-    random_search = RandomizedSearchCV(
-        estimator=RandomForestClassifier(),
-        param_distributions=param_search_cv, 
-        n_iter=n_iter, scoring=scoring, cv=cv_generator,
-        refit=refit, n_jobs=n_jobs, verbose=verbose,
-        random_state=seed
-    )
-
-    # Fit the random search object
-    random_search.fit(x_train, y_train)
-
-    return random_search
 
 
 if __name__ == "_main__":
