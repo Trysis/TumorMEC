@@ -137,7 +137,7 @@ class DataLoader:
             When > 0, it prints some information
 
         **kwargs:
-            ...
+            key word arugment to pass to {pandas.read_csv}
 
         Returns: pandas.DataFrame
             The filtered pandas.DataFrame containing the target features
@@ -153,7 +153,7 @@ class DataLoader:
         filename = self.filename_from_mask()
         filepath = os.path.join(dirpath, filename)
         if os.path.isfile(filepath) and not force_default:
-            dataframe = pd.read_csv(filepath)
+            dataframe = pd.read_csv(filepath, **kwargs)
 
         # Read 'default'
         dframes = []
@@ -167,7 +167,7 @@ class DataLoader:
                 if n_condition == 0 or set(condition).intersection(set_condition):
                     default_filepath = default_name if os.path.isfile(default_name) else os.path.join(self.data_dir, default_name)
                     if os.path.isfile(default_filepath):
-                        df_tmp = pd.read_csv(default_filepath, sep=separator, low_memory=False)
+                        df_tmp = pd.read_csv(default_filepath, sep=separator, low_memory=False, **kwargs)
                         if condition == "KI":  # replace 'CD64-hDTR' with 'KI'
                             df_tmp.loc[df_tmp["Condition"] == "CD64-hDTR", "Condition"] = "KI" 
                         dframes.append(df_tmp)
