@@ -5,6 +5,10 @@ import src.processing.dataloader as load
 import src.models.models as models
 import src.models.scorer as scorer
 import src.utils.auxiliary as auxiliary
+import src.utils.summary as summary
+
+import numpy as np
+import pandas as pd
 
 # TODO : Save Model
 
@@ -43,6 +47,16 @@ SCORING = {
     "mcc": scorer.matthews_corrcoef(to_scorer=True),
     "f1": scorer.f1_score(to_scorer=True),
 }
+FIT_WITH="f1"
+TARGETS_WEIGHTS="balanced"
+## Hyperparameters search
+hsearch_criterion=["entropy",]
+hsearch_n_estimators=[20, 30, 40, 60]
+hsearch_max_features=["sqrt"]
+hsearch_max_depths=[2, 4, 8, 10, 15, 20]
+hsearch_min_s_split=[2, 4, 16, 32]
+hsearch_min_s_leaf=[1, 5]
+hsearch_bootstrap=[False, True]
 
 # Load data
 loader = load.DataLoader(
@@ -69,31 +83,105 @@ rootname, ext = os.path.splitext(filename)
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for features_column in FEATURES:
+        # Saving output
+        loader_name = f"{rootname}_{target_column}"
+        loader_dir = auxiliary.create_dir(os.path.join(OUTPUT_DIR, loader_name), add_suffix=False)
+        summary_file = os.path.join(loader_dir, "summary.txt")
+        hsearch_file = os.path.join(loader_dir, "search_param.csv")
+        e = summary.summarize(
+            summary.mapped_summary({
+                "Condition": [c.name for c in MASK_CONDITION],
+                "Type": [t.name for t in MASK_TYPE],
+                "Tumor": [t.name for t in MASK_TUMOR],
+                "Fiber": [d.name for d in MASK_DENSITY],
+                "Remove none": REMOVE_NONE,
+                "Replace aberrant": REPLACE_ABERRANT,
+            }, map_sep=":"),
+            title="Parameters",
+            filepath=summary_file, mode="w"
+        )
+        f = summary.summarize(
+            summary.mapped_summary({
+                "MODEL": models.ESTIMATOR,
+                "Cross-valdiation N-Folds": CV,
+                "RandomSearch N-iter": N_ITER,
+                "Select best model with": FIT_WITH
+            }, map_sep=":"),
+            summary.arg_summary("Scoring", "\n" + summary.mapped_summary(SCORING, padding_left=4), new_line=False),
+            summary.arg_summary(
+                "Hyperparameters search",
+                "\n" +
+                summary.mapped_summary({
+                    "Criterion": hsearch_criterion,
+                    "N-Tree": hsearch_n_estimators,
+                    "N-Features": hsearch_max_features,
+                    "Max depths": hsearch_max_depths,
+                    "Min sample split": hsearch_min_s_split,
+                    "Min sample leaf": hsearch_min_s_leaf,
+                    "Bootstrap": hsearch_bootstrap
+                }, map_sep="=", padding_left=4),
+                new_line=False
+            ),
+            subtitle="Training regiment",
+            filepath=summary_file
+        )
         # Features and Target(s)
         x, y, groups = models.split_xy(
             df=dataframe, x_columns=features_column, y_columns=target_column, groups=SAMPLE_GROUP
         )
+
+        label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
+        df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
+        mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
+
+        a = summary.df_summary(
+            x=x, y=y,
+            unique_groups=np.unique(groups),
+            x_columns=features_column,
+            y_columns=target_column,
+            groups_columns=SAMPLE_GROUP,
+            mapped_groups=mapped_groups,
+            new_line=True,
+            filepath=summary_file
+        )
+
         # Train and Test
         x_train, x_test, y_train, y_test, groups_train, groups_test = models.split_data(
             x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
+        )
+        summary.summarize(
+            b := summary.xy_summary(
+                x_train, y_train, unique_groups=np.unique(groups_train), title="Train",
+                x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
+            ),
+            c := summary.xy_summary(
+                x_test, y_test, unique_groups=np.unique(groups_test), title="Test",
+                x_label="x_test shape", y_label="y_test shape", groups_label="groups_test",
+            ),
+            filepath=summary_file
         )
 
         # Hyperparameters search
         search = models.random_forest_search(
             x=x_train, y=y_train.ravel(), groups=groups_train,
             n_split=CV, stratify=True, seed=SEED, verbose=1,
-            scoring=SCORING, n_iter=N_ITER, refit="f1", n_jobs=None,
-            class_weight="balanced", random_state=SEED,
+            scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=None,
+            class_weight=TARGETS_WEIGHTS, random_state=SEED,
+            param_criterion=hsearch_criterion,
+            param_n_estimators=hsearch_n_estimators,
+            param_max_features=hsearch_max_features,
+            param_max_depths=hsearch_max_depths,
+            param_min_s_split=hsearch_min_s_split,
+            param_min_s_leaf=hsearch_min_s_leaf,
+            param_bootstrap=hsearch_bootstrap,
         )
-
-        # Saving directory
-        loader_name = f"{rootname}_{target_column}"
-        loader_dir = auxiliary.create_dir(os.path.join(OUTPUT_DIR, loader_dir), add_suffix=False)
+        # Save tested parameters
+        pd.DataFrame(search.cv_results_).to_csv(hsearch_file)
         print(search.best_estimator_)
         print(f"{search.best_score_ = }")
         print(f"{search.best_index_ = }")
         print(f"{search.best_params_ = }")
-        search.cv_results_
+        
         exit()
 
 
