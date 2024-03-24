@@ -226,6 +226,10 @@ def format_by_rows(array, ncol=1, spacing=3):
         from {array} as specified by the argument
 
     """
+    if array is None:
+        return ""
+    if isinstance(array, (int, bool, float, str)):
+        array = [array]
     arr_str = [f"{value}" for value in array]
     arr_len = [len(value) for value in arr_str]
     max_len = max(arr_len)
@@ -235,7 +239,8 @@ def format_by_rows(array, ncol=1, spacing=3):
     # to_return
     val_str = [
         f"{val:{val_format}}{'':{spacing_format}}" if (idx+1)%ncol != 0\
-        else f"{val:{val_format}}{'':{spacing_format}}\n"
+        else f"{val:{val_format}}{'':{spacing_format}}\n" if idx != len(arr_str) - 1
+        else f"{val:{val_format}}{'':{spacing_format}}"
         for idx, val in enumerate(arr_str)
     ]
     val_str = "".join(val_str)
