@@ -3,7 +3,10 @@ import os
 import src.utils.constantes as cst
 import src.processing.dataloader as load
 import src.models.models as models
+import src.models.scorer as scorer
+import src.utils.auxiliary as auxiliary
 
+# TODO : Save Model
 
 # Generic attributes
 SEED = 42
@@ -30,6 +33,16 @@ SAMPLE_GROUP = ["FileName",]
 
 # Training regimen
 CV = 2
+N_ITER = 2  # RandomSearch settings sampling number
+SCORING = {
+    "accuracy": scorer.accuracy_score(to_scorer=True),
+    "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
+    "precision": scorer.precision_score(to_scorer=True),
+    "recall": scorer.recall_score(to_scorer=True),
+    "auc": scorer.roc_auc_score(to_scorer=True),
+    "mcc": scorer.matthews_corrcoef(to_scorer=True),
+    "f1": scorer.f1_score(to_scorer=True),
+}
 
 # Load data
 loader = load.DataLoader(
@@ -50,6 +63,9 @@ dataframe = loader.load_data(
     force_default=False,
 )
 
+filename = loader.filename_from_mask()
+rootname, ext = os.path.splitext(filename)
+
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for features_column in FEATURES:
@@ -61,36 +77,25 @@ for target_column in TARGETS_COLNAMES:
         x_train, x_test, y_train, y_test, groups_train, groups_test = models.split_data(
             x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
         )
+
         # Hyperparameters search
-        models.random_forest_search(
-            x=x_train, y=y_train, groups=groups_train,
-            n_split=5, stratify=True, seed=SEED, verbose=0,
-            scoring={
-                    "accuracy": metrics.accuracy_score,
-                    "balanced_accuracy": metrics.balanced_accuracy_score,
-                    "precision": metrics.precision_score,
-                    "recall": metrics.recall_score,
-                    "auc": metrics.roc_auc_score,
-                    "mcc": metrics.matthews_corrcoef,
-                    "f1": metrics.f1_score,
-            },
-            n_iter=5, refit=True, n_jobs=None,
+        search = models.random_forest_search(
+            x=x_train, y=y_train.ravel(), groups=groups_train,
+            n_split=CV, stratify=True, seed=SEED, verbose=1,
+            scoring=SCORING, n_iter=N_ITER, refit="f1", n_jobs=None,
             class_weight="balanced", random_state=SEED,
-            param_criterion=("entropy",),
-            param_n_estimators=(20, 30, 40, 60),
-            param_max_features=("sqrt,"),
-            param_max_depths=(2, 4, 8, 10, 15, 20),
-            param_min_s_split=(2, 4, 16, 32),
-            param_min_s_leaf=(1, 5),
-            param_bootstrap=(False, True),
         )
-        print(f"{x_train = }\n{x_test = }")
-        print(f"{y_train = }\n{y_test = }")
-        print(f"{groups_train = }\n{groups_test = }")
+
+        # Saving directory
+        loader_name = f"{rootname}_{target_column}"
+        loader_dir = auxiliary.create_dir(os.path.join(OUTPUT_DIR, loader_dir), add_suffix=False)
+        print(search.best_estimator_)
+        print(f"{search.best_score_ = }")
+        print(f"{search.best_index_ = }")
+        print(f"{search.best_params_ = }")
+        search.cv_results_
         exit()
 
-CROSS_VAL = 10
-PREDICT_CLASS = ""
 
 if __name__ == "__main__":
     """

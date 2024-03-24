@@ -5,7 +5,6 @@ __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
 
 
-
 def generic_score_fn(fn, key=None, to_scorer=False, **kwargs):
     """Utilitary function to provide the specified scorer with
     compatibility for the sklearn {scoring} functions arguments
@@ -70,6 +69,17 @@ def f1_score(key=None, to_scorer=False, **kwargs):
     fn = metrics.f1_score
     return generic_score_fn(fn=fn, key=key, to_scorer=to_scorer, **kwargs)
 
+
+# Global variable
+SCORING = {
+    "accuracy": accuracy_score(to_scorer=True),
+    "balanced_accuracy": balanced_accuracy_score(to_scorer=True),
+    "precision": precision_score(to_scorer=True),
+    "recall": recall_score(to_scorer=True),
+    "auc": roc_auc_score(to_scorer=True),
+    "mcc": matthews_corrcoef(to_scorer=True),
+    "f1": f1_score(to_scorer=True),
+}
 
 if __name__ == "__main__":
     pass

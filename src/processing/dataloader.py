@@ -97,8 +97,8 @@ class DataLoader:
             [filename, condition, separator].
             Described as such:
                 {filename}: str
-                    An actual path to a file or
-                    path to {self.data_dir}/{filename}
+                    An actual path to a file or a filename such that it
+                    exists in {self.data_dir}/{filename}
                 {condition}: str, or list(str)
                     The specified condition phenotype, such
                     as "WT", "KI", ["WT", "KI"] for both, or other.

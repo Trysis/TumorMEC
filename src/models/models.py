@@ -22,13 +22,23 @@ from sklearn.model_selection import StratifiedGroupKFold
 
 # Local module
 from . import stats
+from . import scorer
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
 
 SEED = 42
-# TODO: Youden Index, Precision Recall Curve
+SCORING = {
+    "accuracy": scorer.accuracy_score(to_scorer=True),
+    "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
+    "precision": scorer.precision_score(to_scorer=True),
+    "recall": scorer.recall_score(to_scorer=True),
+    "auc": scorer.roc_auc_score(to_scorer=True),
+    "mcc": scorer.matthews_corrcoef(to_scorer=True),
+    "f1": scorer.f1_score(to_scorer=True),
+}
 
+# TODO: Youden Index, Precision Recall Curve
 
 def time_fn(lambda_fn):
     """Time the specified function
@@ -213,31 +223,22 @@ def split_data(
 def random_forest_search(
     x, y, groups=None, n_split=5,
     stratify=True, seed=SEED, verbose=0,
-    scoring={
-            "accuracy": metrics.accuracy_score,
-            "balanced_accuracy": metrics.balanced_accuracy_score,
-            "precision": metrics.precision_score,
-            "recall": metrics.recall_score,
-            "auc": metrics.roc_auc_score,
-            "mcc": metrics.matthews_corrcoef,
-            "f1": metrics.f1_score,
-    },
-    n_iter=5, refit=True, n_jobs=None,
+    scoring=SCORING, n_iter=5, refit="f1", n_jobs=None,
     class_weight="balanced", random_state=SEED,
-    param_criterion=("entropy",),
-    param_n_estimators=(20, 30, 40, 60),
-    param_max_features=("sqrt,"),
-    param_max_depths=(2, 4, 8, 10, 15, 20),
-    param_min_s_split=(2, 4, 16, 32),
-    param_min_s_leaf=(1, 5),
-    param_bootstrap=(False, True),
+    param_criterion=["entropy",],
+    param_n_estimators=[20, 30, 40, 60],
+    param_max_features=["sqrt"],
+    param_max_depths=[2, 4, 8, 10, 15, 20],
+    param_min_s_split=[2, 4, 16, 32],
+    param_min_s_leaf=[1, 5],
+    param_bootstrap=[False, True],
 ):
     """Perform a random search on random forest classifier algorithm
 
-    x: pandas.DataFrame
+    x: array-like of shape (n_samples, n_features)
         Features
 
-    y: pandas.DataFrame
+    y: array-like of shape (n_samples,) or (n_samples, n_outputs)
         Target(s)
 
     groups: array-like of shape (n_samples,), default=None
@@ -322,7 +323,7 @@ def random_forest_search(
     param_search_cv = {
         'criterion': param_criterion,
         'n_estimators': param_n_estimators,
-        'max_feature': param_max_features,
+        'max_features': param_max_features,
         'max_depth': param_max_depths,
         'min_samples_split': param_min_s_split,
         'min_samples_leaf': param_min_s_leaf,
@@ -344,7 +345,7 @@ def random_forest_search(
     )
 
     # Fit the random search object
-    random_search.fit(x, y)
+    random_search.fit(x, y, groups=groups)
 
     return random_search
 
@@ -352,15 +353,7 @@ def random_forest_search(
 def cross_validation(
         estimator, x, y,
         groups=None, n_split=5,
-        scoring={
-            "accuracy": metrics.accuracy_score,
-            "balanced_accuracy": metrics.balanced_accuracy_score,
-            "precision": metrics.precision_score,
-            "recall": metrics.recall_score,
-            "auc": metrics.roc_auc_score,
-            "mcc": metrics.matthews_corrcoef,
-            "f1": metrics.f1_score,
-        },
+        scoring=SCORING,
         seed=SEED, stratify=True,
         return_train_score=False,
         return_estimator=False,
