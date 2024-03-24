@@ -37,7 +37,7 @@ SCORING = {
     "mcc": scorer.matthews_corrcoef(to_scorer=True),
     "f1": scorer.f1_score(to_scorer=True),
 }
-
+ESTIMATOR = RandomForestClassifier
 # TODO: Youden Index, Precision Recall Curve
 
 def time_fn(lambda_fn):
@@ -224,7 +224,8 @@ def random_forest_search(
     x, y, groups=None, n_split=5,
     stratify=True, seed=SEED, verbose=0,
     scoring=SCORING, n_iter=5, refit="f1", n_jobs=None,
-    class_weight="balanced", random_state=SEED,
+    class_weight="balanced", return_train_score=False,
+    cv_generator=None, random_state=SEED,
     param_criterion=["entropy",],
     param_n_estimators=[20, 30, 40, 60],
     param_max_features=["sqrt"],
@@ -333,14 +334,15 @@ def random_forest_search(
     # Cross-validation object generator
     cv_generator = cv_object(
         n_split=n_split, groups=groups, stratify=stratify, seed=seed
-    )
+    ) if cv_generator is None else cv_generator
 
     # Random search to find best hyperparameters
     random_search = RandomizedSearchCV(
-        estimator=RandomForestClassifier(class_weight=class_weight, random_state=random_state),
+        estimator=ESTIMATOR(class_weight=class_weight, random_state=random_state),
         param_distributions=param_search_cv, 
         n_iter=n_iter, scoring=scoring, cv=cv_generator,
-        refit=refit, n_jobs=n_jobs, verbose=verbose,
+        refit=refit, return_train_score=return_train_score,
+        n_jobs=n_jobs, verbose=verbose,
         random_state=seed
     )
 
@@ -490,6 +492,25 @@ def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
         )
 
     return cv_generator
+
+
+def evaluate_kmodel(x, y, estimator, kfolder, return_train=False):
+    """"""
+    observed_train, predicted_train = np.array([]), np.array([])
+    observed_test, predicted_test = np.array([]), np.array([])
+    for train_idx, test_idx in kfolder:
+        train_x, train_y, test_x, test_y = \
+            x[train_idx], y[train_idx], x[test_idx], y[test_idx]
+        # Predict the labels of the test set samples
+        predicted_test = np.append(predicted_test, estimator.predict(test_x))
+        observed_test = np.append(observed_test, test_y)
+        if return_train:
+            predicted_train = np.append(predicted_train, estimator.predict(train_x))
+            observed_train = np.append(observed_train, train_y)
+    
+    if return_train:
+        return observed_train, predicted_train, observed_test, predicted_test
+    return observed_test, predicted_test
 
 
 def forest_mdi_importance(rf_estimator, colnames, **kwargs):

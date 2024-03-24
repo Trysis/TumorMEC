@@ -1,14 +1,16 @@
 import os
 
 import src.utils.constantes as cst
-import src.processing.dataloader as load
-import src.models.models as models
-import src.models.scorer as scorer
-import src.utils.auxiliary as auxiliary
 import src.utils.summary as summary
+import src.utils.auxiliary as auxiliary
+import src.processing.dataloader as load
+import src.models.scorer as scorer
+import src.models.models as models
+import src.models.display_results as display
 
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plt
 
 # TODO : Save Model
 
@@ -30,14 +32,15 @@ REMOVE_NONE = True  # True or False
 REPLACE_ABERRANT = -3  # Set to None or actual value
 
 # Attributes specifying features, target and sample
-FEATURES = [cst.x_fiber_columns,]
+FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.plus_cmask,]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName",]
 
 # Training regimen
 CV = 2
-N_ITER = 2  # RandomSearch settings sampling number
+N_ITER = 1  # RandomSearch settings sampling number
+CV_TRAIN = True
 SCORING = {
     "accuracy": scorer.accuracy_score(to_scorer=True),
     "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
@@ -82,13 +85,22 @@ rootname, ext = os.path.splitext(filename)
 
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
-    for features_column in FEATURES:
+    for key, features_column in FEATURES.items():
         # Saving output
-        loader_name = f"{rootname}_{target_column}"
+        loader_name = f"{rootname}_{key}_{target_column}"
         loader_dir = auxiliary.create_dir(os.path.join(OUTPUT_DIR, loader_name), add_suffix=False)
+        cv_dir = auxiliary.create_dir(os.path.join(loader_dir, "cv"), add_suffix=False)
+        cv_plot_dir = auxiliary.create_dir(os.path.join(cv_dir, "plots"), add_suffix=False)
         summary_file = os.path.join(loader_dir, "summary.txt")
         hsearch_file = os.path.join(loader_dir, "search_param.csv")
-        e = summary.summarize(
+        hsearch_train_file = os.path.join(cv_dir, "search_param-reduced_train.csv")
+        hsearch_test_file = os.path.join(cv_dir, "search_param-reduced_test.csv")
+        cv_scores_train_file = os.path.join(cv_plot_dir, "cv_scores_train.png")
+        cv_scores_test_file = os.path.join(cv_plot_dir, "cv_scores_test.png")
+        cv_cfmatrix_train_file = os.path.join(cv_plot_dir, "cv_cfmatrix_train.png")
+        cv_cfmatrix_test_file = os.path.join(cv_plot_dir, "cv_cfmatrix_test.png")
+
+        summary.summarize(
             summary.mapped_summary({
                 "Condition": [c.name for c in MASK_CONDITION],
                 "Type": [t.name for t in MASK_TYPE],
@@ -96,13 +108,16 @@ for target_column in TARGETS_COLNAMES:
                 "Fiber": [d.name for d in MASK_DENSITY],
                 "Remove none": REMOVE_NONE,
                 "Replace aberrant": REPLACE_ABERRANT,
+                "SEED": SEED,
             }, map_sep=":"),
             title="Parameters",
             filepath=summary_file, mode="w"
         )
-        f = summary.summarize(
+        summary.summarize(
             summary.mapped_summary({
                 "MODEL": models.ESTIMATOR,
+                "TEST RATIO": TEST_SIZE,
+                "GROUPS": True if SAMPLE_GROUP else False,
                 "Cross-valdiation N-Folds": CV,
                 "RandomSearch N-iter": N_ITER,
                 "Select best model with": FIT_WITH
@@ -134,7 +149,7 @@ for target_column in TARGETS_COLNAMES:
         df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
         mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
 
-        a = summary.df_summary(
+        summary.df_summary(
             x=x, y=y,
             unique_groups=np.unique(groups),
             x_columns=features_column,
@@ -150,23 +165,27 @@ for target_column in TARGETS_COLNAMES:
             x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
         )
         summary.summarize(
-            b := summary.xy_summary(
+            summary.xy_summary(
                 x_train, y_train, unique_groups=np.unique(groups_train), title="Train",
                 x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
             ),
-            c := summary.xy_summary(
+            summary.xy_summary(
                 x_test, y_test, unique_groups=np.unique(groups_test), title="Test",
                 x_label="x_test shape", y_label="y_test shape", groups_label="groups_test",
             ),
             filepath=summary_file
         )
-
+        # Kfold generator
+        cv_generator = models.cv_object(
+            n_split=CV, groups=groups_train, stratify=True, seed=SEED
+        )
         # Hyperparameters search
         search = models.random_forest_search(
             x=x_train, y=y_train.ravel(), groups=groups_train,
             n_split=CV, stratify=True, seed=SEED, verbose=1,
             scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=None,
-            class_weight=TARGETS_WEIGHTS, random_state=SEED,
+            class_weight=TARGETS_WEIGHTS, return_train_score=CV_TRAIN,
+            cv_generator=cv_generator, random_state=SEED,
             param_criterion=hsearch_criterion,
             param_n_estimators=hsearch_n_estimators,
             param_max_features=hsearch_max_features,
@@ -175,13 +194,56 @@ for target_column in TARGETS_COLNAMES:
             param_min_s_leaf=hsearch_min_s_leaf,
             param_bootstrap=hsearch_bootstrap,
         )
+        # TODO : Save selected parameters with scores
         # Save tested parameters
         pd.DataFrame(search.cv_results_).to_csv(hsearch_file)
-        print(search.best_estimator_)
-        print(f"{search.best_score_ = }")
-        print(f"{search.best_index_ = }")
-        print(f"{search.best_params_ = }")
-        
+        ## In clearer format
+        test_scores = {"model": [], "mean": [], "std": [], "rank": [], "score": []}
+        train_scores = {"model": [], "mean": [], "std": [], "score": []}
+        for idx, key in enumerate(SCORING.keys()):
+            key_score = [key] * N_ITER
+            key_model = [i for i in range(N_ITER)]
+            test_scores["model"].extend(key_model)
+            test_scores["mean"].extend(search.cv_results_[f"mean_test_{key}"])
+            test_scores["std"].extend(search.cv_results_[f"std_test_{key}"])
+            test_scores["score"].extend(key_score)
+            test_scores["rank"].extend(search.cv_results_[f"rank_test_{key}"])
+            if CV_TRAIN:
+                train_scores["model"].extend(key_model)
+                train_scores["mean"].extend(search.cv_results_[f"mean_train_{key}"])
+                train_scores["std"].extend(search.cv_results_[f"std_train_{key}"])
+                train_scores["score"].extend(key_score)
+        df_test_scores = pd.DataFrame(test_scores)
+        df_test_scores.to_csv(hsearch_test_file, index=False)
+        display.display_cv_scores(df_test_scores, filepath=cv_scores_test_file, title="CV performances")
+        if CV_TRAIN:
+            df_train_scores = pd.DataFrame(train_scores)
+            df_train_scores.to_csv(hsearch_train_file, index=False)
+            display.display_cv_scores(df_train_scores, filepath=cv_scores_train_file, title="CV performances")
+
+        # CV - Confusion matrix
+        cv_obs_pred_results = models.evaluate_kmodel(
+            x=x_train, y=y_train, estimator=search.best_estimator_,
+            kfolder=cv_generator.split(x_train, y_train.ravel(), groups_train),
+            return_train=CV_TRAIN
+        )
+        if CV_TRAIN:
+            observed_train, predicted_train, observed_test, predicted_test = cv_obs_pred_results
+            display.display_confusion_matrix(
+                observed=observed_train, predicted=predicted_train,
+                labels=None, normalize="true", filepath=cv_cfmatrix_train_file
+            )
+            display.display_confusion_matrix(
+                observed=observed_test, predicted=predicted_test,
+                labels=None, normalize="true", filepath=cv_cfmatrix_test_file
+            )
+        else:
+            observed_test, predicted_test = cv_obs_pred_results
+            display.display_confusion_matrix(
+                observed=observed_test, predicted=predicted_test,
+                labels=None, normalize="true", filepath=cv_cfmatrix_test_file
+            )
+        print(f"{search.best_params_}")
         exit()
 
 
