@@ -509,6 +509,37 @@ def enrich_2_cmask(
     return {key: values.to_numpy().flatten()}
 
 
+def wt_cmask(df=None, key="wild_type", colname="Condition", return_mask=False, return_key=False):
+    """Returns a boolean mask with wild-type class condition
+    
+    df: pandas.DataFrame
+        dataframe containing data
+
+    key: str
+        Dictionnary key name
+
+    colname: str
+        name of the column used for the
+        class condition
+
+    return_mask: bool
+        If True return a mask associated with the target
+        class condition
+
+    Returns: dict
+        A dictionnary with key as column name,
+        and values as target feature values
+
+    """
+    if return_key:
+        return key
+    # Apply target condition
+    mask = df[[colname]] == "WT"
+    if return_mask:
+        return mask
+    values = mask.replace({True: 1, False: 0})
+    return {key: values.to_numpy().flatten()}
+
 if __name__ == "__main__":
     """
     MASK_CONDITION = [cst.WT, cst.KI]

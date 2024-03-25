@@ -16,7 +16,8 @@ import matplotlib.pyplot as plt
 
 # Generic attributes
 SEED = 42
-TEST_SIZE = 0.2
+VAL_SIZE = 0.2
+TEST_SIZE = 0.1
 
 MAIN_DIR = "./"
 OUTPUT_DIR = os.path.join(MAIN_DIR, cst.OUTPUT_DIRNAME)
@@ -33,9 +34,10 @@ REPLACE_ABERRANT = -3  # Set to None or actual value
 
 # Attributes specifying features, target and sample
 FEATURES = {"loc-fract": cst.x_fiber_columns}
-TARGETS = [load.plus_cmask,]
+TARGETS = [load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName",]
+REMOVE_SAMPLE = {"FileName": []}  # TODO
 
 # Training regimen
 CV = 2
@@ -87,18 +89,32 @@ rootname, ext = os.path.splitext(filename)
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
         # Saving output
-        loader_name = f"{rootname}_{key}_{target_column}"
+        loader_name = f"{rootname}_{key}_{target_column}"  # MAIN DIR
+        # dir
         loader_dir = auxiliary.create_dir(os.path.join(OUTPUT_DIR, loader_name), add_suffix=False)
         cv_dir = auxiliary.create_dir(os.path.join(loader_dir, "cv"), add_suffix=False)
         cv_plot_dir = auxiliary.create_dir(os.path.join(cv_dir, "plots"), add_suffix=False)
+        importance_dir = auxiliary.create_dir(os.path.join(loader_dir, "importance"), add_suffix=False)
+        importance_plot_dir = auxiliary.create_dir(os.path.join(importance_dir, "plots"), add_suffix=False)
+        # files
         summary_file = os.path.join(loader_dir, "summary.txt")
         hsearch_file = os.path.join(loader_dir, "search_param.csv")
         hsearch_train_file = os.path.join(cv_dir, "search_param-reduced_train.csv")
-        hsearch_test_file = os.path.join(cv_dir, "search_param-reduced_test.csv")
+        hsearch_val_file = os.path.join(cv_dir, "search_param-reduced_val.csv")
         cv_scores_train_file = os.path.join(cv_plot_dir, "cv_scores_train.png")
-        cv_scores_test_file = os.path.join(cv_plot_dir, "cv_scores_test.png")
+        cv_scores_val_file = os.path.join(cv_plot_dir, "cv_scores_val.png")
         cv_cfmatrix_train_file = os.path.join(cv_plot_dir, "cv_cfmatrix_train.png")
-        cv_cfmatrix_test_file = os.path.join(cv_plot_dir, "cv_cfmatrix_test.png")
+        cv_cfmatrix_val_file = os.path.join(cv_plot_dir, "cv_cfmatrix_val.png")
+        mdi_importance_file = os.path.join(importance_dir, "mean-decrease-impurity.csv")
+        permut_importance_train_file = os.path.join(importance_dir, "permutation_train.csv")
+        permut_importance_test_file = os.path.join(importance_dir, "permutation_test.csv")
+        boruta_importance_train_file = os.path.join(importance_dir, "boruta_train.csv")
+        boruta_importance_test_file = os.path.join(importance_dir, "boruta_test.csv")
+        mdi_plot_file = os.path.join(importance_plot_dir, "mean-decrease-impurity.png")
+        permut_plot_train_file = os.path.join(importance_plot_dir, "permutation_train.png")
+        permut_plot_test_file = os.path.join(importance_plot_dir, "permutation_test.png")
+        boruta_plot_train_file = os.path.join(importance_plot_dir, "boruta_train.png")
+        boruta_plot_test_file = os.path.join(importance_plot_dir, "boruta_test.png")
 
         summary.summarize(
             summary.mapped_summary({
@@ -160,14 +176,22 @@ for target_column in TARGETS_COLNAMES:
             filepath=summary_file
         )
 
-        # Train and Test
-        x_train, x_test, y_train, y_test, groups_train, groups_test = models.split_data(
-            x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
+        # Train, Val, Test
+        x_train, x_val_test, y_train, y_val_test, groups_train, groups_val_test = models.split_data(
+            x, y, groups=groups, n_splits=1, test_size=VAL_SIZE+TEST_SIZE, stratify=True, seed=SEED
+        )
+        x_val, x_test, y_val, y_test, groups_val, groups_test = models.split_data(
+            x_val_test, y_val_test, groups=groups_val_test, n_splits=1,
+            test_size=TEST_SIZE/(VAL_SIZE+TEST_SIZE), stratify=True, seed=SEED
         )
         summary.summarize(
             summary.xy_summary(
                 x_train, y_train, unique_groups=np.unique(groups_train), title="Train",
                 x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
+            ),
+            summary.xy_summary(
+                x_val, y_val, unique_groups=np.unique(groups_val), title="Val",
+                x_label="x_val shape", y_label="y_val shape", groups_label="groups_val",
             ),
             summary.xy_summary(
                 x_test, y_test, unique_groups=np.unique(groups_test), title="Test",
@@ -194,56 +218,108 @@ for target_column in TARGETS_COLNAMES:
             param_min_s_leaf=hsearch_min_s_leaf,
             param_bootstrap=hsearch_bootstrap,
         )
-        # TODO : Save selected parameters with scores
         # Save tested parameters
-        pd.DataFrame(search.cv_results_).to_csv(hsearch_file)
+        idx_search = search.best_index_
+        df_search = pd.DataFrame(search.cv_results_)
+        df_search.to_csv(hsearch_file)
         ## In clearer format
-        test_scores = {"model": [], "mean": [], "std": [], "rank": [], "score": []}
+        val_scores = {"model": [], "mean": [], "std": [], "rank": [], "score": []}
         train_scores = {"model": [], "mean": [], "std": [], "score": []}
         for idx, key in enumerate(SCORING.keys()):
             key_score = [key] * N_ITER
             key_model = [i for i in range(N_ITER)]
-            test_scores["model"].extend(key_model)
-            test_scores["mean"].extend(search.cv_results_[f"mean_test_{key}"])
-            test_scores["std"].extend(search.cv_results_[f"std_test_{key}"])
-            test_scores["score"].extend(key_score)
-            test_scores["rank"].extend(search.cv_results_[f"rank_test_{key}"])
+            val_scores["model"].extend(key_model)
+            val_scores["mean"].extend(search.cv_results_[f"mean_test_{key}"])
+            val_scores["std"].extend(search.cv_results_[f"std_test_{key}"])
+            val_scores["score"].extend(key_score)
+            val_scores["rank"].extend(search.cv_results_[f"rank_test_{key}"])
             if CV_TRAIN:
                 train_scores["model"].extend(key_model)
                 train_scores["mean"].extend(search.cv_results_[f"mean_train_{key}"])
                 train_scores["std"].extend(search.cv_results_[f"std_train_{key}"])
                 train_scores["score"].extend(key_score)
-        df_test_scores = pd.DataFrame(test_scores)
-        df_test_scores.to_csv(hsearch_test_file, index=False)
-        display.display_cv_scores(df_test_scores, filepath=cv_scores_test_file, title="CV performances")
+        df_train_scores = None
+        df_val_scores = pd.DataFrame(val_scores)
+        df_val_scores.to_csv(hsearch_val_file, index=False)
+        display.display_cv_scores(df_val_scores, filepath=cv_scores_val_file, title="CV performances")
         if CV_TRAIN:
             df_train_scores = pd.DataFrame(train_scores)
             df_train_scores.to_csv(hsearch_train_file, index=False)
             display.display_cv_scores(df_train_scores, filepath=cv_scores_train_file, title="CV performances")
 
         # CV - Confusion matrix
-        cv_obs_pred_results = models.evaluate_kmodel(
+        observed_val, predicted_val = models.evaluate_kmodel(
             x=x_train, y=y_train, estimator=search.best_estimator_,
             kfolder=cv_generator.split(x_train, y_train.ravel(), groups_train),
-            return_train=CV_TRAIN
+            return_train=False
+        )
+        display.display_confusion_matrix(
+            observed=observed_val, predicted=predicted_val,
+            labels=None, normalize="true", filepath=cv_cfmatrix_val_file
+        )
+
+        cv_perf_val = dict()
+        cv_perf_train = dict() if CV_TRAIN else None
+        for idx, key in enumerate(SCORING.keys()):
+            cv_perf_val[key] = \
+                f"mean={df_search[f'mean_test_{key}'].iloc[idx_search]:.3f} "u'\u00b1'f" {df_search[f'std_test_{key}'].iloc[idx_search]:.3f}"
+            if CV_TRAIN:
+                cv_perf_train[key] = \
+                    f"mean={df_search[f'mean_train_{key}'].iloc[idx_search]:.3f} "u'\u00b1'f" {df_search[f'std_train_{key}'].iloc[idx_search]:.3f}"
+
+        summary.summarize(
+            summary.arg_summary(
+                "Best parameters",
+                "\n" +
+                summary.mapped_summary(
+                    search.best_params_,
+                    map_sep="=", padding_left=4
+                ),
+                new_line=False
+            ),
+            summary.arg_summary(
+                "Val", "\n" + summary.mapped_summary(cv_perf_val, map_sep="=", padding_left=4),
+                new_line=False
+            ),
+            title="Results",
+            filepath=summary_file
         )
         if CV_TRAIN:
-            observed_train, predicted_train, observed_test, predicted_test = cv_obs_pred_results
-            display.display_confusion_matrix(
-                observed=observed_train, predicted=predicted_train,
-                labels=None, normalize="true", filepath=cv_cfmatrix_train_file
+            summary.arg_summary(
+                "Train", "\n" + summary.mapped_summary(cv_perf_train, map_sep="=", padding_left=4),
+                filepath=summary_file
             )
-            display.display_confusion_matrix(
-                observed=observed_test, predicted=predicted_test,
-                labels=None, normalize="true", filepath=cv_cfmatrix_test_file
-            )
-        else:
-            observed_test, predicted_test = cv_obs_pred_results
-            display.display_confusion_matrix(
-                observed=observed_test, predicted=predicted_test,
-                labels=None, normalize="true", filepath=cv_cfmatrix_test_file
-            )
-        print(f"{search.best_params_}")
+
+        # Feature Importance
+        ## Mean Decrease Impurity
+        df_mdi = pd.DataFrame(
+            models.forest_mdi_importance(rf_estimator=search.best_estimator_, colnames=features_column)
+        )
+        df_mdi.to_csv(mdi_importance_file, index=False)
+        display.display_mdi_importance(mdi_importance=df_mdi, filepath=mdi_plot_file)
+        ## Permutation
+        permutation = models.forest_permutation_importance(
+            estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
+            colnames=features_column, seed=SEED
+        )
+        df_permutation = pd.DataFrame({
+            "importances_mean": permutation["importances_mean"],
+             "importances_std": permutation["importances_std"],
+             "colnames": permutation["colnames"]
+        })
+        df_permutation.to_csv(permut_importance_train_file, index=False)
+        display.display_permutation_importance(df_permutation, filepath=permut_plot_train_file)
+        ## Boruta
+        boruta = models.forest_boruta_importance(
+            estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
+            colnames=features_column, n_trials=30
+        )
+        df_boruta = pd.DataFrame(boruta["feature_hit"])
+        df_boruta.to_csv(boruta_importance_train_file, index=False)
+        display.display_boruta_importance(
+            boruta_importance=df_boruta, treshold=boruta.treshold,
+            n_trials=boruta.n_trials, filepath=boruta_plot_train_file
+        )
         exit()
 
 

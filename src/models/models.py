@@ -718,7 +718,7 @@ def run_boruta(
         feature_hit = {f_name: 0 for f_name in colnames}
 
     for f_name in feature_hit:
-        if f_importances[f_name] > highest_shadow_f:
+        if f_importances[f_name] > shadow_f_importances[highest_shadow_f]:
             feature_hit[f_name] += 1
 
     result = Bunch(

@@ -1,26 +1,40 @@
 import matplotlib.pyplot as plt
 from sklearn.metrics import confusion_matrix
 import numpy as np
+import pandas as pd
 import itertools
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
 
+FIGSIZE = (10, 9)
+
 
 def display_cv_scores(
-    cv_scores, figsize=None,
+    cv_scores, figsize=FIGSIZE, hline=True,
     title="", bottom=-1, top=1, 
     filepath=None, show=False
 ):
+    if isinstance(cv_scores, dict):
+        cv_scores = pd.DataFrame(cv_scores)
+    #
     fig, ax = plt.subplots(figsize=figsize)
-    ax.set_title(title)
     cv_unique = cv_scores["model"].unique()
     for sc in cv_unique:
         cv_score = cv_scores[cv_scores["model"] == sc]
         ax.plot(cv_score["score"], cv_score["mean"], label=f"model {sc}", marker="o")
+    if hline:
+        ax.axhline(0.5, color="g", linestyle="--")
+        ax.axhline(0, color="b", linestyle="--")
     ax.set_ylim(bottom, top)
-    ax.set_xticklabels(cv_scores["score"], rotation=45, ha='right')
+    ax.set_xticks([i for i in range(len(cv_score))])
+    ax.set_xticklabels(
+        cv_score["score"], rotation=45,
+        ha='right', rotation_mode='anchor'
+    )
+    ax.set_title(title)
     ax.legend()
+    fig.tight_layout()
     if filepath is not None:
         fig.savefig(filepath)
     if show:
@@ -30,7 +44,7 @@ def display_cv_scores(
 
 def display_confusion_matrix(
     observed, predicted, labels=None, cmap="Blues",
-    normalize=False, figsize=None, title="",
+    normalize=False, figsize=FIGSIZE, title="",
     by_col=True, filepath=None, show=False
 ):
     """"""
@@ -45,7 +59,7 @@ def display_confusion_matrix(
         else plt.subplots(1, 2, figsize=figsize) if by_col
         else plt.subplots(2, 1, figsize=figsize)
     )
-    ax, ax_norm = ax, None if not normalize else ax[0], ax[1]
+    ax, ax_norm = (ax, None) if not normalize else (ax[0], ax[1])
     im = ax.imshow(cf_matrix, interpolation='nearest', cmap=plt.get_cmap(cmap))
     im_norm = None
     if normalize:
@@ -54,6 +68,9 @@ def display_confusion_matrix(
     tick_marks = np.arange(len(labels))
     ax.set_xticks(tick_marks, labels, rotation=45)
     ax.set_yticks(tick_marks, labels)
+    if normalize:
+        ax_norm.set_xticks(tick_marks, labels, rotation=45)
+        ax_norm.set_yticks(tick_marks, labels)
     # Format
     fmt = '.2f' if normalize else 'd'
     thresh = cf_matrix.max() / 2.
@@ -83,6 +100,87 @@ def display_confusion_matrix(
         plt.show()
 
     return fig, ax
+
+
+def display_mdi_importance(
+    mdi_importance, figsize=FIGSIZE,
+    title="Feature importances using MDI",
+    ylabel="Mean decrease in impurity",
+    filepath=None, show=False
+):
+    """mdi_importance: pandas.DataFrame, or dict"""
+    if isinstance(mdi_importance, dict):
+        mdi_importance = pd.DataFrame(mdi_importance)
+    #
+    mean_values = mdi_importance["importances_mean"]
+    std_values = mdi_importance["importances_std"]
+    x_values = mdi_importance["colnames"]
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.bar(x_values, mean_values, yerr=std_values, align="center", ecolor="black")
+    ax.set_xticks([i for i in range(len(x_values))])
+    ax.set_xticklabels(
+        x_values, rotation=45,
+        ha='right', rotation_mode='anchor'
+    )
+    ax.set_title(title)
+    ax.set_ylabel(ylabel)
+    fig.tight_layout()
+    if filepath is not None:
+        fig.savefig(filepath)
+    if show:
+        plt.show()
+
+    return fig, ax
+
+
+def display_permutation_importance(
+    permutation_importance, figsize=FIGSIZE,
+    title="Feature importances using permutation",
+    ylabel="Mean accuracy decrease",
+    filepath=None, show=False
+):
+    """"""
+    fig, ax = display_mdi_importance(
+        mdi_importance=permutation_importance,
+        figsize=figsize, title=title, ylabel=ylabel,
+        filepath=filepath, show=show
+    )
+    return fig, ax
+
+
+def display_boruta_importance(
+    boruta_importance, treshold, n_trials,
+    figsize=FIGSIZE, title="", ylabel="Number of Hit",
+    lower_color="r", upper_color="g",
+    filepath=None, show=False
+):
+    """"""
+    if isinstance(boruta_importance, dict):
+        boruta_importance = pd.DataFrame(boruta_importance)
+    #
+    lower_treshold = treshold
+    upper_treshold = n_trials - treshold
+    count_values = list(boruta_importance["feature_hit"].values())
+    x_values = list(boruta_importance["feature_hit"].keys())
+    fig, ax = plt.subplots(figsize=figsize)
+    ax.bar(x_values, count_values, align="center")
+    ax.set_xticks([i for i in range(len(x_values))])
+    ax.set_xticklabels(
+        x_values, rotation=45,
+        ha='right', rotation_mode='anchor'
+    )
+    ax.axhline(upper_treshold, color=upper_color, linestyle="--")
+    ax.axhline(lower_treshold, color=lower_color, linestyle="--")
+    ax.set_title(title)
+    ax.set_ylabel(ylabel)
+    fig.tight_layout()
+    if filepath is not None:
+        fig.savefig(filepath)
+    if show:
+        plt.show()
+
+    return fig, ax
+
 
 def x(x_test=None, y_test=None,
     colnames=None, ):
