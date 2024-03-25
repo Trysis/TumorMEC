@@ -155,8 +155,6 @@ def display_boruta_importance(
     filepath=None, show=False
 ):
     """"""
-    if isinstance(boruta_importance, dict):
-        boruta_importance = pd.DataFrame(boruta_importance)
     #
     lower_treshold = treshold
     upper_treshold = n_trials - treshold

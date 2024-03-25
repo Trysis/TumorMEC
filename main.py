@@ -107,13 +107,17 @@ for target_column in TARGETS_COLNAMES:
         cv_cfmatrix_val_file = os.path.join(cv_plot_dir, "cv_cfmatrix_val.png")
         mdi_importance_file = os.path.join(importance_dir, "mean-decrease-impurity.csv")
         permut_importance_train_file = os.path.join(importance_dir, "permutation_train.csv")
+        permut_importance_val_file = os.path.join(importance_dir, "permutation_val.csv")
         permut_importance_test_file = os.path.join(importance_dir, "permutation_test.csv")
         boruta_importance_train_file = os.path.join(importance_dir, "boruta_train.csv")
+        boruta_importance_val_file = os.path.join(importance_dir, "boruta_val.csv")
         boruta_importance_test_file = os.path.join(importance_dir, "boruta_test.csv")
         mdi_plot_file = os.path.join(importance_plot_dir, "mean-decrease-impurity.png")
         permut_plot_train_file = os.path.join(importance_plot_dir, "permutation_train.png")
+        permut_plot_val_file = os.path.join(importance_plot_dir, "permutation_val.png")
         permut_plot_test_file = os.path.join(importance_plot_dir, "permutation_test.png")
         boruta_plot_train_file = os.path.join(importance_plot_dir, "boruta_train.png")
+        boruta_plot_val_file = os.path.join(importance_plot_dir, "boruta_val.png")
         boruta_plot_test_file = os.path.join(importance_plot_dir, "boruta_test.png")
 
         summary.summarize(
@@ -278,7 +282,7 @@ for target_column in TARGETS_COLNAMES:
                 new_line=False
             ),
             summary.arg_summary(
-                "Val", "\n" + summary.mapped_summary(cv_perf_val, map_sep="=", padding_left=4),
+                "CV Val", "\n" + summary.mapped_summary(cv_perf_val, map_sep="=", padding_left=4),
                 new_line=False
             ),
             title="Results",
@@ -286,7 +290,7 @@ for target_column in TARGETS_COLNAMES:
         )
         if CV_TRAIN:
             summary.arg_summary(
-                "Train", "\n" + summary.mapped_summary(cv_perf_train, map_sep="=", padding_left=4),
+                "CV Train", "\n" + summary.mapped_summary(cv_perf_train, map_sep="=", padding_left=4),
                 filepath=summary_file
             )
 
@@ -298,17 +302,30 @@ for target_column in TARGETS_COLNAMES:
         df_mdi.to_csv(mdi_importance_file, index=False)
         display.display_mdi_importance(mdi_importance=df_mdi, filepath=mdi_plot_file)
         ## Permutation
-        permutation = models.forest_permutation_importance(
+        ### Train
+        permutation_train = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
             colnames=features_column, seed=SEED
         )
-        df_permutation = pd.DataFrame({
-            "importances_mean": permutation["importances_mean"],
-             "importances_std": permutation["importances_std"],
-             "colnames": permutation["colnames"]
+        df_permutation_train = pd.DataFrame({
+            "importances_mean": permutation_train["importances_mean"],
+            "importances_std": permutation_train["importances_std"],
+            "colnames": permutation_train["colnames"]
         })
-        df_permutation.to_csv(permut_importance_train_file, index=False)
-        display.display_permutation_importance(df_permutation, filepath=permut_plot_train_file)
+        df_permutation_train.to_csv(permut_importance_train_file, index=False)
+        display.display_permutation_importance(df_permutation_train, filepath=permut_plot_train_file)
+        ### Val
+        permutation_val = models.forest_permutation_importance(
+            estimator=search.best_estimator_, x=x_val, y=y_val.ravel(),
+            colnames=features_column, seed=SEED
+        )
+        df_permutation_val = pd.DataFrame({
+            "importances_mean": permutation_val["importances_mean"],
+            "importances_std": permutation_val["importances_std"],
+            "colnames": permutation_val["colnames"]
+        })
+        df_permutation_val.to_csv(permut_importance_val_file, index=False)
+        display.display_permutation_importance(df_permutation_val, filepath=permut_plot_val_file)
         ## Boruta
         boruta = models.forest_boruta_importance(
             estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
@@ -317,11 +334,11 @@ for target_column in TARGETS_COLNAMES:
         df_boruta = pd.DataFrame(boruta["feature_hit"])
         df_boruta.to_csv(boruta_importance_train_file, index=False)
         display.display_boruta_importance(
-            boruta_importance=df_boruta, treshold=boruta.treshold,
+            boruta_importance=boruta["feature_hit"], treshold=boruta.treshold,
             n_trials=boruta.n_trials, filepath=boruta_plot_train_file
         )
-        exit()
 
+        # TODO : Val & Test results
 
 if __name__ == "__main__":
     """
