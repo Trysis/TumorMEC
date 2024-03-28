@@ -1,0 +1,96 @@
+---------------------------------------- Parameters ----------------------------------------
+
+Condition        : ['KI']
+Type             : ['LY6']
+Tumor            : ['IN-TUMOR']
+Fiber            : ['FIBER']
+Remove none      : True
+Replace aberrant : -3
+SEED             : 42
+
+-------------------- Training regiment --------------------
+
+MODEL                    : <class 'sklearn.ensemble._forest.RandomForestClassifier'>
+TEST RATIO               : 0.3
+GROUPS                   : True
+Cross-validation N-Folds : 8
+RandomSearch N-iter      : 50
+Select best model with   : f1
+
+Scoring : 
+    accuracy          ==> make_scorer(accuracy_score)
+    balanced_accuracy ==> make_scorer(balanced_accuracy_score)
+    precision         ==> make_scorer(precision_score)
+    recall            ==> make_scorer(recall_score)
+    auc               ==> make_scorer(roc_auc_score)
+    mcc               ==> make_scorer(matthews_corrcoef)
+    f1                ==> make_scorer(f1_score)
+
+Hyperparameters search : 
+    Criterion        = ['entropy']
+    N-Tree           = [20, 30, 40, 60, 80]
+    N-Features       = ['sqrt']
+    Max depths       = [2, 4, 8, 10, 15, 20]
+    Min sample split = [2, 4, 16, 24, 32]
+    Min sample leaf  = [1, 3, 5]
+    Bootstrap        = [False, True]
+
+---------------------------------------- DataFrame ----------------------------------------
+
+x shape    : 183717 lines, 34 columns
+y shape    : 183717 lines, 1 columns
+y count : 
+    0 ==> 118977
+    1 ==> 64740
+
+groups     : 0   1   2   3   4   5   6   7   8   9   10  11  12  
+
+./12a_MKI152_Ly6G_SHG.tif                          ==> 0
+./12c_ZF_ MAX_12c_MKI857_Ly6G_SHG.tif              ==> 1
+./FKI_140_left_bottom_Ly6GFITC.tif_max.tif_SHG.tif ==> 2
+./FKI_859_left_Ly6GFITC.tif_max.tif_SHG.tif        ==> 3
+./FKI_860bis_left_Ly6GFITC.tif_max.tif_SHG.tif     ==> 5
+./FKI_860_Ly6GFITC.tif_max.tif_SHG.tif             ==> 4
+./MAX_ 12a_FKI158_Ly6G_SHG.tif                     ==> 6
+./MAX_ 12a_FWT156_Ly6G_SHG.tif                     ==> 7
+./MAX_12b_FKI192_Ly6G_SHG.tif                      ==> 8
+./MAX_12b_FKI194_Ly6G_SHG.tif                      ==> 9
+./MAX_12b_FKI332_Ly6G_SHG.tif                      ==> 10
+./MAX_12b_MKI185_Ly6G_SHG.tif                      ==> 11
+./MAX_12b_MKI188_Ly6G_SHG.tif                      ==> 12
+
+x_columns : 
+Angle20             Coherency20         Energy20            MeanInt20           VarInt20            
+Density20           VarDensity20        OrientationRef20    Angle60             Coherency60         
+Energy60            MeanInt60           VarInt60            Density60           VarDensity60        
+OrientationRef60    Angle100            Coherency100        Energy100           MeanInt100          
+VarInt100           Density100          VarDensity100       OrientationRef100   Angle140            
+Coherency140        Energy140           MeanInt140          VarInt140           Density140          
+VarDensity140       OrientationRef140   Dist                Frac                
+
+y_columns : 
+enrich_2   
+
+grouped by : 
+FileName   
+
+-------------------- Train --------------------
+
+x_train shape : 118464 lines, 34 columns
+y_train shape : 118464 lines, 1 columns
+y count : 
+    0 ==> 76442
+    1 ==> 42022
+
+groups_train : 1   2   3   4   5   6   7   10  12  
+
+-------------------- Test --------------------
+
+x_test shape : 65253 lines, 34 columns
+y_test shape : 65253 lines, 1 columns
+y count : 
+    0 ==> 42535
+    1 ==> 22718
+
+groups_test : 0   8   9   11  
+

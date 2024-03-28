@@ -168,8 +168,8 @@ class DataLoader:
                     default_filepath = default_name if os.path.isfile(default_name) else os.path.join(self.data_dir, default_name)
                     if os.path.isfile(default_filepath):
                         df_tmp = pd.read_csv(default_filepath, sep=separator, low_memory=False, **kwargs)
-                        if condition == "KI":  # replace 'CD64-hDTR' with 'KI'
-                            df_tmp.loc[df_tmp["Condition"] == "CD64-hDTR", "Condition"] = "KI" 
+                        if "KI" in condition:  # replace 'CD64-hDTR' with 'KI'
+                            df_tmp["Condition"].replace("CD64-hDTR", "KI", inplace=True)
                         dframes.append(df_tmp)
                     else:
                         raise Exception(f"In default_file: filename={default_filepath} not found\n"
@@ -177,7 +177,7 @@ class DataLoader:
                                         "in {data_dir} or a valid path to a file")
 
         # Concatenate the specified files
-        dataframe = pd.concat(dframes) if dataframe is None else dataframe
+        dataframe = pd.concat(dframes, ignore_index=True) if dataframe is None else dataframe
 
         # Apply types
         if type is not None:
@@ -396,7 +396,7 @@ def arg_mask(df, arg=None):
 
 
 # Functions
-def plus_cmask(df=None, key="t_plus", colname="Cells100um", return_mask=False, return_key=False):
+def plus_cmask(df=None, key="plus", colname="Cells100um", return_mask=False, return_key=False):
     """Returns a boolean mask with t-plus class condition
     
     df: pandas.DataFrame
@@ -429,7 +429,7 @@ def plus_cmask(df=None, key="t_plus", colname="Cells100um", return_mask=False, r
 
 
 def enrich_cmask(
-        df=None, key="t_enrich", colname="Cells100um",
+        df=None, key="enrich", colname="Cells100um",
         fn=np.mean, return_mask=False, return_key=False
     ):
     """Returns a boolean mask with enriched class condition
@@ -468,7 +468,7 @@ def enrich_cmask(
     return {key: values.to_numpy().flatten()}
 
 def enrich_2_cmask(
-    df=None, key="t_enrich_2", mask_plus=None, colname="Cells100um",
+    df=None, key="enrich_2", mask_plus=None, colname="Cells100um",
     fn=np.mean, return_mask=False, return_key=False
 ):
     """Returns a boolean mask with enriched_2 class condition

@@ -1,3 +1,4 @@
+import numpy as np
 from . import auxiliary
 
 FORMAT_STR = "-"
@@ -68,7 +69,7 @@ def mapped_summary(
     padding = select_padding(padding, list(map.keys()))
     padding_left = select_padding(padding_left)
     for key, val in map.items():
-        line_value = f"{'':<{padding_left}s}{key:<{padding}s} {map_sep} {val}\n"
+        line_value = f"{'':<{padding_left}s}{str(key):<{padding}s} {map_sep} {val}\n"
         if label is None:
             to_write += line_value
         else:
@@ -99,8 +100,8 @@ def xy_summary(
         x, y, unique_groups=None, title=None,
         x_label="x shape", y_label="y shape",
         groups_label="groups", group_spacing=2,
-        padding=10, new_line=False,
-        filepath=None, mode="a"
+        padding=10, new_line=False, classif=True,
+        classif_pad_left=4, filepath=None, mode="a"
     ):
     """"""
     if x_label is None:
@@ -118,6 +119,10 @@ def xy_summary(
     if y is not None:
         y_shape_formated = f"{y.shape[0]} lines, {y.shape[1]} columns"
         y_shape_str = arg_summary(y_label, y_shape_formated, padding=padding)
+        if classif:
+            unique, counts = np.unique(y, return_counts=True)
+            dict_count = dict(zip(unique, counts))
+            y_shape_str += arg_summary("y count","\n" + mapped_summary(dict_count, padding_left=classif_pad_left))
     if unique_groups is not None:
         groups_formated = auxiliary.format_by_rows(
             unique_groups, ncol=len(unique_groups), spacing=group_spacing

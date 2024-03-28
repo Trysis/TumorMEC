@@ -1,0 +1,126 @@
+---------------------------------------- Parameters ----------------------------------------
+
+Condition        : ['KI']
+Type             : ['CD3']
+Tumor            : ['IN-TUMOR']
+Fiber            : ['FIBER']
+Remove none      : True
+Replace aberrant : -3
+SEED             : 42
+
+-------------------- Training regiment --------------------
+
+MODEL                    : <class 'sklearn.ensemble._forest.RandomForestClassifier'>
+TEST RATIO               : 0.1
+GROUPS                   : True
+Cross-valdiation N-Folds : 10
+RandomSearch N-iter      : 50
+Select best model with   : f1
+
+Scoring : 
+    accuracy          ==> make_scorer(accuracy_score)
+    balanced_accuracy ==> make_scorer(balanced_accuracy_score)
+    precision         ==> make_scorer(precision_score)
+    recall            ==> make_scorer(recall_score)
+    auc               ==> make_scorer(roc_auc_score)
+    mcc               ==> make_scorer(matthews_corrcoef)
+    f1                ==> make_scorer(f1_score)
+
+Hyperparameters search : 
+    Criterion        = ['entropy']
+    N-Tree           = [20, 30, 40, 60, 80]
+    N-Features       = ['sqrt']
+    Max depths       = [2, 4, 8, 10, 15, 20]
+    Min sample split = [2, 4, 16, 24, 32]
+    Min sample leaf  = [1, 3, 5]
+    Bootstrap        = [False, True]
+
+---------------------------------------- DataFrame ----------------------------------------
+
+x shape    : 313493 lines, 34 columns
+y shape    : 313493 lines, 1 columns
+groups     : 0   1   2   3   4   5   6   7   8   9   10  11  12  13  14  15  16  17  18  19  
+
+./12a_MKI152_CD3_SHG.tif                                        ==> 0
+./12c_MKI138_CD3eFITC_SHG_phal546_F480647.tif_SHG.tif           ==> 1
+./12c_ZF_ MAX_12c_MKI856_CD3FITC_SHG.tif                        ==> 2
+./12c_ZF_ MAX_12c_MKI857_CD3FITC_SHG.tif                        ==> 3
+./FKI_140_left_bottom_CD3FITC.tif_max.tif_SHG.tif               ==> 4
+./FKI_141_bottom_CD3FITC_F480_AF647_Phal546.tif_max.tif_SHG.tif ==> 5
+./FKI_860bis_left_CD3FITC.tif_max.tif_SHG.tif                   ==> 7
+./FKI_860_CD3FITC.tif_max.tif_SHG.tif                           ==> 6
+./MAX_ 12a_FKI158_CD3_SHG.tif                                   ==> 8
+./MAX_ 12a_MKI353_CD3_SHG.tif                                   ==> 9
+./MAX_12b_183_CD3eFITC_SHG.tif                                  ==> 10
+./MAX_12b_188_CD3eFITC.tif_SHG.tif                              ==> 11
+./MAX_12b_FKI192_CD3_SHG.tif                                    ==> 12
+./MAX_12b_FKI193_CD3_SHG.tif                                    ==> 13
+./MAX_12b_FKI194_CD3_SHG.tif                                    ==> 14
+./MAX_12b_FKI332_CD3_SHG.tif                                    ==> 15
+./MAX_12b_MKI183_CD3eFITC_SHG.tif                               ==> 16
+./MAX_12b_MKI185_CD3_SHG.tif                                    ==> 17
+./MKI139_CD3eFITC_SHG.tif                                       ==> 18
+./MKI855_CD3_SHG_HyD3_laser_10 - Copie.tif_SHG.tif              ==> 19
+
+x_columns : 
+Angle20             Coherency20         Energy20            MeanInt20           VarInt20            
+Density20           VarDensity20        OrientationRef20    Angle60             Coherency60         
+Energy60            MeanInt60           VarInt60            Density60           VarDensity60        
+OrientationRef60    Angle100            Coherency100        Energy100           MeanInt100          
+VarInt100           Density100          VarDensity100       OrientationRef100   Angle140            
+Coherency140        Energy140           MeanInt140          VarInt140           Density140          
+VarDensity140       OrientationRef140   Dist                Frac                
+
+y_columns : 
+plus   
+
+grouped by : 
+FileName   
+
+-------------------- Train --------------------
+
+x_train shape : 192074 lines, 34 columns
+y_train shape : 192074 lines, 1 columns
+groups_train : 2   3   4   6   7   9   10  12  13  14  16  18  19  
+
+-------------------- Val --------------------
+
+x_val shape : 78860 lines, 34 columns
+y_val shape : 78860 lines, 1 columns
+groups_val : 5   8   11  17  
+
+-------------------- Test --------------------
+
+x_test shape : 42559 lines, 34 columns
+y_test shape : 42559 lines, 1 columns
+groups_test : 0   1   15  
+
+---------------------------------------- Results ----------------------------------------
+
+Best parameters : 
+    n_estimators      = 40
+    min_samples_split = 4
+    min_samples_leaf  = 1
+    max_features      = sqrt
+    max_depth         = 20
+    criterion         = entropy
+    bootstrap         = True
+
+CV Val : 
+    accuracy          = mean=0.599 ± 0.243
+    balanced_accuracy = mean=0.533 ± 0.140
+    precision         = mean=0.727 ± 0.263
+    recall            = mean=0.701 ± 0.217
+    auc               = mean=0.533 ± 0.140
+    mcc               = mean=0.074 ± 0.273
+    f1                = mean=0.675 ± 0.220
+
+CV Train : 
+    accuracy          = mean=0.975 ± 0.005
+    balanced_accuracy = mean=0.978 ± 0.004
+    precision         = mean=0.994 ± 0.002
+    recall            = mean=0.971 ± 0.008
+    auc               = mean=0.978 ± 0.004
+    mcc               = mean=0.942 ± 0.009
+    f1                = mean=0.982 ± 0.004
+

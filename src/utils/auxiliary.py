@@ -230,6 +230,8 @@ def format_by_rows(array, ncol=1, spacing=3):
         return ""
     if isinstance(array, (int, bool, float, str)):
         array = [array]
+    if len(array) == 0:
+        return ""
     arr_str = [f"{value}" for value in array]
     arr_len = [len(value) for value in arr_str]
     max_len = max(arr_len)

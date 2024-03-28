@@ -410,7 +410,7 @@ def cross_validation(
         split ?
 
     kwargs: dict
-        supplementary argument
+        supplementary key word argument
 
     Returns: dict
         Dictionnary containing the different
@@ -494,7 +494,14 @@ def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
     return cv_generator
 
 
-def evaluate_kmodel(x, y, estimator, kfolder, return_train=False):
+def predict_model(x, y, estimator):
+    """Predict y with a given model"""
+    observed = y
+    predicted = estimator.predict(x)
+    return observed, predicted
+
+
+def predict_kmodel(x, y, estimator, kfolder, return_train=False):
     """"""
     observed_train, predicted_train = np.array([]), np.array([])
     observed_test, predicted_test = np.array([]), np.array([])
@@ -511,6 +518,49 @@ def evaluate_kmodel(x, y, estimator, kfolder, return_train=False):
     if return_train:
         return observed_train, predicted_train, observed_test, predicted_test
     return observed_test, predicted_test
+
+
+def scorer_model(estimator, x, y, scorer, y_pred=None, **kwargs):
+    """ Returns the score associated with the estimator prediction
+    on data.
+
+    estimator: 
+        A sklearn-like model with predict, fit, (...) functions
+ 
+    x: numpy.ndarray
+        input features
+
+    y: numpy.ndarray
+        target data
+
+    scorer: callable or dict({key: callable, ...})
+        Scorer function(s) to apply between the predicted and
+        observed {y} values
+
+    y_pred: numpy.ndarray ,optional
+        Optional already predicted y value from {x}
+
+    **kwargs:
+        Key word optional argument to provide to scorer(s) functions
+
+    Returns: dict
+        Dictionnary containing as key provided scorer names,
+        and as value the associated score. It returns {"score": value}
+        if only a callable is provided.
+
+    """
+    observed, predicted = predict_model(x, y, estimator) if y_pred is None \
+        else y, y_pred
+    #
+    returned_score = dict()
+    if callable(scorer):
+        scorer = {"score": scorer}
+    for key, to_call in scorer:
+        returned_score[key] = to_call(
+            y_true=observed, y_pred=predicted, **kwargs
+        )
+
+    return returned_score
 
 
 def forest_mdi_importance(rf_estimator, colnames, **kwargs):
