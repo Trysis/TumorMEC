@@ -35,8 +35,11 @@ REPLACE_ABERRANT = -3  # Set to None or actual value
 FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
-SAMPLE_GROUP = ["FileName",]  # TODO : Replace by None
+SAMPLE_GROUP = []  # TODO : Replace by None
 REMOVE_SAMPLE = {"FileName": []}  # TODO
+
+## Process
+SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
 
 # TODO : WT-KI, CD3 & LY6
 
@@ -92,7 +95,6 @@ dataframe = loader.load_data(
 
 filename = loader.filename_from_mask()
 rootname, ext = os.path.splitext(filename)
-
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
@@ -186,10 +188,11 @@ for target_column in TARGETS_COLNAMES:
         x, y, groups = models.split_xy(
             df=dataframe, x_columns=features_column, y_columns=target_column, groups=SAMPLE_GROUP
         )
-
-        label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
-        df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
-        mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
+        mapped_groups = None
+        if SAMPLE_GROUP:
+            label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
+            df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
+            mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
 
         summary.df_summary(
             x=x, y=y,
@@ -206,14 +209,15 @@ for target_column in TARGETS_COLNAMES:
         x_train, x_test, y_train, y_test, groups_train, groups_test = models.split_data(
             x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
         )
-
+        u_groups_train = np.unique(groups_train)
+        u_groups_test = np.unique(groups_test)
         summary.summarize(
             summary.xy_summary(
-                x_train, y_train, unique_groups=np.unique(groups_train), title="Train",
+                x_train, y_train, unique_groups=u_groups_train, title="Train",
                 x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
             ),
             summary.xy_summary(
-                x_test, y_test, unique_groups=np.unique(groups_test), title="Test",
+                x_test, y_test, unique_groups=u_groups_test, title="Test",
                 x_label="x_test shape", y_label="y_test shape", groups_label="groups_test",
             ),
             filepath=summary_file
