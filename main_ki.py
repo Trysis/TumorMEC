@@ -59,6 +59,15 @@ SCORING = {
     "mcc": scorer.matthews_corrcoef(to_scorer=True),
     "f1": scorer.f1_score(to_scorer=True),
 }
+SCORING_base = {
+    "accuracy": scorer.accuracy_score(to_scorer=False),
+    "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=False),
+    "precision": scorer.precision_score(to_scorer=False),
+    "recall": scorer.recall_score(to_scorer=False),
+    "auc": scorer.roc_auc_score(to_scorer=False),
+    "mcc": scorer.matthews_corrcoef(to_scorer=False),
+    "f1": scorer.f1_score(to_scorer=False),
+}
 FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
@@ -334,7 +343,7 @@ for target_column in TARGETS_COLNAMES:
         ## Train
         train_scores = models.scorer_model(
             estimator=search.best_estimator_,
-            x=x_train, y=y_train, scorer=SCORING
+            x=x_train, y=y_train, scorer=SCORING_base
         )
         summary.arg_summary(
             "Train", "\n" + summary.mapped_summary(
@@ -346,7 +355,7 @@ for target_column in TARGETS_COLNAMES:
         ## Test
         test_scores = models.scorer_model(
             estimator=search.best_estimator_,
-            x=x_test, y=y_test, scorer=SCORING
+            x=x_test, y=y_test, scorer=SCORING_base
         )
         summary.arg_summary(
             "Test", "\n" + summary.mapped_summary(
