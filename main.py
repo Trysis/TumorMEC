@@ -42,6 +42,7 @@ REMOVE_SAMPLE = {"FileName": []}  # TODO
 
 # Training regimen
 CV = 8
+N_PROCESS = max(CV//2, 1)
 N_ITER = 50  # RandomSearch settings sampling number
 CV_TRAIN = True
 TRAIN = True
@@ -225,7 +226,7 @@ for target_column in TARGETS_COLNAMES:
         search = models.random_forest_search(
             x=x_train, y=y_train.ravel(), groups=groups_train,
             n_split=CV, stratify=True, seed=SEED, verbose=1,
-            scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=None,
+            scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=N_PROCESS,
             class_weight=TARGETS_WEIGHTS, return_train_score=CV_TRAIN,
             cv_generator=cv_generator, random_state=SEED,
             param_criterion=hsearch_criterion,
@@ -380,7 +381,7 @@ for target_column in TARGETS_COLNAMES:
         permutation_train = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
             scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-            colnames=features_column, seed=SEED
+            colnames=features_column, n_jobs=N_PROCESS, seed=SEED
         )
         raw_permutation_train = pd.DataFrame(permutation_train.importances.T, columns=features_column)
         df_permutation_train = pd.DataFrame({
@@ -393,11 +394,11 @@ for target_column in TARGETS_COLNAMES:
         display.display_permutation_importance(df_permutation_train, filepath=permut_plot_train_file)
         display.display_raw_importance(raw_permutation_train, filepath=permut_plot_train_boxplot_file)
         display.display_raw_importance(raw_permutation_train, violin=True, filepath=permut_plot_train_violin_file)
-        ### Test  # TODO : raw_permut test
+        ### Test
         permutation_test = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_test, y=y_test.ravel(),
             scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-            colnames=features_column, seed=SEED
+            colnames=features_column,  n_jobs=N_PROCESS, seed=SEED
         )
         raw_permutation_test = pd.DataFrame(permutation_test.importances.T, columns=features_column)
         df_permutation_test = pd.DataFrame({

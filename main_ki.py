@@ -35,11 +35,14 @@ REPLACE_ABERRANT = -3  # Set to None or actual value
 FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
-SAMPLE_GROUP = ["FileName",]
+SAMPLE_GROUP = ["FileName",]  # TODO : Replace by None
 REMOVE_SAMPLE = {"FileName": []}  # TODO
+
+# TODO : WT-KI, CD3 & LY6
 
 # Training regimen
 CV = 8
+N_PROCESS = max(CV//2, 1)
 N_ITER = 50  # RandomSearch settings sampling number
 CV_TRAIN = True
 TRAIN = True
@@ -62,7 +65,7 @@ hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [2, 4, 8, 10, 15, 20]
 hsearch_min_s_split = [2, 4, 16, 24, 32]
 hsearch_min_s_leaf = [1, 3, 5]
-hsearch_bootstrap = [False, True]
+hsearch_bootstrap = [True]
 
 # Importances attributes
 N_PERM = 30
@@ -223,7 +226,7 @@ for target_column in TARGETS_COLNAMES:
         search = models.random_forest_search(
             x=x_train, y=y_train.ravel(), groups=groups_train,
             n_split=CV, stratify=True, seed=SEED, verbose=1,
-            scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=None,
+            scoring=SCORING, n_iter=N_ITER, refit=FIT_WITH, n_jobs=N_PROCESS,
             class_weight=TARGETS_WEIGHTS, return_train_score=CV_TRAIN,
             cv_generator=cv_generator, random_state=SEED,
             param_criterion=hsearch_criterion,
@@ -277,7 +280,7 @@ for target_column in TARGETS_COLNAMES:
         )
 
         cv_perf_val, cv_perf_str_val = dict(), dict()
-        cv_perf_train, cv_perf_str_train = dict(), dict() if CV_TRAIN else None, None
+        cv_perf_train, cv_perf_str_train = (dict(), dict()) if CV_TRAIN else (None, None)
         for idx, key in enumerate(SCORING.keys()):  # TODO: Save a raw output of mean, std of best model in Train/Val
             key_mean_val = df_search[f'mean_test_{key}'].iloc[idx_search]
             key_std_val = df_search[f'std_test_{key}'].iloc[idx_search]
@@ -378,7 +381,7 @@ for target_column in TARGETS_COLNAMES:
         permutation_train = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
             scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-            colnames=features_column, seed=SEED
+            colnames=features_column, n_jobs=N_PROCESS, seed=SEED
         )
         raw_permutation_train = pd.DataFrame(permutation_train.importances.T, columns=features_column)
         df_permutation_train = pd.DataFrame({
@@ -391,11 +394,11 @@ for target_column in TARGETS_COLNAMES:
         display.display_permutation_importance(df_permutation_train, filepath=permut_plot_train_file)
         display.display_raw_importance(raw_permutation_train, filepath=permut_plot_train_boxplot_file)
         display.display_raw_importance(raw_permutation_train, violin=True, filepath=permut_plot_train_violin_file)
-        ### Test  # TODO : raw_permut test
+        ### Test
         permutation_test = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_test, y=y_test.ravel(),
             scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-            colnames=features_column, seed=SEED
+            colnames=features_column,  n_jobs=N_PROCESS, seed=SEED
         )
         raw_permutation_test = pd.DataFrame(permutation_test.importances.T, columns=features_column)
         df_permutation_test = pd.DataFrame({

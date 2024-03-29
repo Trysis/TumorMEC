@@ -851,6 +851,7 @@ def select_feature_hit(feature_hit, n_trials, prob=0.5, alpha=0.05):
     return result
 
 
+# TODO : Multiprocessing (n_jobs)
 def forest_boruta_importance(estimator, x, y, colnames, n_trials=50, alpha=0.05):
     """Compute boruta importance on the given estimator.
 
