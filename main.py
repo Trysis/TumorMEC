@@ -64,7 +64,7 @@ hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [2, 4, 8, 10, 15, 20]
 hsearch_min_s_split = [2, 4, 16, 24, 32]
 hsearch_min_s_leaf = [1, 3, 5]
-hsearch_bootstrap = [False, True]
+hsearch_bootstrap = [True]
 
 # Importances attributes
 N_PERM = 30

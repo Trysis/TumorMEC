@@ -555,7 +555,7 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, **kwargs):
     returned_score = dict()
     if callable(scorer):
         scorer = {"score": scorer}
-    for key, to_call in scorer:
+    for key, to_call in scorer.items():
         returned_score[key] = to_call(
             y_true=observed, y_pred=predicted, **kwargs
         )
