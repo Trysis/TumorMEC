@@ -38,6 +38,9 @@ TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName",]  # TODO : Replace by None
 REMOVE_SAMPLE = {"FileName": []}  # TODO
 
+## Process
+SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
+
 # TODO : WT-KI, CD3 & LY6
 
 # Training regimen
@@ -92,7 +95,6 @@ dataframe = loader.load_data(
 
 filename = loader.filename_from_mask()
 rootname, ext = os.path.splitext(filename)
-
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
@@ -186,10 +188,11 @@ for target_column in TARGETS_COLNAMES:
         x, y, groups = models.split_xy(
             df=dataframe, x_columns=features_column, y_columns=target_column, groups=SAMPLE_GROUP
         )
-
-        label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
-        df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
-        mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
+        mapped_groups = None
+        if SAMPLE_GROUP:
+            label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
+            df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
+            mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
 
         summary.df_summary(
             x=x, y=y,
