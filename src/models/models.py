@@ -126,7 +126,7 @@ def split_xy(df, x_columns, y_columns, groups=None):
         else:
             print("len{groups}=0, only {x} and {y} have been returned")
 
-    return x, y
+    return x, y, None
 
 
 def split_data(
@@ -214,7 +214,8 @@ def split_data(
             train_index, test_index = next(sss_gen)
             return (
                 x[train_index], x[test_index],
-                y[train_index], y[test_index]
+                y[train_index], y[test_index],
+                None, None
             )
         else:
             return sss_gen
@@ -347,7 +348,10 @@ def random_forest_search(
     )
 
     # Fit the random search object
-    random_search.fit(x, y, groups=groups)
+    if groups is not None:
+        random_search.fit(x, y, groups=groups)
+    else:
+        random_search.fit(x, y)
 
     return random_search
 
