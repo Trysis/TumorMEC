@@ -561,7 +561,7 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, **kwargs):
         scorer = {"score": scorer}
     for key, to_call in scorer.items():
         returned_score[key] = to_call(
-            y_true=observed, y_pred=predicted, **kwargs
+            observed, predicted, **kwargs
         )
 
     return returned_score
