@@ -95,6 +95,7 @@ dataframe = loader.load_data(
 
 filename = loader.filename_from_mask()
 rootname, ext = os.path.splitext(filename)
+rootname = "UNGROUP_" + rootname if SAMPLE_GROUP else rootname 
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
