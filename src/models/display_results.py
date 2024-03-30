@@ -119,15 +119,16 @@ def display_raw_importance(
     violin=False, filepath=None, show=False
 ):
     """raw_importance: pandas.DataFrame, or dict"""
-    if isinstance(mdi_importance, dict):
-        mdi_importance = pd.DataFrame(mdi_importance)
+    if isinstance(raw_importance, dict):
+        raw_importance = pd.DataFrame(raw_importance)
     #
     fig, ax = plt.subplots(figsize=figsize)
+    x_ticks = [i for i in range(len(raw_importance.columns))]
     if not violin:
-        ax.boxplot(raw_importance, labels=raw_importance.columns)
+        ax.boxplot(raw_importance, labels=raw_importance.columns, align="center")
+        ax.set_xticks([i for i in range(len(raw_importance.columns))])
     else:
-        ax.violinplot(raw_importance, showmeans=False, showmedians=True)
-    ax.set_xticks([i for i in range(len(raw_importance.columns))])
+        ax.violinplot(raw_importance, positions=x_ticks, showmeans=False, showmedians=True)
     ax.set_xticklabels(
         raw_importance.columns, rotation=45,
         ha='right', rotation_mode='anchor'
@@ -219,6 +220,29 @@ def display_boruta_importance(
         plt.show()
 
     return fig, ax
+
+
+def display_rf_summary_shap(
+    estimator, x, figsize=FIGSIZE,
+    filepath=None, show=False,
+):
+    """"""
+    try:
+        import shap
+        fig, ax = plt.subplots(figsize=figsize)
+        explainer = shap.TreeExplainer(estimator)
+        shap_values = explainer.shap_values(x)
+        shap.summary_plot(shap_values, x, ax=ax, show=False)
+        fig.tight_layout()
+        if filepath is not None:
+            fig.savefig(filepath)
+        if show:
+            plt.show()
+
+        return fig, ax
+    except:
+        print("\nshape module not available\n")
+        return None, None
 
 
 if __name__ == "__main__":

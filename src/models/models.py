@@ -567,13 +567,15 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
     if callable(scorer):
         scorer = {"score": scorer}
     for key, to_call in scorer.items():
-        print(f"MODELS.SCORER_MODEL:  {key=}\n")
         returned_score[key] = to_call(
             observed, predicted, **kwargs
         )
         if for_pandas:
-            if not isinstance(returned_score[key], list):
-                returned_score[key] = list(returned_score[key])
+            returned_score[key] = returned_score[key].tolist()
+            if hasattr(returned_score[key], "tolist"):
+                returned_score[key] = returned_score[key].tolist()
+            elif isinstance(returned_score[key], (int, float)):
+                returned_score[key] = [returned_score[key]]
 
     return returned_score
 
