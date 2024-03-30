@@ -500,7 +500,7 @@ def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
 
 def predict_model(x, y, estimator):
     """Predict y with a given model"""
-    observed = y
+    observed = y.copy()
     predicted = estimator.predict(x)
     return observed, predicted
 
@@ -524,7 +524,7 @@ def predict_kmodel(x, y, estimator, kfolder, return_train=False):
     return observed_test, predicted_test
 
 
-def scorer_model(estimator, x, y, scorer, y_pred=None, **kwargs):
+def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs):
     """ Returns the score associated with the estimator prediction
     on data.
 
@@ -553,16 +553,27 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, **kwargs):
         if only a callable is provided.
 
     """
-    observed, predicted = predict_model(x, y, estimator) if y_pred is None \
-        else y, y_pred
-    #
+    observed, predicted = None, None
+    if (y_pred is None):
+        observed, predicted = predict_model(x, y, estimator)
+    else:
+        observed, predicted = y, y_pred
+    if (observed is None) or (predicted is None):
+        raise Exception("observed or predicted is None")
+    elif (observed.shape[0] != predicted.shape[0]):
+        raise Exception(f"Shape not the same {observed.shape=}; {predicted.shape=}")
+    #        
     returned_score = dict()
     if callable(scorer):
         scorer = {"score": scorer}
     for key, to_call in scorer.items():
+        print(f"MODELS.SCORER_MODEL:  {key=}\n")
         returned_score[key] = to_call(
             observed, predicted, **kwargs
         )
+        if for_pandas:
+            if not isinstance(returned_score[key], list):
+                returned_score[key] = list(returned_score[key])
 
     return returned_score
 
