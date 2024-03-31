@@ -105,7 +105,6 @@ dataframe = loader.load_data(
     save=False,
     force_default=False,
     remove_sample=REMOVE_SAMPLE,
-    nrows=120000
 )
 
 filename = loader.filename_from_mask()
