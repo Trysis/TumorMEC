@@ -36,20 +36,24 @@ FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName",]  # TODO : Replace by None
-REMOVE_SAMPLE = {"FileName": []}  # TODO
+REMOVE_SAMPLE = {
+    "FileName": [
+        "./12c_ZF_ MAX_12c_MW137_CD3FITC_SHG.tif",
+        "./FKI_860_CD3FITC.tif_max.tif_SHG.tif",
+        "./12c_ZF_ MAX_12c_MKI857_CD3FITC_SHG.tif",
+        "./MAX_ 12a_MKI353_CD3_SHG.tif"
+    ]
+}
 
 ## Process
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
 
-# TODO : WT-KI, CD3 & LY6
-
 # Training regimen
-CV = 8
-N_PROCESS = max(CV//2, 1)
-N_ITER = 50  # RandomSearch settings sampling number
+CV = 10  # Number of CV-Folds
+N_ITER = 100  # RandomSearch settings sampling number
+N_PROCESS = max(round(CV/2), 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
-N_JOBS = -1  # Multi-threading
 SCORING = {
     "accuracy": scorer.accuracy_score(to_scorer=True),
     "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
@@ -73,10 +77,10 @@ TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["entropy",]
 hsearch_n_estimators = [20, 30, 40, 60, 80]
-hsearch_max_features = ["sqrt"]
+hsearch_max_features = ["sqrt", "log2"]
 hsearch_max_depths = [2, 4, 8, 10, 15, 20]
 hsearch_min_s_split = [2, 4, 16, 24, 32]
-hsearch_min_s_leaf = [1, 3, 5]
+hsearch_min_s_leaf = [1, 3, 5, 10]
 hsearch_bootstrap = [True]
 
 # Importances attributes
@@ -92,7 +96,7 @@ loader = load.DataLoader(
     mask_fiber=MASK_DENSITY,
     replace_aberrant=REPLACE_ABERRANT,
     aberrant_columns=cst.aberrant_columns,
-    remove_none=REMOVE_NONE
+    remove_none=REMOVE_NONE,
 )
 
 dataframe = loader.load_data(
@@ -100,11 +104,14 @@ dataframe = loader.load_data(
     type=cst.data_type,
     save=False,
     force_default=False,
+    remove_sample=REMOVE_SAMPLE,
+    nrows=120000
 )
 
 filename = loader.filename_from_mask()
 rootname, ext = os.path.splitext(filename)
-rootname = "UNGROUP_" + rootname if SAMPLE_GROUP else rootname 
+rootname = "UNGROUP_" + rootname if SAMPLE_GROUP is None else rootname 
+
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
@@ -115,7 +122,7 @@ for target_column in TARGETS_COLNAMES:
         cv_dir = auxiliary.create_dir(os.path.join(loader_dir, "cv"), add_suffix=False)
         cv_plot_dir = auxiliary.create_dir(os.path.join(cv_dir, "plots"), add_suffix=False)
         model_dir = auxiliary.create_dir(os.path.join(loader_dir, "main"), add_suffix=False)
-        train_test_dir = auxiliary.create_dir(os.path.join(loader_dir, "importance"), add_suffix=False)
+        train_test_dir = auxiliary.create_dir(os.path.join(loader_dir, "train_test"), add_suffix=False)
         train_test_plot_dir = auxiliary.create_dir(os.path.join(train_test_dir, "plots"), add_suffix=False)
         # files
         summary_file = os.path.join(loader_dir, "summary.txt")
@@ -131,8 +138,8 @@ for target_column in TARGETS_COLNAMES:
         cv_cfmatrix_train_file = os.path.join(cv_plot_dir, "cv_cfmatrix_train.png")
         cv_cfmatrix_val_file = os.path.join(cv_plot_dir, "cv_cfmatrix_val.png")
         
-        scores_train_file = os.path.join(train_test_plot_dir, "scores_train.csv")
-        scores_test_file = os.path.join(train_test_plot_dir, "scores_test.csv")
+        scores_train_file = os.path.join(train_test_dir, "scores_train.csv")
+        scores_test_file = os.path.join(train_test_dir, "scores_test.csv")
         train_test_score_plot_file = os.path.join(train_test_plot_dir, "train-test_score.png")
         cfmatrix_plot_train_file = os.path.join(train_test_plot_dir, "cfmatrix_train.png")
         cfmatrix_plot_test_file = os.path.join(train_test_plot_dir, "cfmatrix_test.png")
@@ -153,6 +160,8 @@ for target_column in TARGETS_COLNAMES:
         permut_plot_test_violin_file = os.path.join(train_test_plot_dir, "permutation_violin_test.png")
         boruta_plot_train_file = os.path.join(train_test_plot_dir, "boruta_train.png")
         boruta_plot_test_file = os.path.join(train_test_plot_dir, "boruta_test.png")
+        shap_plot_train_file = os.path.join(train_test_plot_dir, "shap_train.png")
+        shap_plot_test_file = os.path.join(train_test_plot_dir, "shap_test.png")
 
         summary.summarize(
             summary.mapped_summary({
@@ -176,7 +185,11 @@ for target_column in TARGETS_COLNAMES:
                 "RandomSearch N-iter": N_ITER,
                 "Select best model with": FIT_WITH
             }, map_sep=":"),
-            summary.arg_summary("Scoring", "\n" + summary.mapped_summary(SCORING, padding_left=4), new_line=False),
+            summary.arg_summary(
+                "Scoring",
+                "\n" + summary.mapped_summary(SCORING, padding_left=4),
+                new_line=False
+            ),
             summary.arg_summary(
                 "Hyperparameters search",
                 "\n" +
@@ -194,6 +207,7 @@ for target_column in TARGETS_COLNAMES:
             subtitle="Training regiment",
             filepath=summary_file
         )
+
         # Features and Target(s)
         x, y, groups = models.split_xy(
             df=dataframe, x_columns=features_column, y_columns=target_column, groups=SAMPLE_GROUP
@@ -219,8 +233,8 @@ for target_column in TARGETS_COLNAMES:
         x_train, x_test, y_train, y_test, groups_train, groups_test = models.split_data(
             x, y, groups=groups, n_splits=1, test_size=TEST_SIZE, stratify=True, seed=SEED
         )
-        u_groups_train = np.unique(groups_train)
-        u_groups_test = np.unique(groups_test)
+        u_groups_train = np.unique(groups_train) if groups_train is not None else None
+        u_groups_test = np.unique(groups_test) if groups_test is not None else None
         summary.summarize(
             summary.xy_summary(
                 x_train, y_train, unique_groups=u_groups_train, title="Train",
@@ -232,6 +246,7 @@ for target_column in TARGETS_COLNAMES:
             ),
             filepath=summary_file
         )
+
         # Kfold generator
         cv_generator = models.cv_object(
             n_split=CV, groups=groups_train, stratify=True, seed=SEED
@@ -292,7 +307,6 @@ for target_column in TARGETS_COLNAMES:
             observed=observed_cv_val, predicted=predicted_cv_val,
             labels=None, filepath=cv_cfmatrix_val_file
         )
-
         cv_perf_val, cv_perf_str_val = dict(), dict()
         cv_perf_train, cv_perf_str_train = (dict(), dict()) if CV_TRAIN else (None, None)
         for idx, key in enumerate(SCORING.keys()):  # TODO: Save a raw output of mean, std of best model in Train/Val
@@ -311,6 +325,7 @@ for target_column in TARGETS_COLNAMES:
                 cv_perf_train["score"] = cv_perf_train.get("score", []) + [key]
                 cv_perf_str_train[key] = \
                     f"mean={key_mean_train:.3f} "u'\u00b1'f" {key_std_train:.3f}"
+
         # Save raw cv scores
         pd.DataFrame(cv_perf_val).to_csv(cv_scores_test_file, index=False)
         if CV_TRAIN:
@@ -345,11 +360,13 @@ for target_column in TARGETS_COLNAMES:
             estimator=search.best_estimator_,
             x=x_train, y=y_train, scorer=SCORING_base
         )
+
         summary.arg_summary(
             "Train", "\n" + summary.mapped_summary(
                 train_scores, map_sep="=", padding_left=4
             ), filepath=summary_file
         )
+
         df_train_scores = pd.DataFrame(train_scores).T
         df_train_scores.to_csv(scores_train_file)
         ## Test
@@ -364,6 +381,7 @@ for target_column in TARGETS_COLNAMES:
         )
         df_test_scores = pd.DataFrame(test_scores).T
         df_test_scores.to_csv(scores_test_file)
+
         # Train, Test - Score
         display.display_train_test_scores(
             train_scores=train_scores,
@@ -390,7 +408,8 @@ for target_column in TARGETS_COLNAMES:
         )
         df_mdi.to_csv(mdi_importance_file, index=False)
         display.display_mdi_importance(mdi_importance=df_mdi, filepath=mdi_plot_file)
-        ## Permutation # TODO : Boxplot of features importance
+
+        ## Permutation
         ### Train
         permutation_train = models.forest_permutation_importance(
             estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
@@ -425,6 +444,7 @@ for target_column in TARGETS_COLNAMES:
         display.display_permutation_importance(df_permutation_test, filepath=permut_plot_test_file)
         display.display_raw_importance(raw_permutation_test, filepath=permut_plot_test_boxplot_file)
         display.display_raw_importance(raw_permutation_test, violin=True, filepath=permut_plot_test_violin_file)
+
         ## Boruta
         ### Train
         boruta_train = models.forest_boruta_importance(
@@ -447,6 +467,20 @@ for target_column in TARGETS_COLNAMES:
         display.display_boruta_importance(
             boruta_importance=boruta_test["feature_hit"], treshold=boruta_test.treshold,
             n_trials=boruta_test.n_trials, filepath=boruta_plot_test_file
+        )
+
+        # Shap - Prediction explainer
+        ## Train
+        display.display_rf_summary_shap(
+            estimator=search.best_estimator_,
+            feature_names=features_column,
+            x=x_train, filepath=shap_plot_train_file
+        )
+        ## Test
+        display.display_rf_summary_shap(
+            estimator=search.best_estimator_,
+            feature_names=features_column,
+            x=x_test, filepath=shap_plot_test_file
         )
 
         # TODO : PRC, Youden/Yudon index
