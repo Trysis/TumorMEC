@@ -214,7 +214,7 @@ for target_column in TARGETS_COLNAMES:
         mapped_groups = None
         if SAMPLE_GROUP:
             label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
-            df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
+            df_mapped_groups = label_groups.assign(groups=groups).drop_duplicates()    
             mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
 
         summary.df_summary(
