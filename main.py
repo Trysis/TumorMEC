@@ -49,9 +49,9 @@ REMOVE_SAMPLE = {
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
 
 # Training regimen
-CV = 10
+CV = 10  # Number of CV-Folds
+N_ITER = 100  # RandomSearch settings sampling number
 N_PROCESS = max(round(CV/2), 1)  # Multi-threading
-N_ITER = 1  # RandomSearch settings sampling number
 CV_TRAIN = True
 TRAIN = True
 SCORING = {
@@ -77,10 +77,10 @@ TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["entropy",]
 hsearch_n_estimators = [20, 30, 40, 60, 80]
-hsearch_max_features = ["sqrt"]
+hsearch_max_features = ["sqrt", "log2"]
 hsearch_max_depths = [2, 4, 8, 10, 15, 20]
 hsearch_min_s_split = [2, 4, 16, 24, 32]
-hsearch_min_s_leaf = [1, 3, 5]
+hsearch_min_s_leaf = [1, 3, 5, 10]
 hsearch_bootstrap = [True]
 
 # Importances attributes
@@ -111,7 +111,7 @@ dataframe = loader.load_data(
 filename = loader.filename_from_mask()
 rootname, ext = os.path.splitext(filename)
 rootname = "UNGROUP_" + rootname if SAMPLE_GROUP is None else rootname 
-rootname = "TEST_" + rootname
+
 # Define X and Y
 for target_column in TARGETS_COLNAMES:
     for key, features_column in FEATURES.items():
