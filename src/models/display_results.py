@@ -3,7 +3,7 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import pandas as pd
 import itertools
-import shap
+#import shap
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
@@ -222,7 +222,7 @@ def display_boruta_importance(
 
     return fig, ax
 
-
+"""
 def display_rf_summary_shap(
     estimator, x, feature_names=None,
     figsize=FIGSIZE, autosize=True,
@@ -243,7 +243,7 @@ def display_rf_summary_shap(
         plt.show()
 
     return fig, ax
-
+"""
 
 if __name__ == "__main__":
     pass
