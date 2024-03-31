@@ -325,13 +325,12 @@ def filter_data(
         column name specifying fiber column, known
         as Density20
 
-    Returns: pandas.DataFramfilterse
+    Returns: pandas.DataFrame
         Either the filtered dataframe, or the
         mask with the respective filter
 
     """
     # Replace NaN by None
-    df = df.replace(np.nan, None)
     boolean_masks = (
         masks_filter(df, *mask_i, filter=np.any, return_mask=True)
         for mask_i in masks if len(mask_i) > 0
@@ -463,7 +462,7 @@ def enrich_cmask(
     colname: str
         name of the column used for the
         class condition
-
+hand
     fn: funct (np.mean or np.median)
         Used function for the class condition,
         user should either use np.mean, np.median
