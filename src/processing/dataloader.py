@@ -444,7 +444,7 @@ def plus_cmask(df=None, key="plus", colname="Cells100um", return_mask=False, ret
     mask = df[[colname]] > 0
     if return_mask:
         return mask
-    values = mask.replace({True: 1, False: 0})
+    values = mask[colname].map({True: 1, False: 0})
     return {key: values.to_numpy().flatten()}
 
 
@@ -484,7 +484,7 @@ def enrich_cmask(
     mask = df[[colname]] > fn(df[[colname]])
     if return_mask:
         return mask
-    values = mask.replace({True: 1, False: 0})
+    values = mask[colname].map({True: 1, False: 0})
     return {key: values.to_numpy().flatten()}
 
 def enrich_2_cmask(
@@ -525,7 +525,7 @@ def enrich_2_cmask(
     mask = df[[colname]] > fn(df[mask_plus][colname])
     if return_mask:
         return mask
-    values = mask.replace({True: 1, False: 0})
+    values = mask[colname].map({True: 1, False: 0})
     return {key: values.to_numpy().flatten()}
 
 
@@ -557,8 +557,9 @@ def wt_cmask(df=None, key="wild_type", colname="Condition", return_mask=False, r
     mask = df[[colname]] == "WT"
     if return_mask:
         return mask
-    values = mask.replace({True: 1, False: 0})
+    values = mask[colname].map({True: 1, False: 0})
     return {key: values.to_numpy().flatten()}
+
 
 if __name__ == "__main__":
     """
