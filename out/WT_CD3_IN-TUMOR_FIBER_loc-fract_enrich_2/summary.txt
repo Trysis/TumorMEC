@@ -1,0 +1,95 @@
+---------------------------------------- Parameters ----------------------------------------
+
+Condition        : ['WT']
+Type             : ['CD3']
+Tumor            : ['IN-TUMOR']
+Fiber            : ['FIBER']
+Remove none      : True
+Replace aberrant : -3
+SEED             : 42
+
+-------------------- Training regiment --------------------
+
+MODEL                    : <class 'sklearn.ensemble._forest.RandomForestClassifier'>
+TEST RATIO               : 0.3
+GROUPS                   : True
+Cross-validation N-Folds : 10
+RandomSearch N-iter      : 100
+Select best model with   : f1
+
+Scoring : 
+    accuracy          ==> make_scorer(accuracy_score, response_method='predict')
+    balanced_accuracy ==> make_scorer(balanced_accuracy_score, response_method='predict')
+    precision         ==> make_scorer(precision_score, response_method='predict')
+    recall            ==> make_scorer(recall_score, response_method='predict')
+    auc               ==> make_scorer(roc_auc_score, response_method='predict')
+    mcc               ==> make_scorer(matthews_corrcoef, response_method='predict')
+    f1                ==> make_scorer(f1_score, response_method='predict')
+
+Hyperparameters search : 
+    Criterion        = ['entropy']
+    N-Tree           = [20, 30, 40, 60, 80]
+    N-Features       = ['sqrt', 'log2']
+    Max depths       = [2, 4, 8, 10, 15, 20]
+    Min sample split = [2, 4, 16, 24, 32]
+    Min sample leaf  = [1, 3, 5, 10]
+    Bootstrap        = [True]
+
+---------------------------------------- DataFrame ----------------------------------------
+
+x shape    : 342284 lines, 34 columns
+y shape    : 342284 lines, 1 columns
+y count : 
+    0.0 ==> 299741
+    1.0 ==> 42543
+
+groups     : 0   1   2   3   4   5   6   7   8   9   10  11  
+
+./FWT_507_down_CD3FITC.tif_max.tif_SHG.tif               ==> 0
+./FWT_511_CD3FITC_F480_AF647_Phal546.tif_max.tif_SHG.tif ==> 1
+./FWT_861_big_CD3FITC.tif_max.tif_SHG.tif                ==> 2
+./FWT_928_right_CD3FITC.tif_max.tif_SHG.tif              ==> 3
+./MAX_12b_184_CD3eFITC.tif_SHG.tif                       ==> 4
+./MAX_12b_187_CD3eFITC.tif_SHG.tif                       ==> 5
+./MAX_12b_189_CD3eFITC.tif_SHG.tif                       ==> 6
+./MAX_12b_330_CD3eFITC.tif_SHG.tif                       ==> 7
+./MAX_12b_FWT331_CD3_SHG.tif                             ==> 8
+./MAX_12b_FWT_333_CD3_SHG.tif                            ==> 9
+./MAX_MWT738_CD3_SHG.tif                                 ==> 10
+./MAX_MWT854_CD3_SHG.tif                                 ==> 11
+
+x_columns : 
+Angle20             Coherency20         Energy20            MeanInt20           VarInt20            
+Density20           VarDensity20        OrientationRef20    Angle60             Coherency60         
+Energy60            MeanInt60           VarInt60            Density60           VarDensity60        
+OrientationRef60    Angle100            Coherency100        Energy100           MeanInt100          
+VarInt100           Density100          VarDensity100       OrientationRef100   Angle140            
+Coherency140        Energy140           MeanInt140          VarInt140           Density140          
+VarDensity140       OrientationRef140   Dist                Frac                
+
+y_columns : 
+enrich_2   
+
+grouped by : 
+FileName   
+
+-------------------- Train --------------------
+
+x_train shape : 306769 lines, 34 columns
+y_train shape : 306769 lines, 1 columns
+y count : 
+    0.0 ==> 267616
+    1.0 ==> 39153
+
+groups_train : 1   2   3   4   5   6   7   11  
+
+-------------------- Test --------------------
+
+x_test shape : 35515 lines, 34 columns
+y_test shape : 35515 lines, 1 columns
+y count : 
+    0.0 ==> 32125
+    1.0 ==> 3390
+
+groups_test : 0   8   9   10  
+
