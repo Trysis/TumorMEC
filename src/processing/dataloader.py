@@ -173,7 +173,7 @@ class DataLoader:
                     if os.path.isfile(default_filepath):
                         df_tmp = pd.read_csv(default_filepath, sep=separator, low_memory=False, **kwargs)
                         if "KI" in condition:  # replace 'CD64-hDTR' with 'KI'
-                            df_tmp["Condition"] = df_tmp["Condition"].replace("CD64-hDTR", "KI")
+                            df_tmp.loc[df_tmp["Condition"] == "CD64-hDTR", "Condition"] = "KI"
                         dframes.append(df_tmp)
                     else:
                         raise Exception(f"In default_file: filename={default_filepath} not found\n"
