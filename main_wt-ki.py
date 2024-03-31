@@ -49,8 +49,8 @@ REMOVE_SAMPLE = {
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
 
 # Training regimen
-CV = 10  # Number of CV-Folds
-N_ITER = 100  # RandomSearch settings sampling number
+CV = 2  # Number of CV-Folds
+N_ITER = 1  # RandomSearch settings sampling number
 N_PROCESS = max(round(CV/2), 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
@@ -84,8 +84,8 @@ hsearch_min_s_leaf = [1, 3, 5, 10]
 hsearch_bootstrap = [True]
 
 # Importances attributes
-N_PERM = 30
-N_BORUTA = 50
+N_PERM = 2
+N_BORUTA = 2
 
 # Load data
 loader = load.DataLoader(
@@ -211,10 +211,11 @@ for target_column in TARGETS_COLNAMES:
         x, y, groups = models.split_xy(
             df=dataframe, x_columns=features_column, y_columns=target_column, groups=SAMPLE_GROUP
         )
+        print(f"{x.shape=}\n{y.shape=}\n{groups.shape=}\n")
         mapped_groups = None
         if SAMPLE_GROUP:
             label_groups = pd.DataFrame(dataframe[SAMPLE_GROUP].agg(';'.join, axis=1), columns=["label"])
-            df_mapped_groups = pd.concat([label_groups, pd.DataFrame({"groups": groups})], axis=1).drop_duplicates()    
+            df_mapped_groups = label_groups.assign(groups=groups).drop_duplicates()    
             mapped_groups = dict(zip(df_mapped_groups.label, df_mapped_groups.groups))
 
         summary.df_summary(
