@@ -38,22 +38,22 @@ TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName",]  # TODO : Replace by None
 REMOVE_SAMPLE = {
     "FileName": [
-        "12c_ZF_ MAX_12c_MKI857_CD3FITC_SHG",
+        "./12c_ZF_ MAX_12c_MW137_CD3FITC_SHG.tif",
+        "./FKI_860_CD3FITC.tif_max.tif_SHG.tif",
+        "./12c_ZF_ MAX_12c_MKI857_CD3FITC_SHG.tif",
+        "./MAX_ 12a_MKI353_CD3_SHG.tif"
     ]
-}  # TODO
+}
 
 ## Process
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
 
-# TODO : WT-KI, CD3 & LY6
-
 # Training regimen
-CV = 2
-N_PROCESS = max(round(CV/2), 1)
+CV = 10
+N_PROCESS = max(round(CV/2), 1)  # Multi-threading
 N_ITER = 1  # RandomSearch settings sampling number
 CV_TRAIN = True
 TRAIN = True
-N_JOBS = -1  # Multi-threading
 SCORING = {
     "accuracy": scorer.accuracy_score(to_scorer=True),
     "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
@@ -84,8 +84,8 @@ hsearch_min_s_leaf = [1, 3, 5]
 hsearch_bootstrap = [True]
 
 # Importances attributes
-N_PERM = 2
-N_BORUTA = 2
+N_PERM = 30
+N_BORUTA = 50
 
 # Load data
 loader = load.DataLoader(
@@ -104,6 +104,7 @@ dataframe = loader.load_data(
     type=cst.data_type,
     save=False,
     force_default=False,
+    remove_sample=REMOVE_SAMPLE,
     nrows=120000
 )
 
@@ -472,11 +473,13 @@ for target_column in TARGETS_COLNAMES:
         ## Train
         display.display_rf_summary_shap(
             estimator=search.best_estimator_,
+            feature_names=features_column,
             x=x_train, filepath=shap_plot_train_file
         )
         ## Test
         display.display_rf_summary_shap(
             estimator=search.best_estimator_,
+            feature_names=features_column,
             x=x_test, filepath=shap_plot_test_file
         )
 

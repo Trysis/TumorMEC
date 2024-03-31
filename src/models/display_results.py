@@ -3,6 +3,7 @@ from sklearn.metrics import confusion_matrix
 import numpy as np
 import pandas as pd
 import itertools
+import shap
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
@@ -125,10 +126,10 @@ def display_raw_importance(
     fig, ax = plt.subplots(figsize=figsize)
     x_ticks = [i for i in range(len(raw_importance.columns))]
     if not violin:
-        ax.boxplot(raw_importance, labels=raw_importance.columns, align="center")
-        ax.set_xticks([i for i in range(len(raw_importance.columns))])
+        ax.boxplot(raw_importance, labels=raw_importance.columns)
     else:
         ax.violinplot(raw_importance, positions=x_ticks, showmeans=False, showmedians=True)
+    ax.set_xticks([i+1 for i in range(len(raw_importance.columns))])
     ax.set_xticklabels(
         raw_importance.columns, rotation=45,
         ha='right', rotation_mode='anchor'
@@ -223,26 +224,25 @@ def display_boruta_importance(
 
 
 def display_rf_summary_shap(
-    estimator, x, figsize=FIGSIZE,
+    estimator, x, feature_names=None,
+    figsize=FIGSIZE, autosize=True,
     filepath=None, show=False,
 ):
     """"""
-    try:
-        import shap
-        fig, ax = plt.subplots(figsize=figsize)
-        explainer = shap.TreeExplainer(estimator)
-        shap_values = explainer.shap_values(x)
-        shap.summary_plot(shap_values, x, ax=ax, show=False)
-        fig.tight_layout()
-        if filepath is not None:
-            fig.savefig(filepath)
-        if show:
-            plt.show()
+    fig, ax = plt.subplots(figsize=figsize)
+    explainer = shap.TreeExplainer(estimator)
+    shap_values = explainer.shap_values(x)
+    shap.summary_plot(
+        shap_values, x, 
+        auto_size_plot=autosize, show=False
+    )
+    #plt.tight_layout()
+    if filepath is not None:
+        plt.savefig(filepath)
+    if show:
+        plt.show()
 
-        return fig, ax
-    except:
-        print("\nshape module not available\n")
-        return None, None
+    return fig, ax
 
 
 if __name__ == "__main__":

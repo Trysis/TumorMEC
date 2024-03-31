@@ -83,7 +83,7 @@ class DataLoader:
     def load_data(
             self,
             default_file=[["WTconcatenate.csv.gz", "WT"], ["KIconcatenate.csv.gz", "KI"]],
-            targets=None, type=None, save=True, verbose=1, force_default=False, **kwargs
+            targets=None, type=None, save=True, remove_sample=None, force_default=False, verbose=1, **kwargs
     ):
         """Load an existing dataframe if a file with the specified mask,
         already exist. Else generate a dataframe filtered with the specified
@@ -128,6 +128,10 @@ class DataLoader:
             directory.
             In False, or unexisting directory the dataframe won't be saved
 
+        remove_sample: dict
+            Dictionnary containing selected columns as key and values as
+            the selected value criteria to remove a row from the dataframe
+
         force_default: bool
             If True, it loads the dataframe based on the {default_file}
             even if there is a file with a filename defined from mask
@@ -169,7 +173,7 @@ class DataLoader:
                     if os.path.isfile(default_filepath):
                         df_tmp = pd.read_csv(default_filepath, sep=separator, low_memory=False, **kwargs)
                         if "KI" in condition:  # replace 'CD64-hDTR' with 'KI'
-                            df_tmp["Condition"].replace("CD64-hDTR", "KI", inplace=True)
+                            df_tmp["Condition"] = df_tmp["Condition"].replace("CD64-hDTR", "KI")
                         dframes.append(df_tmp)
                     else:
                         raise Exception(f"In default_file: filename={default_filepath} not found\n"
@@ -179,6 +183,18 @@ class DataLoader:
         # Concatenate the specified files
         dataframe = pd.concat(dframes, ignore_index=True) if dataframe is None else dataframe
 
+        # Remove specified sample
+        print(f"Before rmv : {dataframe.shape=}")
+        if remove_sample is not None:
+            mask_to_rmv = []
+            for colname, values in remove_sample.items():
+                for val in values:
+                    mask = dataframe[colname] == val
+                    mask_to_rmv.append(mask)
+            dataframe = masks_filter(dataframe, *mask_to_rmv, filter=np.any, negate=True)
+            print(f"After rmv : {dataframe.shape}")
+            print(f"{dataframe=}")
+            exit()
         # Apply types
         if type is not None:
             dataframe = dataframe.astype(type)
@@ -336,7 +352,7 @@ def filter_data(
     return df_filtered
 
 
-def masks_filter(df, *args, filter=np.all, return_mask=False, view=False):
+def masks_filter(df, *args, filter=np.all, negate=False, return_mask=False, view=False):
     """Apply the specified mask to the dataframe.
     
     df: pandas.DataFrame
@@ -349,6 +365,10 @@ def masks_filter(df, *args, filter=np.all, return_mask=False, view=False):
 
     filter: function
         boolean list comparator function
+
+    negate: bool
+        If True, we returns the True samples. Else
+        the ones not selected in the filter.
 
     return_mask: bool
         Should we return a mask from the combined
@@ -365,6 +385,9 @@ def masks_filter(df, *args, filter=np.all, return_mask=False, view=False):
     """
     masks = [arg_mask(df, arg) for arg in args]
     combined_mask = filter(masks, axis=0)
+    if negate:
+        combined_mask = ~combined_mask
+
     if return_mask:
         return combined_mask
 
@@ -389,7 +412,7 @@ def arg_mask(df, arg=None):
         The specified mask
 
     """
-    if isinstance(arg, (np.ndarray, pd.DataFrame)):
+    if isinstance(arg, (np.ndarray, pd.DataFrame, pd.Series)):
         return arg
     else:  # we assume, it is a cst.Constantes object
         return arg == df[arg.column]
