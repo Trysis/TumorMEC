@@ -462,7 +462,7 @@ def enrich_cmask(
     colname: str
         name of the column used for the
         class condition
-hand
+
     fn: funct (np.mean or np.median)
         Used function for the class condition,
         user should either use np.mean, np.median

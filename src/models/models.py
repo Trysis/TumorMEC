@@ -15,6 +15,8 @@ from sklearn.model_selection import StratifiedShuffleSplit
 from sklearn.model_selection import GroupShuffleSplit
 
 from sklearn.model_selection import cross_validate
+from sklearn.model_selection import LeaveOneOut
+from sklearn.model_selection import LeaveOneGroupOut
 from sklearn.model_selection import KFold
 from sklearn.model_selection import StratifiedKFold
 from sklearn.model_selection import GroupKFold
@@ -483,17 +485,24 @@ def cv_object(groups=None, n_split=None, stratify=None, seed=SEED):
         "shuffle": True if seed is not None else False,
         "random_state": seed
     }
-    if groups is None:
-        cv_generator = (
-            KFold(**cv_args) if not stratify
-            else StratifiedKFold(**cv_args)
-        )
+    # Leave one out
+    if n_split == 1:
+        if groups is not None:
+            cv_generator = LeaveOneGroupOut()
+        else:
+            cv_generator = LeaveOneOut()
     else:
-        cv_generator = (
-            GroupKFold(n_splits=cv_args["n_splits"])
-            if not stratify
-            else StratifiedGroupKFold(**cv_args)
-        )
+        if groups is None:
+            cv_generator = (
+                KFold(**cv_args) if not stratify
+                else StratifiedKFold(**cv_args)
+            )
+        else:
+            cv_generator = (
+                GroupKFold(n_splits=cv_args["n_splits"])
+                if not stratify
+                else StratifiedGroupKFold(**cv_args)
+            )
 
     return cv_generator
 
@@ -571,11 +580,12 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
             observed, predicted, **kwargs
         )
         if for_pandas:
-            returned_score[key] = returned_score[key].tolist()
             if hasattr(returned_score[key], "tolist"):
                 returned_score[key] = returned_score[key].tolist()
-            elif isinstance(returned_score[key], (int, float)):
+            elif isinstance(returned_score[key], (int, float, str)):
                 returned_score[key] = [returned_score[key]]
+            else:
+                returned_score[key] = list(returned_score[key])
 
     return returned_score
 

@@ -222,6 +222,7 @@ def display_boruta_importance(
 
     return fig, ax
 
+
 """
 def display_rf_summary_shap(
     estimator, x, feature_names=None,
@@ -244,6 +245,7 @@ def display_rf_summary_shap(
 
     return fig, ax
 """
+
 
 if __name__ == "__main__":
     pass
