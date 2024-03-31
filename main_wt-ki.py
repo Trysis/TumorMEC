@@ -468,7 +468,7 @@ for target_column in TARGETS_COLNAMES:
             boruta_importance=boruta_test["feature_hit"], treshold=boruta_test.treshold,
             n_trials=boruta_test.n_trials, filepath=boruta_plot_test_file
         )
-
+        """
         # Shap - Prediction explainer
         ## Train
         display.display_rf_summary_shap(
@@ -482,7 +482,7 @@ for target_column in TARGETS_COLNAMES:
             feature_names=features_column,
             x=x_test, filepath=shap_plot_test_file
         )
-
+        """
         # TODO : PRC, Youden/Yudon index
         # TODO : Confiance dans la prediction
         # TODO : II. Predire WT & KI basé sur les fibres

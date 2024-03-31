@@ -471,6 +471,9 @@ for target_column in TARGETS_COLNAMES:
 
         # Shap - Prediction explainer
         ## Train
+        """
+        # Shap - Prediction explainer
+        ## Train
         display.display_rf_summary_shap(
             estimator=search.best_estimator_,
             feature_names=features_column,
@@ -482,6 +485,7 @@ for target_column in TARGETS_COLNAMES:
             feature_names=features_column,
             x=x_test, filepath=shap_plot_test_file
         )
+        """
 
         # TODO : PRC, Youden/Yudon index
         # TODO : Confiance dans la prediction
