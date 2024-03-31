@@ -184,7 +184,6 @@ class DataLoader:
         dataframe = pd.concat(dframes, ignore_index=True) if dataframe is None else dataframe
 
         # Remove specified sample
-        print(f"Before rmv : {dataframe.shape=}")
         if remove_sample is not None:
             mask_to_rmv = []
             for colname, values in remove_sample.items():
@@ -192,9 +191,7 @@ class DataLoader:
                     mask = dataframe[colname] == val
                     mask_to_rmv.append(mask)
             dataframe = masks_filter(dataframe, *mask_to_rmv, filter=np.any, negate=True)
-            print(f"After rmv : {dataframe.shape}")
-            print(f"{dataframe=}")
-            exit()
+
         # Apply types
         if type is not None:
             dataframe = dataframe.astype(type)
