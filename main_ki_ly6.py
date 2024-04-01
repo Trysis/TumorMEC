@@ -74,11 +74,11 @@ FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["entropy",]
-hsearch_n_estimators = [6, 10, 15, 20, 40, 60]
-hsearch_max_features = ["sqrt", "log2"]
-hsearch_max_depths = [2, 4, 10, 15, 20]
-hsearch_min_s_split = [2, 4, 16]
-hsearch_min_s_leaf = [1, 3, 5, 10]
+hsearch_n_estimators = [10, 15, 20, 30, 35]
+hsearch_max_features = ["sqrt"]
+hsearch_max_depths = [10, 15, 20]
+hsearch_min_s_split = [2, 4, 8]
+hsearch_min_s_leaf = [1, 5]
 hsearch_bootstrap = [True]
 hsearch_class_weight = ["balanced"]
 
