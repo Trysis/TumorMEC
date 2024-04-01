@@ -46,10 +46,10 @@ REMOVE_SAMPLE = {
 }
 
 # Training regimen
-CV = 2  # Number of CV-Folds
+CV = 10  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
-N_ITER = 1  # RandomSearch settings sampling number
-N_PROCESS = max(round(CV/2), 1)  # Multi-threading
+N_ITER = 50  # RandomSearch settings sampling number
+N_PROCESS = max(round(CV/(2/3)), 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
 SCORING = {
