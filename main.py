@@ -46,9 +46,9 @@ REMOVE_SAMPLE = {
 }
 
 # Training regimen
-CV = 10  # Number of CV-Folds
-LEAVE_ONE_OUT = False  # If True, CV is not used
-N_ITER = 100  # RandomSearch settings sampling number
+CV = 2  # Number of CV-Folds
+LEAVE_ONE_OUT = True  # If True, CV is not used
+N_ITER = 1  # RandomSearch settings sampling number
 N_PROCESS = max(round(CV/2), 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
@@ -74,12 +74,13 @@ FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["entropy",]
-hsearch_n_estimators = [20, 30, 40, 60, 80]
+hsearch_n_estimators = [6, 10, 15, 20, 40, 60]
 hsearch_max_features = ["sqrt", "log2"]
-hsearch_max_depths = [2, 4, 8, 10, 15, 20]
-hsearch_min_s_split = [2, 4, 16, 24, 32]
+hsearch_max_depths = [2, 4, 10, 15, 20]
+hsearch_min_s_split = [2, 4, 16]
 hsearch_min_s_leaf = [1, 3, 5, 10]
 hsearch_bootstrap = [True]
+hsearch_class_weight = ["balanced"]
 
 # Importances attributes
 N_PERM = 30
@@ -112,6 +113,7 @@ if __name__ == "__main__":
 
     filename = loader.filename_from_mask()
     rootname, ext = os.path.splitext(filename)
+    rootname = "LEAVE-ONE-OUT_" + rootname if LEAVE_ONE_OUT else rootname
     rootname = "UNGROUP_" + rootname if SAMPLE_GROUP is None else rootname 
 
     # Define X and Y
@@ -184,7 +186,7 @@ if __name__ == "__main__":
                         "N-Boruta trials": N_BORUTA,
                     }, map_sep="=", padding_left=4),
                     new_line=False
-                )
+                ),
                 title="Parameters",
                 filepath=summary_file, mode="w"
             )
@@ -213,7 +215,8 @@ if __name__ == "__main__":
                         "Max depths": hsearch_max_depths,
                         "Min sample split": hsearch_min_s_split,
                         "Min sample leaf": hsearch_min_s_leaf,
-                        "Bootstrap": hsearch_bootstrap
+                        "Bootstrap": hsearch_bootstrap,
+                        "Class-weight": hsearch_class_weight
                     }, map_sep="=", padding_left=4),
                     new_line=False
                 ),
@@ -281,6 +284,7 @@ if __name__ == "__main__":
                     param_min_s_split=hsearch_min_s_split,
                     param_min_s_leaf=hsearch_min_s_leaf,
                     param_bootstrap=hsearch_bootstrap,
+                    param_class_weight=hsearch_class_weight,
                 )
             else:
                 # Leave one out (use all dataset)
@@ -297,14 +301,44 @@ if __name__ == "__main__":
                     param_min_s_split=hsearch_min_s_split,
                     param_min_s_leaf=hsearch_min_s_leaf,
                     param_bootstrap=hsearch_bootstrap,
+                    param_class_weight=hsearch_class_weight,
                 )
-            # TODO : Save score of each fold in summary.txt
+    
             # Save best model
             joblib.dump(search.best_estimator_, model_file)
             # Save tested parameters
             idx_search = search.best_index_
             df_search = pd.DataFrame(search.cv_results_)
             df_search.to_csv(hsearch_file)
+            df_best_scores = df_search.iloc[idx_search]
+            # N-Folds to summary
+            N_scores = -1
+            if SAMPLE_GROUP:
+                if LEAVE_ONE_OUT:
+                    N_scores = len(mapped_groups)
+                else:
+                    N_scores = CV
+            else:
+                if LEAVE_ONE_OUT:
+                    N_scores = len(x)
+                else:
+                    N_scores = len(x_train)
+
+            summary.summarize(title="Results", filepath=summary_file)
+            for i in range(N_scores):
+                split_scores_str = [f"split{i}_test_{key}" for key in SCORING.keys()]
+                result_i_scores = dict(zip(split_scores_str, df_best_scores[split_scores_str].values))
+                summary.arg_summary(
+                    f"Split {i}",
+                    "\n" +
+                    summary.mapped_summary(
+                        result_i_scores,
+                        map_sep="=", padding_left=4
+                    ),
+                    new_line=True,
+                    filepath=summary_file
+                )
+
             ## In clearer format
             cv_val_scores = {"model": [], "mean": [], "std": [], "rank": [], "score": []}
             cv_train_scores = {"model": [], "mean": [], "std": [], "score": []}
@@ -378,7 +412,6 @@ if __name__ == "__main__":
                     "CV Val", "\n" + summary.mapped_summary(cv_perf_str_val, map_sep="=", padding_left=4),
                     new_line=False
                 ),
-                title="Results",
                 filepath=summary_file
             )
             if CV_TRAIN:
