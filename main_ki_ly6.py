@@ -46,10 +46,10 @@ REMOVE_SAMPLE = {
 }
 
 # Training regimen
-CV = 10  # Number of CV-Folds
+CV = 8  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
 N_ITER = 50  # RandomSearch settings sampling number
-N_PROCESS = max(round(CV/(2/3)), 1)  # Multi-threading
+N_PROCESS = max(CV, 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
 SCORING = {
@@ -74,10 +74,10 @@ FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["entropy",]
-hsearch_n_estimators = [10, 15, 20, 30, 35]
+hsearch_n_estimators = [16, 32, 64, 80]
 hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [10, 15, 20]
-hsearch_min_s_split = [2, 4, 8]
+hsearch_min_s_split = [1, 4, 8]
 hsearch_min_s_leaf = [1, 5]
 hsearch_bootstrap = [True]
 hsearch_class_weight = ["balanced"]
@@ -196,7 +196,7 @@ if __name__ == "__main__":
                     "MODEL": models.ESTIMATOR,
                     "TEST RATIO": TEST_SIZE,
                     "GROUPS": True if SAMPLE_GROUP else False,
-                    "Cross-validation N-Folds": "Leave one hot" if LEAVE_ONE_OUT else CV,
+                    "Cross-validation N-Folds": "Leave one out" if LEAVE_ONE_OUT else CV,
                     "RandomSearch N-iter": N_ITER,
                     "Select best model with": FIT_WITH
                 }, map_sep=":"),
@@ -251,17 +251,18 @@ if __name__ == "__main__":
             )
             u_groups_train = np.unique(groups_train) if groups_train is not None else None
             u_groups_test = np.unique(groups_test) if groups_test is not None else None
-            summary.summarize(
-                summary.xy_summary(
-                    x_train, y_train, unique_groups=u_groups_train, title="Train",
-                    x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
-                ),
-                summary.xy_summary(
-                    x_test, y_test, unique_groups=u_groups_test, title="Test",
-                    x_label="x_test shape", y_label="y_test shape", groups_label="groups_test",
-                ),
-                filepath=summary_file
-            )
+            if not LEAVE_ONE_OUT:
+                summary.summarize(
+                    summary.xy_summary(
+                        x_train, y_train, unique_groups=u_groups_train, title="Train",
+                        x_label="x_train shape", y_label="y_train shape", groups_label="groups_train",
+                    ),
+                    summary.xy_summary(
+                        x_test, y_test, unique_groups=u_groups_test, title="Test",
+                        x_label="x_test shape", y_label="y_test shape", groups_label="groups_test",
+                    ),
+                    filepath=summary_file
+                )
 
             # Kfold generator
             cv_generator = models.cv_object(
@@ -322,11 +323,13 @@ if __name__ == "__main__":
                 if LEAVE_ONE_OUT:
                     N_scores = len(x)
                 else:
-                    N_scores = len(x_train)
+                    N_scores = CV
 
             summary.summarize(title="Results", filepath=summary_file)
             for i in range(N_scores):
                 split_scores_str = [f"split{i}_test_{key}" for key in SCORING.keys()]
+                print(split_scores_str)
+                print(f"{df_best_scores.index=}")
                 result_i_scores = dict(zip(split_scores_str, df_best_scores[split_scores_str].values))
                 summary.arg_summary(
                     f"Split {i}",
