@@ -236,6 +236,7 @@ def random_forest_search(
     param_min_s_split=[2, 4, 16, 32],
     param_min_s_leaf=[1, 5],
     param_bootstrap=[False, True],
+    param_class_weight=["balanced",],
 ):
     """Perform a random search on random forest classifier algorithm
 
@@ -332,6 +333,7 @@ def random_forest_search(
         'min_samples_split': param_min_s_split,
         'min_samples_leaf': param_min_s_leaf,
         'bootstrap': param_bootstrap,
+        'class_weight': param_class_weight,
     }
 
     # Cross-validation object generator
@@ -341,7 +343,7 @@ def random_forest_search(
 
     # Random search to find best hyperparameters
     random_search = RandomizedSearchCV(
-        estimator=ESTIMATOR(class_weight=class_weight, random_state=random_state),
+        estimator=ESTIMATOR(random_state=random_state),
         param_distributions=param_search_cv, 
         n_iter=n_iter, scoring=scoring, cv=cv_generator,
         refit=refit, return_train_score=return_train_score,
@@ -582,7 +584,7 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
         if for_pandas:
             if hasattr(returned_score[key], "tolist"):
                 returned_score[key] = returned_score[key].tolist()
-            elif isinstance(returned_score[key], (int, float, str)):
+            if isinstance(returned_score[key], (int, float, str)):
                 returned_score[key] = [returned_score[key]]
             else:
                 returned_score[key] = list(returned_score[key])
