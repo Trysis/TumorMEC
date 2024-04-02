@@ -328,8 +328,6 @@ if __name__ == "__main__":
             summary.summarize(title="Results", filepath=summary_file)
             for i in range(N_scores):
                 split_scores_str = [f"split{i}_test_{key}" for key in SCORING.keys()]
-                print(split_scores_str)
-                print(f"{df_best_scores.index=}")
                 result_i_scores = dict(zip(split_scores_str, df_best_scores[split_scores_str].values))
                 summary.arg_summary(
                     f"Split {i}",
