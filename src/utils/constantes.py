@@ -245,6 +245,15 @@ x_fiber_unloc_columns = [
     *shape_columns,
 ]
 
+## Without frac
+x_fiber_nofrac_columns = [
+    *float20_columns,
+    *float60_columns,
+    *float100_columns,
+    *float140_columns,
+    *dist_columns,
+]
+
 ## Learning cells features to predict fiber values
 # TODO
 

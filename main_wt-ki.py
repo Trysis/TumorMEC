@@ -32,7 +32,7 @@ REMOVE_NONE = True  # True or False
 REPLACE_ABERRANT = -3  # Set to None or actual value
 
 # Attributes specifying features, target and sample
-FEATURES = {"loc-fract": cst.x_fiber_columns, "only-loc": cst.x_fiber_nofrac_columns}
+FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = []  # TODO : Replace by None
@@ -73,7 +73,7 @@ SCORING_base = {
 FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
-hsearch_criterion = ["entropy",]
+hsearch_criterion = ["gini",]
 hsearch_n_estimators = [16, 24, 32, 64, 80]
 hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [10, 15, 20]
