@@ -48,7 +48,7 @@ REMOVE_SAMPLE = {
 # Training regimen
 CV = 8  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
-N_ITER = 10  # RandomSearch settings sampling number
+N_ITER = 50  # RandomSearch settings sampling number
 N_PROCESS = max(CV, 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
@@ -76,7 +76,7 @@ TARGETS_WEIGHTS = "balanced"
 hsearch_criterion = ["gini",]
 hsearch_n_estimators = [16, 24, 32, 64, 80]
 hsearch_max_features = ["sqrt"]
-hsearch_max_depths = [10, 15, 20]
+hsearch_max_depths = [5, 10, 15, 20]
 hsearch_min_s_split = [1, 4, 8]
 hsearch_min_s_leaf = [1, 5]
 hsearch_bootstrap = [True]
