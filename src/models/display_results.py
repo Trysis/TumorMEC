@@ -96,7 +96,7 @@ def display_confusion_matrix(
     # Format
     thresh = cf_matrix.max() / 2
     for i, j in itertools.product(range(cf_matrix.shape[0]), range(cf_matrix.shape[1])):
-        ax.text(j, i, f"{cf_matrix[i, j]:d}\n({cf_matrix_norm[i, j]:.2f}%)",
+        ax.text(j, i, f"{cf_matrix[i, j]:d}\n({cf_matrix_norm[i, j]*100:.0f}%)",
                 horizontalalignment="center",
                 color="white" if cf_matrix[i, j] > thresh else "black")
 

@@ -36,7 +36,8 @@ FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = []  # TODO : Replace by None
-REMOVE_SAMPLE = {
+REMOVE_SAMPLE = None
+{
     "FileName": [
         "./12c_ZF_ MAX_12c_MW137_CD3FITC_SHG.tif",
         "./FKI_860_CD3FITC.tif_max.tif_SHG.tif",
@@ -46,9 +47,9 @@ REMOVE_SAMPLE = {
 }
 
 # Training regimen
-CV = 8  # Number of CV-Folds
+CV = 10  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
-N_ITER = 50  # RandomSearch settings sampling number
+N_ITER = 30  # RandomSearch settings sampling number
 N_PROCESS = max(CV, 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
@@ -77,7 +78,7 @@ hsearch_criterion = ["entropy",]
 hsearch_n_estimators = [16, 32, 64, 80]
 hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [10, 15, 20]
-hsearch_min_s_split = [1, 4, 8]
+hsearch_min_s_split = [2, 4, 8]
 hsearch_min_s_leaf = [1, 5]
 hsearch_bootstrap = [True]
 hsearch_class_weight = ["balanced"]
@@ -328,8 +329,6 @@ if __name__ == "__main__":
             summary.summarize(title="Results", filepath=summary_file)
             for i in range(N_scores):
                 split_scores_str = [f"split{i}_test_{key}" for key in SCORING.keys()]
-                print(split_scores_str)
-                print(f"{df_best_scores.index=}")
                 result_i_scores = dict(zip(split_scores_str, df_best_scores[split_scores_str].values))
                 summary.arg_summary(
                     f"Split {i}",
