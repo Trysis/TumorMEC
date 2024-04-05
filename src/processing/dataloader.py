@@ -182,7 +182,6 @@ class DataLoader:
 
         # Concatenate the specified files
         dataframe = pd.concat(dframes, ignore_index=True) if dataframe is None else dataframe
-
         # Remove specified sample
         if remove_sample is not None:
             mask_to_rmv = []
@@ -480,7 +479,7 @@ def enrich_cmask(
     if return_key:
         return key
     # Apply target condition
-    mask = df[[colname]] > fn(df[[colname]])
+    mask = df[[colname]] > 2.26  # == fn(df[[colname]])
     if return_mask:
         return mask
     values = mask[colname].map({True: 1, False: 0})
@@ -522,7 +521,7 @@ def enrich_2_cmask(
     # Apply target condition
     if mask_plus is None:
         mask_plus = plus_cmask(df, colname=colname, return_mask=True)
-    mask = df[[colname]] > fn(df[mask_plus][colname])
+    mask = df[[colname]] > 5.05 # == fn(df[mask_plus][colname])
     if return_mask:
         return mask
     values = mask[colname].map({True: 1, False: 0})
