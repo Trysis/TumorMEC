@@ -84,7 +84,7 @@ hsearch_class_weight = ["balanced"]
 
 # Importances attributes
 N_PERM = 30
-N_BORUTA = 50
+N_BORUTA = 20
 
 ## Process
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP

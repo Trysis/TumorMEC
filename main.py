@@ -74,7 +74,7 @@ FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
 ## Hyperparameters search
 hsearch_criterion = ["gini",]
-hsearch_n_estimators = [16, 24, 32, 64, 80]
+hsearch_n_estimators = [16, 24, 32, 64]
 hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [5, 10, 15, 20]
 hsearch_min_s_split = [1, 4, 8]
@@ -84,7 +84,7 @@ hsearch_class_weight = ["balanced"]
 
 # Importances attributes
 N_PERM = 30
-N_BORUTA = 50
+N_BORUTA = 20
 
 ## Process
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
