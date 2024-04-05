@@ -35,7 +35,7 @@ REPLACE_ABERRANT = -3  # Set to None or actual value
 FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
-SAMPLE_GROUP = []  # TODO : Replace by None
+SAMPLE_GROUP = ["FileName"]  # TODO : Replace by None
 REMOVE_SAMPLE = {
     "FileName": [
         "./12c_ZF_ MAX_12c_MW137_CD3FITC_SHG.tif",
@@ -47,7 +47,7 @@ REMOVE_SAMPLE = {
 
 # Training regimen
 CV = 10  # Number of CV-Folds
-LEAVE_ONE_OUT = False  # If True, CV is not used
+LEAVE_ONE_OUT = True  # If True, CV is not used
 N_ITER = 50  # RandomSearch settings sampling number
 N_PROCESS = max(CV, 1)  # Multi-threading
 CV_TRAIN = True
