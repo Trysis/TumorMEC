@@ -46,7 +46,7 @@ REMOVE_SAMPLE = {
 }
 
 # Training regimen
-CV = 10  # Number of CV-Folds
+CV = 8  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
 N_ITER = 50  # RandomSearch settings sampling number
 N_PROCESS = max(CV, 1)  # Multi-threading
@@ -77,14 +77,14 @@ hsearch_criterion = ["entropy",]
 hsearch_n_estimators = [16, 32, 64, 80]
 hsearch_max_features = ["sqrt"]
 hsearch_max_depths = [10, 15, 20]
-hsearch_min_s_split = [1, 4, 8]
+hsearch_min_s_split = [2, 4, 8]
 hsearch_min_s_leaf = [1, 5]
 hsearch_bootstrap = [True]
 hsearch_class_weight = ["balanced"]
 
 # Importances attributes
 N_PERM = 30
-N_BORUTA = 50
+N_BORUTA = None
 
 ## Process
 SAMPLE_GROUP = None if SAMPLE_GROUP == [] else SAMPLE_GROUP
@@ -328,8 +328,6 @@ if __name__ == "__main__":
             summary.summarize(title="Results", filepath=summary_file)
             for i in range(N_scores):
                 split_scores_str = [f"split{i}_test_{key}" for key in SCORING.keys()]
-                print(split_scores_str)
-                print(f"{df_best_scores.index=}")
                 result_i_scores = dict(zip(split_scores_str, df_best_scores[split_scores_str].values))
                 summary.arg_summary(
                     f"Split {i}",
@@ -515,28 +513,29 @@ if __name__ == "__main__":
             display.display_raw_importance(raw_permutation_test, violin=True, filepath=permut_plot_test_violin_file)
 
             ## Boruta
-            ### Train
-            boruta_train = models.forest_boruta_importance(
-                estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
-                colnames=features_column, n_trials=N_BORUTA
-            )
-            df_boruta_train = pd.DataFrame(boruta_train["feature_hit"], index=[0])
-            df_boruta_train.to_csv(boruta_importance_train_file, index=False)
-            display.display_boruta_importance(
-                boruta_importance=boruta_train["feature_hit"], treshold=boruta_train.treshold,
-                n_trials=boruta_train.n_trials, filepath=boruta_plot_train_file
-            )
-            ### Test
-            boruta_test = models.forest_boruta_importance(
-                estimator=search.best_estimator_, x=x_test, y=y_test.ravel(),
-                colnames=features_column, n_trials=N_BORUTA
-            )
-            df_boruta_test = pd.DataFrame(boruta_test["feature_hit"], index=[0])
-            df_boruta_test.to_csv(boruta_importance_test_file, index=False)
-            display.display_boruta_importance(
-                boruta_importance=boruta_test["feature_hit"], treshold=boruta_test.treshold,
-                n_trials=boruta_test.n_trials, filepath=boruta_plot_test_file
-            )
+            if N_BORUTA is not None:
+                ### Train
+                boruta_train = models.forest_boruta_importance(
+                    estimator=search.best_estimator_, x=x_train, y=y_train.ravel(),
+                    colnames=features_column, n_trials=N_BORUTA
+                )
+                df_boruta_train = pd.DataFrame(boruta_train["feature_hit"], index=[0])
+                df_boruta_train.to_csv(boruta_importance_train_file, index=False)
+                display.display_boruta_importance(
+                    boruta_importance=boruta_train["feature_hit"], treshold=boruta_train.treshold,
+                    n_trials=boruta_train.n_trials, filepath=boruta_plot_train_file
+                )
+                ### Test
+                boruta_test = models.forest_boruta_importance(
+                    estimator=search.best_estimator_, x=x_test, y=y_test.ravel(),
+                    colnames=features_column, n_trials=N_BORUTA
+                )
+                df_boruta_test = pd.DataFrame(boruta_test["feature_hit"], index=[0])
+                df_boruta_test.to_csv(boruta_importance_test_file, index=False)
+                display.display_boruta_importance(
+                    boruta_importance=boruta_test["feature_hit"], treshold=boruta_test.treshold,
+                    n_trials=boruta_test.n_trials, filepath=boruta_plot_test_file
+                )
             """
             # Shap - Prediction explainer
             ## Train
