@@ -36,17 +36,10 @@ FEATURES = {"loc-fract": cst.x_fiber_columns}
 TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enrich_2_cmask]
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = []  # TODO : Replace by None
-REMOVE_SAMPLE = {
-    "FileName": [
-        "./12c_ZF_ MAX_12c_MW137_CD3FITC_SHG.tif",
-        "./FKI_860_CD3FITC.tif_max.tif_SHG.tif",
-        "./12c_ZF_ MAX_12c_MKI857_CD3FITC_SHG.tif",
-        "./MAX_ 12a_MKI353_CD3_SHG.tif"
-    ]
-}
+REMOVE_SAMPLE = None
 
 # Training regimen
-CV = 8  # Number of CV-Folds
+CV = 10  # Number of CV-Folds
 LEAVE_ONE_OUT = False  # If True, CV is not used
 N_ITER = 50  # RandomSearch settings sampling number
 N_PROCESS = max(CV, 1)  # Multi-threading
