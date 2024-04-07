@@ -1,0 +1,222 @@
+---------------------------------------- Parameters ----------------------------------------
+
+Condition               : ['KI']
+Type                    : ['CD3']
+Tumor                   : ['IN-TUMOR']
+Fiber                   : ['FIBER']
+Remove none             : True
+Replace aberrant        : -3
+NJOBS (Multi-threading) : 10
+SEED                    : 42
+
+Importance parameters : 
+    N-Permutation shuffle = 30
+    N-Boruta trials       = None
+
+-------------------- Training regiment --------------------
+
+MODEL                    : <class 'sklearn.ensemble._forest.RandomForestClassifier'>
+TEST RATIO               : 0.3
+GROUPS                   : False
+Cross-validation N-Folds : 10
+RandomSearch N-iter      : 50
+Select best model with   : f1
+
+Scoring : 
+    accuracy          ==> make_scorer(accuracy_score, response_method='predict')
+    balanced_accuracy ==> make_scorer(balanced_accuracy_score, response_method='predict')
+    precision         ==> make_scorer(precision_score, response_method='predict')
+    recall            ==> make_scorer(recall_score, response_method='predict')
+    auc               ==> make_scorer(roc_auc_score, response_method='predict')
+    mcc               ==> make_scorer(matthews_corrcoef, response_method='predict')
+    f1                ==> make_scorer(f1_score, response_method='predict')
+
+Hyperparameters search : 
+    Criterion        = ['entropy']
+    N-Tree           = [16, 32, 64, 80]
+    N-Features       = ['sqrt']
+    Max depths       = [10, 15, 20]
+    Min sample split = [2, 4, 8]
+    Min sample leaf  = [1, 5]
+    Bootstrap        = [True]
+    Class-weight     = ['balanced']
+
+---------------------------------------- DataFrame ----------------------------------------
+
+x shape    : 313493 lines, 34 columns
+y shape    : 313493 lines, 1 columns
+y count : 
+    0 ==> 163415
+    1 ==> 150078
+
+groups     : None  
+
+
+x_columns : 
+Angle20             Coherency20         Energy20            MeanInt20           VarInt20            
+Density20           VarDensity20        OrientationRef20    Angle60             Coherency60         
+Energy60            MeanInt60           VarInt60            Density60           VarDensity60        
+OrientationRef60    Angle100            Coherency100        Energy100           MeanInt100          
+VarInt100           Density100          VarDensity100       OrientationRef100   Angle140            
+Coherency140        Energy140           MeanInt140          VarInt140           Density140          
+VarDensity140       OrientationRef140   Dist                Frac                
+
+y_columns : 
+enrich_2   
+
+-------------------- Train --------------------
+
+x_train shape : 219445 lines, 34 columns
+y_train shape : 219445 lines, 1 columns
+y count : 
+    0 ==> 114390
+    1 ==> 105055
+
+
+-------------------- Test --------------------
+
+x_test shape : 94048 lines, 34 columns
+y_test shape : 94048 lines, 1 columns
+y count : 
+    0 ==> 49025
+    1 ==> 45023
+
+
+---------------------------------------- Results ----------------------------------------
+
+Split 0 : 
+    split0_test_accuracy          = 0.8437457279562542
+    split0_test_balanced_accuracy = 0.8415199681832304
+    split0_test_precision         = 0.8722777485533929
+    split0_test_recall            = 0.7891680944222349
+    split0_test_auc               = 0.8415199681832305
+    split0_test_mcc               = 0.6886088095605499
+    split0_test_f1                = 0.8286442456648843
+
+Split 1 : 
+    split1_test_accuracy          = 0.8374117110959216
+    split1_test_balanced_accuracy = 0.8352928744924597
+    split1_test_precision         = 0.8626385113945223
+    split1_test_recall            = 0.7854559299447934
+    split1_test_auc               = 0.8352928744924596
+    split1_test_mcc               = 0.6755524575832388
+    split1_test_f1                = 0.8222399362295736
+
+Split 2 : 
+    split2_test_accuracy          = 0.8466165413533835
+    split2_test_balanced_accuracy = 0.8446502339601978
+    split2_test_precision         = 0.8704856787048568
+    split2_test_recall            = 0.7984009137635637
+    split2_test_auc               = 0.8446502339601978
+    split2_test_mcc               = 0.6938434934561505
+    split2_test_f1                = 0.8328865058087578
+
+Split 3 : 
+    split3_test_accuracy          = 0.838049669628617
+    split3_test_balanced_accuracy = 0.835788363963115
+    split3_test_precision         = 0.8662031184155078
+    split3_test_recall            = 0.7826004188083
+    split3_test_auc               = 0.835788363963115
+    split3_test_mcc               = 0.6771618886202784
+    split3_test_f1                = 0.8222822282228223
+
+Split 4 : 
+    split4_test_accuracy          = 0.8411938938254728
+    split4_test_balanced_accuracy = 0.8390954921966087
+    split4_test_precision         = 0.8667084508513527
+    split4_test_recall            = 0.7897391966495336
+    split4_test_auc               = 0.8390954921966087
+    split4_test_mcc               = 0.6831573657828522
+    split4_test_f1                = 0.8264355794611286
+
+Split 5 : 
+    split5_test_accuracy          = 0.836401749908859
+    split5_test_balanced_accuracy = 0.8342316562837981
+    split5_test_precision         = 0.8623833979666702
+    split5_test_recall            = 0.7832460732984293
+    split5_test_auc               = 0.834231656283798
+    split5_test_mcc               = 0.6736112246262629
+    split5_test_f1                = 0.8209119026239649
+
+Split 6 : 
+    split6_test_accuracy          = 0.8431461903025884
+    split6_test_balanced_accuracy = 0.8410660624393473
+    split6_test_precision         = 0.8685940924746894
+    split6_test_recall            = 0.7921941932413137
+    split6_test_auc               = 0.8410660624393472
+    split6_test_mcc               = 0.6870576928521412
+    split6_test_f1                = 0.828636861495569
+
+Split 7 : 
+    split7_test_accuracy          = 0.8430550492161867
+    split7_test_balanced_accuracy = 0.8409048031153723
+    split7_test_precision         = 0.8698795180722891
+    split7_test_recall            = 0.7903855306996668
+    split7_test_auc               = 0.8409048031153723
+    split7_test_mcc               = 0.6870271151396325
+    split7_test_f1                = 0.8282294264339152
+
+Split 8 : 
+    split8_test_accuracy          = 0.8440576011666059
+    split8_test_balanced_accuracy = 0.8418508805622056
+    split8_test_precision         = 0.8722017866526537
+    split8_test_recall            = 0.7900047596382674
+    split8_test_auc               = 0.8418508805622057
+    split8_test_mcc               = 0.689185714272773
+    split8_test_f1                = 0.829070929070929
+
+Split 9 : 
+    split9_test_accuracy          = 0.8435107546481954
+    split9_test_balanced_accuracy = 0.8414740373778276
+    split9_test_precision         = 0.8681661980631052
+    split9_test_recall            = 0.7936220847215611
+    split9_test_auc               = 0.8414740373778274
+    split9_test_mcc               = 0.6877032913151814
+    split9_test_f1                = 0.8292222001193554
+
+Best parameters : 
+    n_estimators      = 80
+    min_samples_split = 4
+    min_samples_leaf  = 1
+    max_features      = sqrt
+    max_depth         = 20
+    criterion         = entropy
+    class_weight      = balanced
+    bootstrap         = True
+
+CV Val : 
+    accuracy          = mean=0.842 ± 0.003
+    balanced_accuracy = mean=0.840 ± 0.003
+    precision         = mean=0.868 ± 0.003
+    recall            = mean=0.789 ± 0.005
+    auc               = mean=0.840 ± 0.003
+    mcc               = mean=0.684 ± 0.006
+    f1                = mean=0.827 ± 0.004
+
+CV Train : 
+    accuracy          = mean=0.977 ± 0.001
+    balanced_accuracy = mean=0.977 ± 0.001
+    precision         = mean=0.982 ± 0.001
+    recall            = mean=0.970 ± 0.001
+    auc               = mean=0.977 ± 0.001
+    mcc               = mean=0.954 ± 0.002
+    f1                = mean=0.976 ± 0.001
+
+Train : 
+    accuracy          = [0.975752466449452]
+    balanced_accuracy = [0.9754737211342293]
+    precision         = [0.9802014521502995]
+    recall            = [0.968921041359288]
+    auc               = [0.9754737211342291]
+    mcc               = [0.9514522187563071]
+    f1                = [0.9745286044585713]
+
+Test : 
+    accuracy          = [0.8460254338210276]
+    balanced_accuracy = [0.8440087045770011]
+    precision         = [0.8707453265355669]
+    recall            = [0.7966150634120338]
+    auc               = [0.8440087045770012]
+    mcc               = [0.6927462512009362]
+    f1                = [0.8320322921137183]
+
