@@ -1,2 +1,1 @@
-*/main/*.joblib
-!.gitignore
+*.joblib
