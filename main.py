@@ -11,8 +11,6 @@ import src.models.display_results as display
 import joblib
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-
 
 # Generic attributes
 SEED = 42
@@ -37,6 +35,7 @@ TARGETS = [load.enrich_2_cmask] #[load.plus_cmask, load.enrich_cmask, load.enric
 TARGETS_COLNAMES = [target_col(return_key=True) for target_col in TARGETS]
 SAMPLE_GROUP = ["FileName"]  # TODO : Replace by None
 REMOVE_SAMPLE = None
+TRAIN_NEW_MODEL = True
 
 # Training regimen
 CV = 8  # Number of CV-Folds
@@ -108,6 +107,8 @@ if __name__ == "__main__":
     rootname, ext = os.path.splitext(filename)
     rootname = "LEAVE-ONE-OUT_" + rootname if LEAVE_ONE_OUT else rootname
     rootname = "UNGROUP_" + rootname if SAMPLE_GROUP is None else rootname 
+    # Summary either for new model, or an already existant one
+    summary_name = "summary.txt" if TRAIN_NEW_MODEL else "summary_estimator.txt"
 
     # Define X and Y
     for target_column in TARGETS_COLNAMES:
@@ -122,7 +123,7 @@ if __name__ == "__main__":
             train_test_dir = auxiliary.create_dir(os.path.join(loader_dir, "train_test"), add_suffix=False)
             train_test_plot_dir = auxiliary.create_dir(os.path.join(train_test_dir, "plots"), add_suffix=False)
             # files
-            summary_file = os.path.join(loader_dir, "summary.txt")
+            summary_file = os.path.join(loader_dir, summary_name)
             hsearch_file = os.path.join(loader_dir, "search_param.csv")
             hsearch_train_file = os.path.join(cv_dir, "search_param-reduced_train.csv")
             hsearch_val_file = os.path.join(cv_dir, "search_param-reduced_val.csv")
@@ -198,6 +199,11 @@ if __name__ == "__main__":
                     "\n" + summary.mapped_summary(SCORING, padding_left=4),
                     new_line=False
                 ),
+                subtitle="Training regiment",
+                filepath=summary_file
+            )
+            # Save search parameters for new model
+            if TRAIN_NEW_MODEL:
                 summary.arg_summary(
                     "Hyperparameters search",
                     "\n" +
@@ -211,11 +217,8 @@ if __name__ == "__main__":
                         "Bootstrap": hsearch_bootstrap,
                         "Class-weight": hsearch_class_weight
                     }, map_sep="=", padding_left=4),
-                    new_line=False
-                ),
-                subtitle="Training regiment",
-                filepath=summary_file
-            )
+                    new_line=False, filepath=summary_file
+                )
 
             # Features and Target(s)
             x, y, groups = models.split_xy(
@@ -261,8 +264,10 @@ if __name__ == "__main__":
             cv_generator = models.cv_object(
                 n_split=CV, groups=groups_train, stratify=True, seed=SEED
             )
+            # TODO : Add estimator = None & use cv_generator for multiple train and evaluate model on test
             # Hyperparameters search
             search = None
+            # TODO: if TRAIN_NEW_MODEL then search
             if not LEAVE_ONE_OUT:
                 # Default cross-validation
                 search = models.random_forest_search(
@@ -414,52 +419,53 @@ if __name__ == "__main__":
                     filepath=summary_file
                 )
 
-            # Train, Test - Score
-            ## Train
-            train_scores = models.scorer_model(
-                estimator=search.best_estimator_,
-                x=x_train, y=y_train, scorer=SCORING_base
-            )
-
-            summary.arg_summary(
-                "Train", "\n" + summary.mapped_summary(
-                    train_scores, map_sep="=", padding_left=4
-                ), filepath=summary_file
-            )
-
-            df_train_scores = pd.DataFrame(train_scores).T
-            df_train_scores.to_csv(scores_train_file)
-            ## Test
-            test_scores = models.scorer_model(
-                estimator=search.best_estimator_,
-                x=x_test, y=y_test, scorer=SCORING_base
-            )
-            summary.arg_summary(
-                "Test", "\n" + summary.mapped_summary(
-                    test_scores, map_sep="=", padding_left=4
-                ), filepath=summary_file
-            )
-            df_test_scores = pd.DataFrame(test_scores).T
-            df_test_scores.to_csv(scores_test_file)
-
-            # Train, Test - Score
-            display.display_train_test_scores(
-                train_scores=train_scores,
-                test_scores=test_scores,
-                title="Score", filepath=train_test_score_plot_file
-            )
-            # Train, Test - Confusion matrix
-            if TRAIN:
-                observed_train, predicted_train = models.predict_model(x_train, y_train, search.best_estimator_)
-                display.display_confusion_matrix(
-                    observed=observed_train, predicted=predicted_train, cmap="Reds",
-                    labels=None, filepath=cfmatrix_plot_train_file, title=f"train: {target_column}"
+            if not LEAVE_ONE_OUT:
+                # Train, Test - Score
+                ## Train
+                train_scores = models.scorer_model(
+                    estimator=search.best_estimator_,
+                    x=x_train, y=y_train, scorer=SCORING_base
                 )
-            observed_test, predicted_test = models.predict_model(x_test, y_test, search.best_estimator_)
-            display.display_confusion_matrix(
-                observed=observed_test, predicted=predicted_test, cmap="Greens",
-                labels=None, filepath=cfmatrix_plot_test_file, title=f"test: {target_column}"
-            )
+
+                summary.arg_summary(
+                    "Train", "\n" + summary.mapped_summary(
+                        train_scores, map_sep="=", padding_left=4
+                    ), filepath=summary_file
+                )
+
+                df_train_scores = pd.DataFrame(train_scores).T
+                df_train_scores.to_csv(scores_train_file)
+                ## Test
+                test_scores = models.scorer_model(
+                    estimator=search.best_estimator_,
+                    x=x_test, y=y_test, scorer=SCORING_base
+                )
+                summary.arg_summary(
+                    "Test", "\n" + summary.mapped_summary(
+                        test_scores, map_sep="=", padding_left=4
+                    ), filepath=summary_file
+                )
+                df_test_scores = pd.DataFrame(test_scores).T
+                df_test_scores.to_csv(scores_test_file)
+
+                # Train, Test - Score
+                display.display_train_test_scores(
+                    train_scores=train_scores,
+                    test_scores=test_scores,
+                    title="Score", filepath=train_test_score_plot_file
+                )
+                # Train, Test - Confusion matrix
+                if TRAIN:
+                    observed_train, predicted_train = models.predict_model(x_train, y_train, search.best_estimator_)
+                    display.display_confusion_matrix(
+                        observed=observed_train, predicted=predicted_train, cmap="Reds",
+                        labels=None, filepath=cfmatrix_plot_train_file, title=f"train: {target_column}"
+                    )
+                observed_test, predicted_test = models.predict_model(x_test, y_test, search.best_estimator_)
+                display.display_confusion_matrix(
+                    observed=observed_test, predicted=predicted_test, cmap="Greens",
+                    labels=None, filepath=cfmatrix_plot_test_file, title=f"test: {target_column}"
+                )
 
             # Feature Importance
             ## Mean Decrease Impurity

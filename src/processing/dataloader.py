@@ -232,7 +232,7 @@ class DataLoader:
             remove_none=self.remove_none,
             aberrant_column=self.aberrant_columns
         )
-
+        print(dataframe)
         # Save dataframe
         if save and isinstance(save, (bool, str)):
             dirpath = self.data_dir if not isinstance(save, str) else save
@@ -521,7 +521,7 @@ def enrich_2_cmask(
     # Apply target condition
     if mask_plus is None:
         mask_plus = plus_cmask(df, colname=colname, return_mask=True)
-    mask = df[[colname]] > 5.05 # == fn(df[mask_plus][colname])
+    mask = df[[colname]] >= 5.05 # == fn(df[mask_plus][colname])
     if return_mask:
         return mask
     values = mask[colname].map({True: 1, False: 0})
