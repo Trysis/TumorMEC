@@ -232,7 +232,6 @@ class DataLoader:
             remove_none=self.remove_none,
             aberrant_column=self.aberrant_columns
         )
-        print(dataframe)
         # Save dataframe
         if save and isinstance(save, (bool, str)):
             dirpath = self.data_dir if not isinstance(save, str) else save
