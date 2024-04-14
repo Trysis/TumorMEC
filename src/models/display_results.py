@@ -113,6 +113,54 @@ def display_confusion_matrix(
     return fig, ax
 
 
+def display_mean_confusion_matrix(
+    obs_pred_list, labels=None, cmap="Blues",
+    figsize=FIGSIZE, title="", filepath=None, show=False
+):
+    """"""
+    if labels is None:
+        labels = [str(i) for i in np.unique(obs_pred_list[0][0])]
+    # List of confusion matrix
+    cf_matrix_list = list()
+    for i, (observed, predicted) in enumerate(obs_pred_list):
+        cf_matrix_i = confusion_matrix(observed, predicted)
+        cf_matrix_list.append(cf_matrix_i)
+    # Mean & Std & norm confusion matrix
+    n_cf_matrix = np.array(cf_matrix_list)
+    cf_matrix_mean = n_cf_matrix.mean(axis=0)
+    cf_matrix_std = n_cf_matrix.std(axis=0)
+    row_sum = cf_matrix_mean.sum(axis=1).reshape(2, -1)  # true
+    cf_matrix_norm = cf_matrix_mean / row_sum  # norm on true
+
+    # To plot
+    fig, ax = plt.subplots(figsize=figsize)
+    im = ax.imshow(cf_matrix_mean, interpolation='nearest', cmap=plt.get_cmap(cmap))
+    # x & y labels
+    tick_marks = np.arange(len(labels))
+    ax.set_xticks(tick_marks, labels, rotation=45)
+    ax.set_yticks(tick_marks, labels)
+    # Format
+    thresh = cf_matrix_mean.max() / 2
+    for i, j in itertools.product(range(cf_matrix_mean.shape[0]), range(cf_matrix_mean.shape[1])):
+        text = f"{cf_matrix_mean[i, j]:.0f}"u'\u00b1'f"{cf_matrix_std[i, j]:.1f}\n"
+        text += f"({cf_matrix_norm[i, j]*100:.0f}%)"
+        ax.text(j, i, text,
+                horizontalalignment="center",
+                color="white" if cf_matrix_mean[i, j] > thresh else "black")
+
+    ax.set_xlabel('Predicted label')
+    ax.set_ylabel('True label')
+    fig.colorbar(im)
+    fig.suptitle(title)
+    fig.tight_layout()
+    if filepath is not None:
+        fig.savefig(filepath)
+    if show:
+        plt.show()
+
+    return fig, ax
+
+
 def display_raw_importance(
     raw_importance, figsize=FIGSIZE,
     title="Feature importances using MDI",

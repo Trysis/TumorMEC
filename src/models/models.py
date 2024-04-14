@@ -9,6 +9,7 @@ from sklearn.ensemble import RandomForestClassifier
 import sklearn.inspection as inspection
 
 import sklearn.metrics as metrics
+from sklearn.metrics import confusion_matrix
 from sklearn.model_selection import RandomizedSearchCV
 from sklearn.model_selection import ShuffleSplit
 from sklearn.model_selection import StratifiedShuffleSplit
@@ -535,7 +536,10 @@ def predict_kmodel(x, y, estimator, kfolder, return_train=False):
     return observed_test, predicted_test
 
 
-def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs):
+def scorer_model(
+    estimator, x, y, scorer, y_pred=None, for_pandas=True,
+    prefix=None, after_prefix="_", **kwargs
+    ):
     """ Returns the score associated with the estimator prediction
     on data.
 
@@ -555,6 +559,16 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
     y_pred: numpy.ndarray ,optional
         Optional already predicted y value from {x}
 
+    for_pandas: bool
+        Makes the final dictionnary convertible to a pandas dataframe
+
+    prefix: str, default=None
+        prefix to append to the key attributed to each score
+
+    after_prefix: str
+        used separator after the prefix such that it produces
+        an output key such as: dict({prefix}{after_prefix}{key}=score)
+
     **kwargs:
         Key word optional argument to provide to scorer(s) functions
 
@@ -565,6 +579,15 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
 
     """
     observed, predicted = None, None
+    if prefix is None:
+        prefix = ""
+    else:
+        if isinstance(prefix, str):
+            if not prefix.endswith(after_prefix):
+                prefix += after_prefix
+        else:
+            raise Exception("after_prefix should be None or str")
+
     if (y_pred is None):
         observed, predicted = predict_model(x, y, estimator)
     else:
@@ -576,20 +599,52 @@ def scorer_model(estimator, x, y, scorer, y_pred=None, for_pandas=True, **kwargs
     #        
     returned_score = dict()
     if callable(scorer):
-        scorer = {"score": scorer}
+        scorer = {f"{prefix}score": scorer}
     for key, to_call in scorer.items():
-        returned_score[key] = to_call(
+        key_str = f"{prefix}{key}"
+        returned_score[key_str] = to_call(
             observed, predicted, **kwargs
         )
         if for_pandas:
-            if hasattr(returned_score[key], "tolist"):
-                returned_score[key] = returned_score[key].tolist()
-            if isinstance(returned_score[key], (int, float, str)):
-                returned_score[key] = [returned_score[key]]
+            if hasattr(returned_score[key_str], "tolist"):
+                returned_score[key_str] = returned_score[key_str].tolist()
+            if isinstance(returned_score[key_str], (int, float, str)):
+                returned_score[key_str] = [returned_score[key_str]]
             else:
-                returned_score[key] = list(returned_score[key])
+                returned_score[key_str] = list(returned_score[key_str])
 
     return returned_score
+
+
+def get_tn_fp_fn_tp(
+    observed, predicted, for_pandas=True,
+    prefix=None, after_prefix="_"
+):
+    if prefix is None:
+        prefix = ""
+    else:
+        if isinstance(prefix, str):
+            if not prefix.endswith(after_prefix):
+                prefix += after_prefix
+        else:
+            raise Exception("after_prefix should be None or str")
+    #
+    concatenated_values = np.concatenate((observed, predicted), axis=None)
+    unique_values = np.unique(concatenated_values)
+    if len(unique_values) > 2:
+        raise Exception("Only binary class is accepted")
+
+    tn, fp, fn, tp = confusion_matrix([0, 1, 0, 1], [1, 1, 1, 0]).ravel()
+    to_return = tn, fp, fn, tp
+    if for_pandas:
+        to_return = {
+            f"{prefix}tn": [tn],
+            f"{prefix}fp": [fp],
+            f"{prefix}fn": [fn],
+            f"{prefix}tp": [tp]
+        }
+
+    return to_return
 
 
 def forest_mdi_importance(rf_estimator, colnames, **kwargs):
