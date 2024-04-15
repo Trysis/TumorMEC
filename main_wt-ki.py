@@ -572,50 +572,50 @@ if __name__ == "__main__":
                     observed=observed_test, predicted=predicted_test, cmap="Greens",
                     labels=None, filepath=cfmatrix_plot_test_file, title=f"test: {target_column}"
                 )
+            if False:
+                # Feature Importance
+                ## Mean Decrease Impurity
+                df_mdi = pd.DataFrame(
+                    models.forest_mdi_importance(rf_estimator=estimator, colnames=features_column)
+                )
+                df_mdi.to_csv(mdi_importance_file, index=False)
+                display.display_mdi_importance(mdi_importance=df_mdi, filepath=mdi_plot_file)
 
-            # Feature Importance
-            ## Mean Decrease Impurity
-            df_mdi = pd.DataFrame(
-                models.forest_mdi_importance(rf_estimator=estimator, colnames=features_column)
-            )
-            df_mdi.to_csv(mdi_importance_file, index=False)
-            display.display_mdi_importance(mdi_importance=df_mdi, filepath=mdi_plot_file)
-
-            ## Permutation
-            ### Train
-            permutation_train = models.forest_permutation_importance(
-                estimator=estimator, x=x_train, y=y_train.ravel(),
-                scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-                colnames=features_column, n_jobs=N_PROCESS, seed=SEED
-            )
-            raw_permutation_train = pd.DataFrame(permutation_train.importances.T, columns=features_column)
-            df_permutation_train = pd.DataFrame({
-                "importances_mean": permutation_train["importances_mean"],
-                "importances_std": permutation_train["importances_std"],
-                "colnames": permutation_train["colnames"]
-            })
-            raw_permutation_train.to_csv(raw_permut_importance_train_file, index=False)
-            df_permutation_train.to_csv(permut_importance_train_file, index=False)
-            display.display_permutation_importance(df_permutation_train, filepath=permut_plot_train_file)
-            display.display_raw_importance(raw_permutation_train, filepath=permut_plot_train_boxplot_file)
-            display.display_raw_importance(raw_permutation_train, violin=True, filepath=permut_plot_train_violin_file)
-            ### Test
-            permutation_test = models.forest_permutation_importance(
-                estimator=estimator, x=x_test, y=y_test.ravel(),
-                scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
-                colnames=features_column,  n_jobs=N_PROCESS, seed=SEED
-            )
-            raw_permutation_test = pd.DataFrame(permutation_test.importances.T, columns=features_column)
-            df_permutation_test = pd.DataFrame({
-                "importances_mean": permutation_test["importances_mean"],
-                "importances_std": permutation_test["importances_std"],
-                "colnames": permutation_test["colnames"]
-            })
-            raw_permutation_test.to_csv(raw_permut_importance_test_file, index=False)
-            df_permutation_test.to_csv(permut_importance_test_file, index=False)
-            display.display_permutation_importance(df_permutation_test, filepath=permut_plot_test_file)
-            display.display_raw_importance(raw_permutation_test, filepath=permut_plot_test_boxplot_file)
-            display.display_raw_importance(raw_permutation_test, violin=True, filepath=permut_plot_test_violin_file)
+                ## Permutation
+                ### Train
+                permutation_train = models.forest_permutation_importance(
+                    estimator=estimator, x=x_train, y=y_train.ravel(),
+                    scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
+                    colnames=features_column, n_jobs=N_PROCESS, seed=SEED
+                )
+                raw_permutation_train = pd.DataFrame(permutation_train.importances.T, columns=features_column)
+                df_permutation_train = pd.DataFrame({
+                    "importances_mean": permutation_train["importances_mean"],
+                    "importances_std": permutation_train["importances_std"],
+                    "colnames": permutation_train["colnames"]
+                })
+                raw_permutation_train.to_csv(raw_permut_importance_train_file, index=False)
+                df_permutation_train.to_csv(permut_importance_train_file, index=False)
+                display.display_permutation_importance(df_permutation_train, filepath=permut_plot_train_file)
+                display.display_raw_importance(raw_permutation_train, filepath=permut_plot_train_boxplot_file)
+                display.display_raw_importance(raw_permutation_train, violin=True, filepath=permut_plot_train_violin_file)
+                ### Test
+                permutation_test = models.forest_permutation_importance(
+                    estimator=estimator, x=x_test, y=y_test.ravel(),
+                    scoring=SCORING[FIT_WITH], n_repeats=N_PERM,
+                    colnames=features_column,  n_jobs=N_PROCESS, seed=SEED
+                )
+                raw_permutation_test = pd.DataFrame(permutation_test.importances.T, columns=features_column)
+                df_permutation_test = pd.DataFrame({
+                    "importances_mean": permutation_test["importances_mean"],
+                    "importances_std": permutation_test["importances_std"],
+                    "colnames": permutation_test["colnames"]
+                })
+                raw_permutation_test.to_csv(raw_permut_importance_test_file, index=False)
+                df_permutation_test.to_csv(permut_importance_test_file, index=False)
+                display.display_permutation_importance(df_permutation_test, filepath=permut_plot_test_file)
+                display.display_raw_importance(raw_permutation_test, filepath=permut_plot_test_boxplot_file)
+                display.display_raw_importance(raw_permutation_test, violin=True, filepath=permut_plot_test_violin_file)
 
             # Apply it with list of model
             ## Confusion matrix
@@ -651,7 +651,7 @@ if __name__ == "__main__":
                     obs_pred_train_list, cmap="Reds", labels=None,
                     filepath=mean_cfmatrix_plot_train_file, title=f"mean train performance"
                 )
-
+            exit()
             # Mean decrease accuracy
             n_mdi = dict()
             for i, model_i in enumerate(estimator_list):
