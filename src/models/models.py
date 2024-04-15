@@ -634,7 +634,7 @@ def get_tn_fp_fn_tp(
     if len(unique_values) > 2:
         raise Exception("Only binary class is accepted")
 
-    tn, fp, fn, tp = confusion_matrix([0, 1, 0, 1], [1, 1, 1, 0]).ravel()
+    tn, fp, fn, tp = confusion_matrix(observed, predicted).ravel()
     to_return = tn, fp, fn, tp
     if for_pandas:
         to_return = {
