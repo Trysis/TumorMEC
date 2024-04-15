@@ -115,7 +115,8 @@ def display_confusion_matrix(
 
 def display_mean_confusion_matrix(
     obs_pred_list, labels=None, cmap="Blues",
-    figsize=FIGSIZE, title="", filepath=None, show=False
+    figsize=FIGSIZE, title="", filepath=None, show=False,
+    invert_out=True
 ):
     """"""
     if labels is None:
@@ -129,8 +130,10 @@ def display_mean_confusion_matrix(
     n_cf_matrix = np.array(cf_matrix_list)
     cf_matrix_mean = n_cf_matrix.mean(axis=0)
     cf_matrix_std = n_cf_matrix.std(axis=0)
-    row_sum = cf_matrix_mean.sum(axis=1).reshape(2, -1)  # true
-    cf_matrix_norm = cf_matrix_mean / row_sum  # norm on true
+    row_mean_sum = cf_matrix_mean.sum(axis=1).reshape(2, -1)  # true
+    row_std_sum = cf_matrix_std.sum(axis=1).reshape()
+    cf_matrix_mean_norm = cf_matrix_mean / row_mean_sum  # norm on true
+    cf_matrix_std_norm = cf_matrix_std / row_std_sum
 
     # To plot
     fig, ax = plt.subplots(figsize=figsize)
@@ -142,11 +145,18 @@ def display_mean_confusion_matrix(
     # Format
     thresh = cf_matrix_mean.max() / 2
     for i, j in itertools.product(range(cf_matrix_mean.shape[0]), range(cf_matrix_mean.shape[1])):
-        text = f"{cf_matrix_mean[i, j]:.0f}"u'\u00b1'f"{cf_matrix_std[i, j]:.1f}\n"
-        text += f"({cf_matrix_norm[i, j]*100:.0f}%)"
-        ax.text(j, i, text,
-                horizontalalignment="center",
-                color="white" if cf_matrix_mean[i, j] > thresh else "black")
+        if not invert_out:
+            text = f"{cf_matrix_mean[i, j]:.0f}"u'\u00b1'f"{cf_matrix_std[i, j]:.1f}\n"
+            text += f"({cf_matrix_mean_norm[i, j]*100:.0f}%)"
+            ax.text(j, i, text,
+                    horizontalalignment="center",
+                    color="white" if cf_matrix_mean[i, j] > thresh else "black")
+        else:
+            text = f"{cf_matrix_mean_norm[i, j]*100:.0f}%"u'\u00b1'f"{cf_matrix_std_norm[i, j]*100:.0f}\n"
+            text += f"({cf_matrix_mean[i, j]:.0f})"
+            ax.text(j, i, text,
+                    horizontalalignment="center",
+                    color="white" if cf_matrix_mean[i, j] > thresh else "black")
 
     ax.set_xlabel('Predicted label')
     ax.set_ylabel('True label')
