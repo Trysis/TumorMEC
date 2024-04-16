@@ -131,7 +131,7 @@ def display_mean_confusion_matrix(
     cf_matrix_mean = n_cf_matrix.mean(axis=0)
     cf_matrix_std = n_cf_matrix.std(axis=0)
     row_mean_sum = cf_matrix_mean.sum(axis=1).reshape(2, -1)  # true
-    row_std_sum = cf_matrix_std.sum(axis=1).reshape()
+    row_std_sum = cf_matrix_std.sum(axis=1).reshape(2, -1)
     cf_matrix_mean_norm = cf_matrix_mean / row_mean_sum  # norm on true
     cf_matrix_std_norm = cf_matrix_std / row_std_sum
 
