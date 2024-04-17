@@ -83,8 +83,8 @@ def mapped_summary(
 
 
 def summarize(
-        *args, title=None, subtitle=None,
-        args_space=True, filepath=None, mode="a"
+    *args, title=None, subtitle=None,
+    args_space=True, filepath=None, mode="a"
 ):
     """"""
     to_write = ""
@@ -97,12 +97,12 @@ def summarize(
 
 
 def xy_summary(
-        x, y, unique_groups=None, title=None,
-        x_label="x shape", y_label="y shape",
-        groups_label="groups", group_spacing=2,
-        padding=10, new_line=False, classif=True,
-        classif_pad_left=4, filepath=None, mode="a"
-    ):
+    x, y, unique_groups=None, title=None,
+    x_label="x shape", y_label="y shape",
+    groups_label="groups", group_spacing=2,
+    padding=10, new_line=False, classif=True,
+    classif_pad_left=4, filepath=None, mode="a"
+):
     """"""
     if x_label is None:
         x_label = "x"
@@ -138,10 +138,10 @@ def xy_summary(
 
 
 def df_summary(
-        x, y, unique_groups=None,
-        x_columns=None, y_columns=None, groups_columns=None,
-        mapped_groups=None, new_line=False,
-        title="DataFrame", filepath=None, mode="a"
+    x, y, unique_groups=None,
+    x_columns=None, y_columns=None, groups_columns=None,
+    mapped_groups=None, new_line=False,
+    title="DataFrame", filepath=None, mode="a"
 ):
     to_write = FORMAT(title) + "\n"
     to_write += xy_summary(x=x, y=y, unique_groups=unique_groups, padding=10)

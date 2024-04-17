@@ -101,10 +101,11 @@ if __name__ == "__main__":
     dataframe = loader.load_data(
         targets=TARGETS,
         type=cst.data_type,
-        save=False,
+        save=True,
         force_default=False,
         remove_sample=REMOVE_SAMPLE,
     )
+    exit()
 
     filename = loader.filename_from_mask()
     rootname, ext = os.path.splitext(filename)

@@ -94,7 +94,7 @@ def display_confusion_matrix(
     ax.set_xticks(tick_marks, labels, rotation=45)
     ax.set_yticks(tick_marks, labels)
     # Format
-    thresh = cf_matrix.max() / 2
+    thresh = cf_matrix.max() * 0.35
     for i, j in itertools.product(range(cf_matrix.shape[0]), range(cf_matrix.shape[1])):
         ax.text(j, i, f"{cf_matrix[i, j]:d}\n({cf_matrix_norm[i, j]*100:.0f}%)",
                 horizontalalignment="center",
@@ -143,20 +143,20 @@ def display_mean_confusion_matrix(
     ax.set_xticks(tick_marks, labels, rotation=45)
     ax.set_yticks(tick_marks, labels)
     # Format
-    thresh = cf_matrix_mean.max() / 2
+    thresh = cf_matrix_mean_norm.max() * 0.35 #cf_matrix_mean.max() / 2
     for i, j in itertools.product(range(cf_matrix_mean.shape[0]), range(cf_matrix_mean.shape[1])):
         if not invert_out:
             text = f"{cf_matrix_mean[i, j]:.0f}"u'\u00b1'f"{cf_matrix_std[i, j]:.1f}\n"
             text += f"({cf_matrix_mean_norm[i, j]*100:.0f}%)"
             ax.text(j, i, text,
                     horizontalalignment="center",
-                    color="white" if cf_matrix_mean[i, j] > thresh else "black")
+                    color="white" if cf_matrix_mean_norm[i, j] > thresh else "black")
         else:
-            text = f"{cf_matrix_mean_norm[i, j]*100:.0f}%"u'\u00b1'f"{cf_matrix_std_norm[i, j]*100:.0f}\n"
+            text = f"{cf_matrix_mean_norm[i, j]*100:.0f}%"u'\u00b1'f"{cf_matrix_std_norm[i, j]*100:.1f}%\n"
             text += f"({cf_matrix_mean[i, j]:.0f})"
             ax.text(j, i, text,
                     horizontalalignment="center",
-                    color="white" if cf_matrix_mean[i, j] > thresh else "black")
+                    color="white" if cf_matrix_mean_norm[i, j] > thresh else "black")
 
     ax.set_xlabel('Predicted label')
     ax.set_ylabel('True label')
