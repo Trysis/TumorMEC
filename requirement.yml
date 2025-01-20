@@ -1,4 +1,5 @@
-name: BI
+#  conda env create -f requirements.yml -n env_name
+name: ecm
 channels:
   - defaults
 dependencies:

@@ -162,11 +162,11 @@ unsigned_columns = ("X", "Y")
 # With angle
 float20_columns = [
     "Angle20", "Coherency20", "Energy20", "MeanInt20",
-   "VarInt20", "Density20", "VarDensity20", "OrientationRef20"
+    "VarInt20", "Density20", "VarDensity20", "OrientationRef20"
 ]
 float60_columns = [
     "Angle60", "Coherency60", "Energy60", "MeanInt60",
-   "VarInt60", "Density60", "VarDensity60", "OrientationRef60"
+    "VarInt60", "Density60", "VarDensity60", "OrientationRef60"
 ]
 float100_columns = [
     "Angle100", "Coherency100", "Energy100", "MeanInt100",
