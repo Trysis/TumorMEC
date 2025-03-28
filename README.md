@@ -1,4 +1,4 @@
-# TumorMEC
+# Macrophages restrict tumor immune infiltration by controlling local collagen topography
 
 This is the official codebase to the Random Forest classification part for the **Macrophages restrict tumor immune infiltration by controlling local collagen topography** paper.
 
