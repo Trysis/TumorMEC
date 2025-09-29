@@ -1,11 +1,37 @@
+# Internal modules
+from typing import Union, Optional
 import os
 
-# Data gestion
+# External modules
 import numpy as np
 import pandas as pd
 
+
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
+
+
+class Loader:
+    """For loading a tabular dataset."""
+
+    def __init__(
+        self,
+        filepath: Union[str, os.PathLike],
+        sep: Optional[str] = None,
+        low_memory: bool = False,
+        **kwargs
+    ):
+        # Read data
+        self.data = self.read_data(filepath, sep, low_memory, **kwargs)
+
+    @staticmethod
+    def read_data(filepath, sep, low_memory, **kwargs) -> pd.DataFrame:
+        data = pd.read_csv(filepath, sep=sep, low_memory=low_memory, **kwargs)
+        return data
+
+    def apply_filter():
+        """"""
+        pass
 
 
 class DataLoader:    
