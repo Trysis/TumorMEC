@@ -82,8 +82,11 @@ class Preprocess:
         # Retrieve specified arguments
         rows = self.rows if rows is None else rows
         rows_categories = self.rows_categories if rows_categories is None else rows_categories
+        rows_nonzeros = self.rows_nonzeros if rows_nonzeros is None else rows_nonzeros
+        rows_nonnan = self.rows_nonnan if rows_nonnan is None else rows_nonnan
         cols = self.cols if cols is None else cols
         cols_nonzeros = self.cols_nonzeros if cols_nonzeros is None else cols_nonzeros
+        cols_nonnan = self.cols_nonnan if cols_nonnan is None else cols_nonnan
         permissive = self.permissive if permissive is None else permissive
         # Mask for samples and features
         sample_mask = (
@@ -91,16 +94,18 @@ class Preprocess:
             & self.mask_rows(dataframe, rows=rows)
             & self.mask_categories(dataframe, rows_categories, permissive)
             & self.mask_rows_nonzeros(dataframe, rows_nonzeros)
-            & self.mask_rows_nonnan(dataframe, rows_nonnan)
         )
         feature_mask = (
             np.ones(dataframe.shape[1], dtype=bool)
             & self.mask_cols(dataframe, cols=cols)
             & self.mask_cols_nonzeros(dataframe, cols_nonzeros)
-            & self.mask_cols_nonnan(dataframe, cols_nonnan)
         )
         # Apply filter
-        dataframe = dataframe.loc[sample_mask, feature_mask].copy()
+        dataframe = dataframe.loc[sample_mask, feature_mask]
+        dataframe = dataframe.loc[
+            self.mask_rows_nonnan(dataframe, rows_nonnan),
+            self.mask_cols_nonnan(dataframe, cols_nonnan)
+        ].copy()
         return dataframe
 
     @staticmethod
@@ -190,7 +195,7 @@ class Preprocess:
         # Otherwise, we will 
         permissive = permissive if isinstance(permissive, bool) else False
         # Select items belonging to a category
-        categories_mask = np.zeros(len(dataframe), dtype=bool)
+        categories_mask = np.ones(len(dataframe), dtype=bool)
         for col, selected_categories in categories.items():
             # Check if column from categories is in dataframe
             if not (col in dataframe.columns):
@@ -201,7 +206,7 @@ class Preprocess:
             cmask = select_categories(
                 dataframe[col], selected_categories, as_bool=True
             )
-            categories_mask = categories_mask | cmask
+            categories_mask = categories_mask & cmask
         return categories_mask
 
 
@@ -287,7 +292,7 @@ def select_colnames(
 
 def select_categories(
     feature_category: Union[List[str], pd.Series, np.ndarray],
-    selected_category: Union[str, Sequence[str], bool],
+    selected_category: Union[int, str, Sequence[str], bool],
     as_bool: bool = False
 ) -> np.ndarray:
     """Select the feature belonging to a category.
@@ -314,10 +319,10 @@ def select_categories(
     # Check instances
     if isinstance(feature_category, pd.Series):
         feature_category = feature_category.to_numpy()
-    if isinstance(selected_category, str):
+    if isinstance(selected_category, (str, int, bool)):
         selected_category = [selected_category]
     # Case when the category is a bool
-    if isinstance(selected_category, bool):
+    if isinstance(selected_category[0], bool):
         feature_category = np.asarray(feature_category)
         if feature_category.dtype == bool:
             b_array = feature_category
@@ -458,16 +463,16 @@ def select_nonnan_rows(
     if not isinstance(x, (np.ndarray, pd.DataFrame)):
         raise TypeError("Non-supported x type.") 
     if non_nan == True:
-        # Convert to numpy
+        # A pandas dataframe
         if isinstance(x, pd.DataFrame):
-            x = x.to_numpy()
+            b_array = ~(np.any(x.isnull().to_numpy(), axis=1))
         # A numpy array
-        if x.ndim == 2:
-            b_array = ~(np.all(np.isnan(x), axis=1))
-            if not as_bool:
-                indices_array = np.arange(x.shape[0])
+        elif x.ndim == 2:
+            b_array = ~(np.any(np.isnan(x), axis=1))
         else:
             raise ValueError("x.ndim should be equal to 2 (2D array)")
+        if not as_bool:
+            indices_array = np.arange(x.shape[0])
     # We consider it as a list of column names, x should be a pd.DataFrame
     else:
         if not isinstance(x, pd.DataFrame):
@@ -510,16 +515,16 @@ def select_nonnan_columns(
     # Check types
     if not isinstance(x, (np.ndarray, pd.DataFrame)):
         raise TypeError("Non-supported x type.") 
-    # Convert to numpy
+    # A pandas dataframe
     if isinstance(x, pd.DataFrame):
-        x = x.to_numpy()
+        b_array = ~(np.any(x.isnull().to_numpy(), axis=0))
     # A numpy array
-    if x.ndim == 2:
-        b_array = ~(np.all(np.isnan(x), axis=0))
-        if not as_bool:
-            indices_array = np.arange(x.shape[1])
+    elif x.ndim == 2:
+        b_array = ~(np.any(np.isnan(x), axis=0))
     else:
         raise ValueError("x.ndim should be equal to 2 (2D array)")
+    if not as_bool:
+        indices_array = np.arange(x.shape[1])
     # Return boolean array
     if as_bool:
         return b_array

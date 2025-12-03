@@ -63,7 +63,7 @@ def time_fn(lambda_fn):
 
 def split_xy(df, x_columns, y_columns, groups=None):
     """Returns the set of predictor (x) and the associated
-    target (y) from the defined columns without na values
+    target (y) from the defined columns
 
     dataframe: pandas.Dataframe
         A pandas dataframe containing the descriptors
@@ -118,13 +118,13 @@ def split_xy(df, x_columns, y_columns, groups=None):
             f"\t{groups = }\n\tdiff={groups_set - df_column_set}"
         )
     # Defines the main dataframe without na
-    xy = df[x_columns + y_columns].dropna()
-    x = xy[x_columns].values  # features
-    y = xy[y_columns].values  # target
+    x = df[x_columns].to_numpy()  # features
+    y = df[y_columns].to_numpy()  # target
     if groups is not None:
-        if isinstance(groups, str): groups = [groups]
-        if len(groups) != 0:
-            groups = df.groupby(groups).ngroup().values
+        if isinstance(groups, str):
+            groups = [groups]
+        if len(groups) > 0:
+            groups = df.groupby(groups).ngroup().to_numpy()
             return x, y, groups
         else:
             print("len{groups}=0, only {x} and {y} have been returned")

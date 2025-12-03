@@ -1,11 +1,14 @@
 """Contains auxiliary functions."""
 
+# Internal modules
+from pathlib import Path
 import re  # Pattern matching
 import os
 
-# Data Gestion
+# External modules
 import numpy as np
 import pandas as pd
+
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"
@@ -13,40 +16,32 @@ __email__ = "roude.bioinfo@gmail.com"
 
 def isfile(filepath):
     """Checks if {filepath} is a valid path to file."""
-    return os.path.isfile(filepath)
+    return Path(filepath).is_file()
 
 
 def isdir(dirpath):
     """Checks if {dirpath} is a valid directory."""
-    return os.path.isdir(dirpath)
+    return Path(dirpath).is_dir()
 
 
 def to_dirpath(dirpath, dir_sep="/"):
     """Returns a {dirpath} with its ending file separator."""
-    dirpath = dirpath if dirpath[-1] == dir_sep else \
-              dirpath + dir_sep
-
-    return dirpath
+    return Path(dirpath).as_posix() + dir_sep
 
 
-def create_dir(dirpath, dir_sep="/", add_suffix=False):
+def create_dir(dirpath, add_suffix=False):
     """Create a directory and return its path."""
-    dirpath_ = to_dirpath(dirpath, dir_sep=dir_sep)
+    dirpath = Path(dirpath)
     if add_suffix:
-        dirpath_ = append_suffix(dirpath_)
-
-    if os.path.exists(dirpath_):
-        return dirpath_
-
-    os.mkdir(dirpath_)
-    return dirpath_
+        dirpath = Path(append_suffix(dirpath.as_posix()))
+    dirpath.mkdir(parents=True, exist_ok=True)
+    return dirpath
 
 
 def read_dataframe(filepath, **kwargs):
     """Read a dataframe."""
     if not isfile(filepath):
         raise Exception("Filepath is invalid")
-
     return pd.read_csv(filepath, **kwargs)
 
 
@@ -111,7 +106,6 @@ def replace_extension(name, new_ext):
     new_ext = new_ext.replace(".", "")
     if new_ext in ("", None):
         return root
-
     name_ext = root + "." + new_ext
     return name_ext
 

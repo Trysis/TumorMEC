@@ -5,8 +5,9 @@
 import numpy as np
 
 # Local modules
-import auxiliary
-import plots
+from src.utils import auxiliary
+from src.utils import plots
+
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"

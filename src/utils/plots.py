@@ -18,7 +18,8 @@ import collections
 import pydotplus
 
 # Local modules
-import auxiliary
+from src.utils import auxiliary
+
 
 __author__ = "Roude JEAN MARIE"
 __email__ = "roude.bioinfo@gmail.com"

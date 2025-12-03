@@ -218,7 +218,7 @@ aberrant_columns = [
 # Type for each column
 data_type = {
     **dict.fromkeys(str_columns, object),
-    **dict.fromkeys(unsigned_columns, np.uint32),
+    **dict.fromkeys(unsigned_columns, np.int32),
     **dict.fromkeys(float_columns, np.float64),
     **dict.fromkeys(int_columns, np.int32)
 }

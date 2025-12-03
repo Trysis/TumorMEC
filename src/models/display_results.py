@@ -78,7 +78,8 @@ def display_cv_scores(
 
 def display_confusion_matrix(
     observed, predicted, labels=None, cmap="Blues",
-    figsize=FIGSIZE, title="", filepath=None, show=False
+    figsize=FIGSIZE, title="", filepath=None, show=False,
+    add_cf_matrix=False
 ):
     """"""
     if labels is None:
@@ -109,7 +110,8 @@ def display_confusion_matrix(
         fig.savefig(filepath)
     if show:
         plt.show()
-
+    if add_cf_matrix:
+        return fig, ax, cf_matrix, cf_matrix_norm
     return fig, ax
 
 
