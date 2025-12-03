@@ -3,6 +3,7 @@ name: ecm
 channels:
   - defaults
 dependencies:
+  - anaconda::joblib
   - anaconda::jupyter
   - anaconda::numpy
   - conda-forge::matplotlib
