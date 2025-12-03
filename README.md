@@ -24,13 +24,14 @@ Activate the working environment (after installation):
 conda activate ecm
 ```
 
-Then run the main script:
-
+Then you can either run the different jupyter notebooks `main.ipynb`, `main_base_on_timepoint.ipynb`, `main_time_on_other-time.ipynb`, `main_alltime_on_alltime.ipynb`.  
+  
+Or run the scripts in the `scripts/` directory example:  
 ```
-python main.py
+python scripts/main_wt_cd3.py
 ```
 
-## Contact
+## Contacts
 
-Zoe FUSILIER (zoe.fusilier@curie.fr)  
+Zoe FUSILIER (zoe.fusilier@curie.fr/zoe.fusilier@unige.ch)  
 Hélène MOREAU (helene.moreau@curie.fr)
