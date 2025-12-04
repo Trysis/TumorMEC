@@ -54,22 +54,22 @@ N_PROCESS = max(CV, 1)  # Multi-threading
 CV_TRAIN = True
 TRAIN = True
 SCORING = {
-    "accuracy": scorer.accuracy_score(to_scorer=True),
-    "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=True),
-    "precision": scorer.precision_score(to_scorer=True),
-    "recall": scorer.recall_score(to_scorer=True),
-    "auc": scorer.roc_auc_score(to_scorer=True),
-    "mcc": scorer.matthews_corrcoef(to_scorer=True),
-    "f1": scorer.f1_score(to_scorer=True),
+    **scorer.accuracy_score(wrap_scorer=True, key="accuracy"),
+    **scorer.balanced_accuracy_score(wrap_scorer=True, key="balanced_accuracy"),
+    **scorer.precision_score(wrap_scorer=True, key="precision"),
+    **scorer.recall_score(wrap_scorer=True, key="recall"),
+    **scorer.roc_auc_score(wrap_scorer=True, key="auc"),
+    **scorer.matthews_corrcoef(wrap_scorer=True, key="mcc"),
+    **scorer.f1_score(wrap_scorer=True, key="f1"),
 }
 SCORING_base = {
-    "accuracy": scorer.accuracy_score(to_scorer=False),
-    "balanced_accuracy": scorer.balanced_accuracy_score(to_scorer=False),
-    "precision": scorer.precision_score(to_scorer=False),
-    "recall": scorer.recall_score(to_scorer=False),
-    "auc": scorer.roc_auc_score(to_scorer=False),
-    "mcc": scorer.matthews_corrcoef(to_scorer=False),
-    "f1": scorer.f1_score(to_scorer=False),
+    **scorer.accuracy_score(wrap_scorer=False, key="accuracy"),
+    **scorer.balanced_accuracy_score(wrap_scorer=False, key="balanced_accuracy"),
+    **scorer.precision_score(wrap_scorer=False, key="precision"),
+    **scorer.recall_score(wrap_scorer=False, key="recall"),
+    **scorer.roc_auc_score(wrap_scorer=False, key="auc"),
+    **scorer.matthews_corrcoef(wrap_scorer=False, key="mcc"),
+    **scorer.f1_score(wrap_scorer=False, key="f1"),
 }
 FIT_WITH = "f1"
 TARGETS_WEIGHTS = "balanced"
